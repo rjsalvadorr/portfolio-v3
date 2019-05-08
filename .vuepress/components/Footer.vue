@@ -20,6 +20,8 @@ export default {
 
   .page-footer {
     background-color: $footer-bg-color;
+    background-image: url("/textures/shley-tree-1.png");
+
     color: $footer-color;
     padding: $space-unit;
     box-shadow: $box-shadow-up;

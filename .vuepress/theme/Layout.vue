@@ -4,15 +4,17 @@
       <Header :title="$site.title" :desc="$site.description"></Header>
     </div>
     <div class="theme-content">
-      <div :class="getContentClasses($page)">
-        <slot>
-          <!-- if <Layout> has children, they go here -->
-        </slot>
-        <Content>
-        </Content>
-        <PostList :enabled="isCategoryPage($page)" :posts="filterPostsByCategory($site.pages, $page.frontmatter.category)"></PostList>
+      <div class="content-wrapper-wrapper">
+        <div :class="getContentClasses($page)">
+          <slot>
+            <!-- if <Layout> has children, they go here -->
+          </slot>
+          <Content>
+          </Content>
+          <PostList :enabled="isCategoryPage($page)" :posts="filterPostsByCategory($site.pages, $page.frontmatter.category)"></PostList>
+        </div>
+        <Footer></Footer>
       </div>
-      <Footer></Footer>
     </div>
     <DebugPanel :enabled="debugPanelEnabled" :siteData="$site" :pageData="$page" ></DebugPanel>
   </div>

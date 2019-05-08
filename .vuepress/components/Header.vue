@@ -62,6 +62,8 @@ export default {
 
   .page-header {
     background-color: $header-bg-color;
+    background-image: url("/textures/shley-tree-1.png");
+
     color: $header-color;
     padding: $space-unit;
     position: relative;
@@ -70,15 +72,15 @@ export default {
 
     .header--mobile {
       display: block;
-      
+      background-color: $header-bg-color;
+      background-image: url("/textures/shley-tree-1.png");
       position: absolute;
       z-index: $z-index-header - 2;
       left: 0;
       right: 0;
       bottom: -40px;
-      padding-top: 100px;
+      padding-top: 86px;
       padding-bottom: 20px;
-      background-color: $header-bg-color;
       box-shadow: $box-shadow-down;
     }
     .nav-wrapper--desktop {

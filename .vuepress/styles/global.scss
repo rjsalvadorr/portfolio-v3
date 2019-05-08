@@ -19,6 +19,10 @@ code {
   border-radius: $border-radius;
 }
 
+.content-wrapper-wrapper {
+  background-image: url("/textures/asfalt-dark.png");
+}
+
 .content-wrapper {
   padding-top: $space-unit;
   padding-right: $space-unit;
@@ -28,7 +32,7 @@ code {
   // 100% - headerHeight - footerHeight
   min-height: calc(100vh - #{$expected-header-height} - #{$expected-footer-height});
   margin: 0 auto;
-  
+
   .language-text code {
     display: block;
     overflow: auto;

@@ -3,10 +3,9 @@ module.exports = {
   description: 'page description...',
   themeConfig: {
     nav: [
-      { text: 'Software', link: '/' },
+      { text: 'Software', link: '/software/' },
       { text: 'Music', link: '/music/' },
       { text: 'Art & Misc', link: '/art/' },
-      { text: 'LinkedIn', link: 'https://www.linkedin.com', external: true },
     ]
   },
   head: [
