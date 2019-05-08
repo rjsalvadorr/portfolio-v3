@@ -23,7 +23,7 @@ export default {
     background-image: url("/textures/shley-tree-1.png");
 
     color: $footer-color;
-    padding: $space-unit;
+    padding: ($space-unit * 0.75) $space-unit;
     box-shadow: $box-shadow-up;
   }
 </style>

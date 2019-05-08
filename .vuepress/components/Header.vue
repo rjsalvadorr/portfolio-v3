@@ -79,8 +79,8 @@ export default {
       left: 0;
       right: 0;
       bottom: -40px;
-      padding-top: 86px;
-      padding-bottom: 20px;
+      padding-top: 91px;
+      padding-bottom: $space-unit * 0.75;
       box-shadow: $box-shadow-down;
     }
     .nav-wrapper--desktop {
@@ -110,6 +110,7 @@ export default {
 
     .page-title {
       margin-top: 0;
+      letter-spacing: 0.1rem;
       margin-bottom: $title-margin;
       font-size: $title-height-mobile;
       line-height: $title-height-mobile;
@@ -118,7 +119,7 @@ export default {
     .page-desc {
       display: block;
       font-weight: 300;
-      letter-spacing: 0.1rem;
+      letter-spacing: 0.12rem;
       text-transform: uppercase;
       font-size: $desc-height-mobile;
       line-height: $desc-height-mobile;
