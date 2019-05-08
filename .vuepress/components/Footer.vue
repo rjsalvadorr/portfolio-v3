@@ -1,6 +1,6 @@
 <template>
   <div class="page-footer">
-    © {{ getCurrentYear }} Your Copyright Here
+    © {{ getCurrentYear }} Randolph Jerome Salvador
   </div>
 </template>
 

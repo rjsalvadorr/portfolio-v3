@@ -1,12 +1,18 @@
 <template>
   <div class="theme-container theme-container--404" @keyup.esc="toggleDebugPanel">
-    <Header :title="$site.title" :desc="$site.description"></Header>
-    <div class="content-wrapper">
-      <h1>404</h1>
-      <p>{{ getMsg() }}</p>
-      <router-link to="/">Take me home.</router-link>
+    <div class="theme-header">
+      <Header :title="$site.title" :desc="$site.description"></Header>
     </div>
-    <Footer></Footer>
+    <div class="theme-content">
+      <div class="content-wrapper-wrapper">
+        <div class="content-wrapper">
+          <h1>404</h1>
+          <p>{{ getMsg() }}</p>
+          <router-link to="/">Take me home.</router-link>
+        </div>
+        <Footer></Footer>
+      </div>
+    </div>
     <DebugPanel :enabled="debugPanelEnabled" :siteData="$site" :pageData="$page" ></DebugPanel>
   </div>
 </template>
@@ -51,14 +57,20 @@ export default {
   @import "../styles/vars.scss";
 
   .theme-container {
-    background-color: $body-bg-color;
-    color: $body-color;
-
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    background-color: $body-bg-color;
+    color: $body-color;
+    display: flex;
+    flex-direction: column;
+
+    .theme-content {
+      overflow: auto;
+      flex-grow: 1;
+    }
 
     &--404 .content-wrapper {
       text-align: center;
