@@ -1,21 +1,9 @@
 ---
 title: Garage door painting
-date: 2018-01-14 19:30:49
-tags:
-  - blog
-categories:
-type: post
 subtitle:
-target_url:
-parent_page: blog
-feat_img: /images/thumb-garage-door.jpg
-post_images:
-  - /images/garage-door-01.jpg
-  - /images/garage-door-02.jpg
-  - /images/garage-door-03.jpg
-  - /images/garage-door-04.jpg
-layout_opts:
-- art-view
+date: 2018-01-14 19:30:49
+type: post
+category: art
 ---
 
 One time, I was walkin' around the block during fall 2017, and I noticed one of my neighbours painting their garage door. I saw and admired the progress, and it was looking cooler and cooler as the days went by. <!-- more -->

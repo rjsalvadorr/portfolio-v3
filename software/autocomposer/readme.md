@@ -1,21 +1,11 @@
 ---
 title: AutoComposer (process)
-date: 2017-04-30 13:22:43
-tags:
-- software
-- music
-categories:
-type: post
 subtitle:
-target_url:
-parent_page: software
-post_images:
-- /images/autocomposer/autocomposer02.jpg
-- /images/autocomposer/autocomposer-sketch-02.jpg
-- /images/autocomposer/autocomposer-sketch-03.jpg
-feat_img: /images/autocomposer/thumb.jpg
-external_url: /apps/autocomposer/
+date: 2017-04-30 13:22:43
+type: post
+category: software
 ---
+
 Web app that automagically writes music! <!-- more --> This web app generates melodies based on a given chord progression. It can then play back those generated melodies to users. One can also download the melody (and accompaniment) as a MIDI file, for future playback or tinkering.
 
 This can be a useful tool for exploring different ways to move through a chord progression. Or for brainstorming when writing a musical composition.

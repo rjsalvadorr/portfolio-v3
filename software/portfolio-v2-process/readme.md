@@ -1,15 +1,9 @@
 ---
 title: Portfolio v2 (process)
+subtitle:
 date: 2017-01-09 00:43:02
-tags:
-- software
-categories:
 type: post
-post_images:
-  - /images/portfolio-sketch-01.jpg
-  - /images/portfolio-sketch-02.jpg
-parent_page: software
-feat_img: /images/portfolio-sketch-01.jpg
+category: software
 
 ---
 I built this website around the start of 2017. I showed my portfolio page to some friends, and I realized how ugly it was. So I hopped on my computer and got to work.

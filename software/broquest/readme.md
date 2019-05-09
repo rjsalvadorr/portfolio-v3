@@ -1,22 +1,9 @@
 ---
 title: BroQuest
-date: 2017-01-08 17:07:17
-tags:
-- software
-categories:
-type: post
 subtitle: Winter 2012 - Summer 2013
-target_url:
-parent_page: software
-feat_img: /images/thumb-broquest.png
-use_subtitle: true
-post_images:
-  - /images/broquest-sketch-01.jpg
-  - /images/broquest-sketch-02.jpg
-  - /images/broquest-01.jpg
-  - /images/broquest-dead.jpg
-  - /images/broquest-debug.jpg
-  - /images/broquest-spritesheet.png
+date: 2017-01-08 17:07:17
+type: post
+category: software
 ---
 
 Two brothers tried to make a Zelda-esque platformer. And they caught a glimpse of development hell. <!-- more -->

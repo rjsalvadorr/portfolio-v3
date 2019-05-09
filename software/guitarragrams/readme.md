@@ -1,20 +1,9 @@
 ---
 title: guitarragrams (process)
-date: 2018-09-23 18:02:06
-tags:
-  - music
-  - software
-categories:
-type: post
 subtitle: Guitar chord diagrams
-target_url:
-parent_page: music
-feat_img: /images/guitarragrams/sketch-thumb.jpg
-post_images:
-  - /images/guitarragrams/sketch-1.jpg
-  - /images/guitarragrams/sketch-2.jpg
-  - /images/guitarragrams/sketch-3.jpg
-external_url: https://rjsalvadorr.github.io/guitarragrams/
+date: 2018-09-23 18:02:06
+type: post
+category: software
 ---
 
 Around early 2018, I started compiling guitar chord diagrams as I studied different chord patterns and inversions. That turned into a huge Visio document, which was a pain in the ass to update. I figured that putting it on the web would be a much cooler idea.

@@ -1,20 +1,11 @@
 ---
 title: SnackWatcher
-date: 2017-01-08 17:10:50
-tags:
-- software
-categories:
-type: post
 subtitle: Fall 2015 to Spring 2016
-target_url:
-parent_page: software
-feat_img: /images/thumb-cookie.png
-use_subtitle: true
-post_images:
-  - /images/snackwatcher-setup.jpg
-  - /images/snackwatcher-slack.png
-  - /images/snackwatcher-interface.png
+date: 2017-01-08 17:10:50
+type: post
+category: software
 ---
+
 Sometime in late 2015/early 2016, I was involved in a "Snack Watcher" project at the Jonah Group. This was a fun exercise involving a sweet office tradition.
 
 <!-- more -->
