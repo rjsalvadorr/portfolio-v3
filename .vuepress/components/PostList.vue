@@ -3,7 +3,7 @@
     <div class="post-link-wrapper" v-for="post in posts">
       <div class="post-link">
         <a class="actual-plink" :href="post.path" >
-          <img class="post-link__img" :src="'/images/thumb-' + post.title + '.jpg'" />
+          <img class="post-link__img" :src="getThumbnailLink(post)" />
         </a>
         <div class="post-link__text">
           <a class="actual-plink" :href="post.path" >
@@ -41,6 +41,11 @@ export default {
       */
       const content = excerptHtml.split(/<\/?p>/);
       return content[content.length - 2];
+    },
+    getThumbnailLink(postData) {
+      const folderPath = postData.path.split('/').filter(token => token && token !== '');
+      const folderName = folderPath[folderPath.length - 1];
+      return `/images/thumb-${folderName}.jpg`
     }
   }
 }

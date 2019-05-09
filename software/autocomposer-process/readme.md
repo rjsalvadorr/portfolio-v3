@@ -8,17 +8,23 @@ category: software
 
 Web app that automagically writes music! <!-- more --> This web app generates melodies based on a given chord progression. It can then play back those generated melodies to users. One can also download the melody (and accompaniment) as a MIDI file, for future playback or tinkering.
 
+![yep yep yep](./autocomposer02.jpg "yep yep")
+
 This can be a useful tool for exploring different ways to move through a chord progression. Or for brainstorming when writing a musical composition.
 
 For more info, check out the [project wiki](https://github.com/rjsalvadorr/autocomposer-js/wiki) and [repository](https://github.com/rjsalvadorr/autocomposer-js).
 
-## Quick Stats
-&nbsp;                  | &nbsp;
------------------------ | ----------
-**LIBRARIES & FRAMEWORKS USED** | *React* and *Browserify* for bundling the HTML/JS. *Mocha* for unit testing. *ESDoc* for generating documentation. *Stylus* for CSS processing.
+## Tech used
+
+- *React* and *Browserify* for bundling the HTML/JS
+- *Mocha* for unit testing. *ESDoc* for generating documentation
+- *Stylus* for CSS processing.
 
 ## Game plan
 I've always wanted to write software that creates music. It's one of the reasons I liked studying music theory. And I needed an excuse to learn how to use React and some other JS tools. I've played with some JS libraries out there that can handle music theory, playback, and notation. So it wasn't too ambitious of me to mix all of these skills together and take the first step to making an automatic music composer.
+
+![yep yep yep](./autocomposer-sketch-02.jpg "yep yep")
+![yep yep yep](./autocomposer-sketch-03.jpg "yep yep")
 
 ## Pulling it off
 Thankfully, I was at a point where I could do something with my coding skills and music theory knowledge. Music theory can be seen as a set of _design patterns_ or _best practices_ followed by musicians and composers for the last few centuries. As those musicians kept encountering musical problems, they developed techniques to solve them, and passed those techniques down to their apprentices.

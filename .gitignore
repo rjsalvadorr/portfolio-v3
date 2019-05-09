@@ -58,3 +58,8 @@ typings/
 .env
 
 .vuepress/dist
+
+# crap that RJ is putting in the repo that
+# doesn't belong in the repo
+
+temp-img
