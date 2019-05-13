@@ -82,7 +82,6 @@ export default {
         float: left;
         display: inline-block;
         width: 25%;
-        border-radius: $border-radius;
       }
 
       &__text {

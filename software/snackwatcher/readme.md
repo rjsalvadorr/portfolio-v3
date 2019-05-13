@@ -22,5 +22,11 @@ When people wanted to share snacks, they would place it on a certain _snack tabl
 
 When the call went out for people to work on it, I eagerly joined the SnackWatcher team. I worked on the user-facing parts of the system. First, I set up a Slack bot to let our colleagues know when there are new snacks. This bot periodically checked the table status (using the handy SnackWatcher API). I also implemented a webpage using *Flask*, a Python static site generator.
 
+![yep yep yep](./snackwatcher-setup.jpg "yep yep")
+
+![yep yep yep](./snackwatcher-interface.png "yep yep")
+
+![yep yep yep](./snackwatcher-slack.png "yep yep")
+
 ### More links
 If you want some more details, feel free to check out the [GitHub repo](https://github.com/jonahgroup/SnackWatcher) and [blog](https://jonahgroup.github.io/SnackWatcher/) for the project.

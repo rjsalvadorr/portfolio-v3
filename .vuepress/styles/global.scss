@@ -23,6 +23,11 @@ code {
   background-image: url("/textures/asfalt-dark.png");
 }
 
+img {
+  border-radius: $border-radius;
+  max-width: 100%;
+}
+
 .content-wrapper {
   padding-top: $space-unit;
   padding-right: $space-unit;

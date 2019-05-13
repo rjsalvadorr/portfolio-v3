@@ -21,6 +21,10 @@ The game had to blend together:
 
 No problem, that's gonna be easy. I'm a software magician now.
 
+![yep yep yep](./broquest-sketch-01.jpg "yep yep")
+
+![yep yep yep](./broquest-sketch-02.jpg "yep yep")
+
 ### Pulling it off
 
 It was not easy. If I was a software magician then, I was a very inept one.
@@ -32,6 +36,14 @@ I ended up rolling my sleeves up to write a game engine from scratch with [*SDL*
 1. Basic animation through sprites.
 1. Controls to let the player move and interact with world by opening things and slaying NPCs.
 1. Primitive AI. Yeah, all these guys do is move towards my character in a straight line and attack if I'm close enough. But they're doing these things without player commands!
+
+![yep yep yep](./broquest-dead.jpg "yep yep")
+
+![yep yep yep](./broquest-debug.jpg "yep yep")
+
+![yep yep yep](./broquest-01.jpg "yep yep")
+
+![yep yep yep](./broquest-spritesheet.png "yep yep")
 
 ### End of Experiment
 

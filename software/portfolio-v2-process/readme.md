@@ -18,6 +18,8 @@ I built this website around the start of 2017. I showed my portfolio page to som
 ## Game plan
 I liked the idea of a static site generator (thanks to my work on the SnackWatcher project), and I've been looking for an excuse to use more JavaScript. So I looked around for an SSG running on NodeJS and found [Hexo](https://hexo.io/).
 
+![yep yep yep](./portfolio-sketch-01.jpg "yep yep")
+
 ## Pulling it off
 I started by sketching some layouts on paper, and I ended up with a grid-based design I liked. I then started looking around for JS libraries I can use, and I stumbled on [Masonry](http://masonry.desandro.com/layout.html). That made this project a whole lot easier.
 
@@ -25,5 +27,4 @@ For the visual design, I wanted something simple, so I stuck to a palette of bla
 
 When you click the post images on this site, you'll see a fullscreen version thanks to [jQuery.LiteBox](https://github.com/ioquatix/jquery-litebox).
 
-## Results
-You're browsing through it right now!
+![yep yep yep](./portfolio-sketch-02.jpg "yep yep")
