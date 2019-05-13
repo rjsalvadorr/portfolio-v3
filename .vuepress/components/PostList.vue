@@ -45,7 +45,7 @@ export default {
     getThumbnailLink(postData) {
       const folderPath = postData.path.split('/').filter(token => token && token !== '');
       const folderName = folderPath[folderPath.length - 1];
-      return `/images/thumb-${folderName}.jpg`
+      return `/images/thumbs/${folderName}.jpg`
     }
   }
 }

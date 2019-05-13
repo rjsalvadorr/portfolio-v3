@@ -31,10 +31,11 @@ Read more about Vuepress here: https://vuepress.vuejs.org/guide/
 
 ## Post Thumbnails
 
-In order to work, these have to go in `.vuepress/public/images`.There's a
-naming convention in place: `thumb-<page-name>.jpg`. So a page with content
+_NOTE: THIS ONLY ACCEPTS JPG IMAGES (for now)_
+
+In order to work, these have to go in `.vuepress/public/images/thumbs`. A page with content
 in `/category1/sample-title/README.md` would have a corresponding image in
-`/.vuepress/public/images/thumb-sample-title.jpg`
+`/.vuepress/public/images/thumbs/sample-title.jpg`
 
 ## Page excerpts
 
