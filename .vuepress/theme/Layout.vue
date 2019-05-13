@@ -62,8 +62,9 @@ export default {
       // Filtering by category
       const filteredPosts = filter(allPages, (page) => {
         const isPost = page.frontmatter.type === "post";
+        const isLink = page.frontmatter.type === "link";
         const isCorrectCategory = page.frontmatter.category === category;
-        return isPost && isCorrectCategory;
+        return (isPost || isLink) && isCorrectCategory;
       });
 
       // Sorting by reverse chronological order (newest first)

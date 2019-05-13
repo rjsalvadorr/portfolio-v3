@@ -52,8 +52,8 @@ Added on top of every markdown document in the site. Looks like this:
 ```
 ---
 title: Writing words is neat
-subtitle:
 date: 2019-03-24 13:35:57
+subtitle:
 type: post
 category: deep-thoughts
 ---
@@ -72,15 +72,15 @@ for various categories and pages.
 
 Title of the post/category
 
-#### subtitle
-
-Subtitle of post. Appears in the post list of its category page.
-
 #### date
 
 Date for post/category. Appears in the post list of its category page.
 Also used for sorting.  
 Expected values: date/time, formatted like `2019-03-26 13:35:57` or simply `2019-04-23` (YYYY-MM-DD)
+
+#### subtitle
+
+Subtitle of post. Appears in the post list of its category page.
 
 #### type
 
@@ -92,3 +92,21 @@ Expected values: `post | category | link`
 Category of this object. This can be customized for the categories in the page.
 For example, a portfolio page could have categories like:  
 `software | art | contact`.
+
+#### target_url
+
+Used for `link` objects. Defines the target of the link. For example:
+
+```
+---
+title: Click this thing
+date: 2019-03-24 13:35:57
+type: link
+category: deep-thoughts
+target_url: https://example.org
+---
+
+# Words words words
+
+Bacon ipsum dolor amet in est pork belly ex excepteur.
+```

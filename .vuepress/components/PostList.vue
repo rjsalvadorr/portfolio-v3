@@ -2,16 +2,16 @@
   <div class="post-links" v-if="enabled">
     <div class="post-link-wrapper" v-for="post in posts">
       <div class="post-link">
-        <a class="actual-plink" :href="post.path" >
+        <a class="actual-plink" :href="getLinkHref(post)" :target="getLinkTarget(post)">
           <img class="post-link__img" :src="getThumbnailLink(post)" />
         </a>
         <div class="post-link__text">
-          <a class="actual-plink" :href="post.path" >
+          <a class="actual-plink" :href="getLinkHref(post)" :target="getLinkTarget(post)">
             <h2 class="post-link__title">{{ post.frontmatter.title }}</h2>
           </a>
           <span class="post-link__subtitle" v-if="post.frontmatter.subtitle">{{ post.frontmatter.subtitle }}</span>
           <span class="post-link__date">{{ getFormattedDate(post.frontmatter.date) }}</span>
-          <p class="post-link__excerpt" v-if="post.excerpt">{{ parseExcerptText(post.excerpt) }}</p>
+          <p class="post-link__excerpt" v-if="post.frontmatter.type != 'link' && post.excerpt">{{ parseExcerptText(post.excerpt) }}</p>
         </div>
       </div>
     </div>
@@ -41,6 +41,16 @@ export default {
       */
       const content = excerptHtml.split(/<\/?p>/);
       return content[content.length - 2];
+    },
+    getLinkHref(postData) {
+      if (postData.frontmatter.type === "link") {
+        return postData.frontmatter.target_url;
+      } else {
+        return postData.path;
+      }
+    },
+    getLinkTarget: (postData) => {
+      return postData.frontmatter.type === "link" ? '_blank' : '_self';
     },
     getThumbnailLink(postData) {
       const folderPath = postData.path.split('/').filter(token => token && token !== '');
