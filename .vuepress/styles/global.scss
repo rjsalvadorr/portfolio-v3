@@ -46,6 +46,10 @@ img {
     padding: $space-unit;
   }
 
+  .content-title {
+    margin-top: 0;
+  }
+
   &--post {
     img {
       margin: ($space-unit * 1.5) auto;

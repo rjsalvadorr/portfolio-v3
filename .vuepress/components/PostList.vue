@@ -70,7 +70,8 @@ export default {
     justify-content: space-between;
 
     .post-link-wrapper {
-      margin-top: $space-unit * 2.5;
+      margin-top: $space-unit;
+      margin-bottom: $space-unit;
       flex: 0 0 100%;
     }
 
