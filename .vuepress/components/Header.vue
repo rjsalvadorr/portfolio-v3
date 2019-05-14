@@ -2,7 +2,7 @@
   <div class="page-header">
     <div class="header-top">
       <div class="header-wrapper">
-        <h1 class="page-title">{{ title }}</h1>
+        <a href="/"><h1 class="page-title">{{ title }}</h1></a>
         <span class="page-desc">{{ desc }}</span>
       </div>
       <NavMenu class="nav-wrapper nav-wrapper--desktop" :navigationLinks="$site.themeConfig.nav"></NavMenu>
@@ -114,6 +114,11 @@ export default {
       margin-bottom: $title-margin;
       font-size: $title-height-mobile;
       line-height: $title-height-mobile;
+      color: $header-color;
+
+      &:hover {
+        color: $header-color-hover;
+      }
     }
 
     .page-desc {
@@ -153,7 +158,7 @@ export default {
         height: $burger-height;
       }
     }
-    
+
     .page-header {
       .header--mobile {
         display: none;

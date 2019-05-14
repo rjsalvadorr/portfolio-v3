@@ -43,7 +43,7 @@ export default {
 
       &:hover,
       &:active {
-        color: darken($header-color, 20%);
+        color: $header-color-hover;
       }
     }
 
