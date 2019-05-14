@@ -9,21 +9,14 @@ import * as THREE from 'three';
 export default {
   name: 'ThreeCanvas',
   mounted() {
-    window.addEventListener('resize', this.resizeHandler);
-
-    console.log(this.$el);
-    console.log(this.$el.clientHeight);
-    console.log(this.$el.clientWidth);
-
     ///////////////////////////////////////////////////////////////////////////////
     //   CONSTANTS
     ///////////////////////////////////////////////////////////////////////////////
 
     const SHOW_AXIS_LINES = false;
     const SHOW_CAMERA_TARGET = true;
-    const CAMERA_TARGET = new THREE.Vector3(-80, 0, 0);
-
-    const STAR_RADIUS = 60;
+    const CAMERA_TARGET = new THREE.Vector3(-30, 10, 0);
+    const STAR_RADIUS = 30;
     const UPDATES_PER_SECOND = 24;
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -33,7 +26,7 @@ export default {
     let scene = new THREE.Scene ();
     let camera = new THREE.PerspectiveCamera (
       45,
-      window.innerWidth / window.innerHeight,
+      this.$el.clientWidth / this.$el.clientHeight,
       1,
       1000
     );
@@ -41,7 +34,7 @@ export default {
     camera.lookAt (CAMERA_TARGET);
 
     let renderer = new THREE.WebGLRenderer ({antialias: true});
-    renderer.setSize (window.innerWidth, window.innerHeight);
+    renderer.setSize (this.$el.clientWidth, this.$el.clientHeight);
     const canvasWrapper = this.$el;
     canvasWrapper.appendChild (renderer.domElement);
 
@@ -49,31 +42,15 @@ export default {
     light.position.set (2, 3, 0);
     scene.add (light);
 
-    if (SHOW_AXIS_LINES) {
-      const axesHelper = new THREE.AxesHelper (200);
-      scene.add (axesHelper);
-    }
-
-    if (SHOW_CAMERA_TARGET) {
-      const targetHelperGeo = new THREE.SphereGeometry (5);
-      const targetHelperMat = new THREE.LineBasicMaterial ({
-        color: 0xf0ff00,
-        lights: false,
-      });
-      const targetHelper = new THREE.Mesh (targetHelperGeo, targetHelperMat);
-      targetHelper.position.set(CAMERA_TARGET);
-      scene.add (targetHelper);
-    }
-
     ///////////////////////////////////////////////////////////////////////////////
     //   MAIN OBJECTS
     ///////////////////////////////////////////////////////////////////////////////
 
     // Creating stars
-    const globeGeometry = new THREE.IcosahedronGeometry (STAR_RADIUS, 2);
+    const globeGeometry = new THREE.IcosahedronGeometry (STAR_RADIUS, 1);
 
     const starGroup = new THREE.Group ();
-    const starGeometry = new THREE.SphereGeometry (1);
+    const starGeometry = new THREE.SphereGeometry (0.9);
     const starMaterial = new THREE.LineBasicMaterial ({
       color: 0xdd0000,
       lights: false,
@@ -117,41 +94,33 @@ export default {
     //   HANDLING WINDOW RESIZES
     ///////////////////////////////////////////////////////////////////////////////
 
-    // function resizeRenderer() {
-    //   camera.aspect = window.innerWidth / window.innerHeight;
-    //   renderer.setSize(window.innerWidth, window.innerHeight);
-    //   camera.updateProjectionMatrix();
-    // };
+    function resizeRenderer() {
+      camera.aspect = this.$el.clientWidth / this.$el.clientHeight;
+      renderer.setSize(this.$el.clientWidth, this.$el.clientHeight);
+      camera.updateProjectionMatrix();
+    };
 
-    // const resizeHandler = evt => {
-    //   resizeRenderer();
-    // };
+    const resizeHandler = evt => {
+      resizeRenderer();
+    };
 
-    // const delay = 100;  // Your delay here
+    const delay = 100;  // Your delay here
 
-    // (() => {
-    //   let resizeTaskId = null;
+    (() => {
+      let resizeTaskId = null;
 
-    //   window.addEventListener('resize', evt => {
-    //     if (resizeTaskId !== null) {
-    //       clearTimeout(resizeTaskId);
-    //     }
+      window.addEventListener('resize', evt => {
+        if (resizeTaskId !== null) {
+          clearTimeout(resizeTaskId);
+        }
 
-    //     resizeTaskId = setTimeout(() => {
-    //       resizeTaskId = null;
-    //       resizeHandler(evt);
-    //     }, delay);
-    //   });
-    // })();
+        resizeTaskId = setTimeout(() => {
+          resizeTaskId = null;
+          resizeHandler(evt);
+        }, delay);
+      });
+    })();
   },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.resizeHandler);
-  },
-  methods: {
-    resizeHandler(evt) {
-      console.log('resizing!', evt);
-    }
-  }
 }
 </script>
 

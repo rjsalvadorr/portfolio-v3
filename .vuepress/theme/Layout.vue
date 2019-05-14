@@ -5,7 +5,6 @@
     </div>
     <div class="theme-content">
       <div class="content-wrapper-wrapper">
-        <ThreeCanvas></ThreeCanvas>
         <div :class="getContentClasses($page)">
           <slot>
             <!-- if <Layout> has children, they go here -->
