@@ -24,6 +24,7 @@ code {
 }
 
 img {
+  display: block;
   border-radius: $border-radius;
   box-shadow: $box-shadow;
   max-width: 100%;
@@ -44,12 +45,25 @@ img {
     overflow: auto;
     padding: $space-unit;
   }
+
+  &--post {
+    img {
+      margin: ($space-unit * 1.5) auto;
+    }
+  }
 }
 
 /* Larger than phablet */
 @media (min-width: 550px) {
   .content-wrapper {
     padding-bottom: $space-unit * 2;
+    
+    &--post {
+      img {
+        max-width: 90%;
+        margin: ($space-unit * 2) auto;
+      }
+    }
   }
 }
 
@@ -58,7 +72,7 @@ img {
   .content-wrapper {
     padding-top: $space-unit * 2;
     padding-right: 0;
-    padding-bottom: $space-unit * 2;
+    padding-bottom: $space-unit * 2.5;
     padding-left: 0;
   }
 }
