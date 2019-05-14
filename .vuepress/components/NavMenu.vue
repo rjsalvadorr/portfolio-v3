@@ -38,6 +38,8 @@ export default {
     }
 
     &-link {
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
       color: $header-color;
       font-weight: 700;
 

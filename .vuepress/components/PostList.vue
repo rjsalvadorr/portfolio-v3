@@ -3,16 +3,16 @@
     <div class="post-link-wrapper" v-for="post in posts">
       <div class="post-link">
         <a class="actual-plink" :href="getLinkHref(post)" :target="getLinkTarget(post)">
+          <h2 class="post-link__title">{{ post.frontmatter.title }}</h2>
+        </a>
+        <span class="post-link__subtitle" v-if="post.frontmatter.subtitle">{{ post.frontmatter.subtitle }}</span>
+        <span class="post-link__date">{{ getFormattedDate(post.frontmatter.date) }}</span>
+        <a class="actual-plink" :href="getLinkHref(post)" :target="getLinkTarget(post)">
           <img class="post-link__img" :src="getThumbnailLink(post)" />
         </a>
-        <div class="post-link__text">
-          <a class="actual-plink" :href="getLinkHref(post)" :target="getLinkTarget(post)">
-            <h2 class="post-link__title">{{ post.frontmatter.title }}</h2>
-          </a>
-          <span class="post-link__subtitle" v-if="post.frontmatter.subtitle">{{ post.frontmatter.subtitle }}</span>
-          <span class="post-link__date">{{ getFormattedDate(post.frontmatter.date) }}</span>
-          <p class="post-link__excerpt" v-if="post.frontmatter.type != 'link' && post.excerpt">{{ parseExcerptText(post.excerpt) }}</p>
-        </div>
+      </div>
+      <div class="post-link__text">
+        <p class="post-link__excerpt" v-if="post.frontmatter.type != 'link' && post.excerpt">{{ parseExcerptText(post.excerpt) }}</p>
       </div>
     </div>
   </div>
@@ -70,7 +70,8 @@ export default {
     justify-content: space-between;
 
     .post-link-wrapper {
-      margin-top: $space-unit * 2.5;
+      margin-top: $space-unit;
+      margin-bottom: $space-unit;
       flex: 0 0 100%;
     }
 
@@ -78,26 +79,31 @@ export default {
       display: block;
       text-decoration: none;
 
+      a {
+        display: block;
+      }
+
       &__img {
-        float: left;
+        margin-top: $space-unit / 2;
         display: inline-block;
-        width: 25%;
       }
 
       &__text {
         display: inline-block;
-        width: 75%;
-        padding-left: $space-unit * 0.66;
+        margin-bottom: 0;
       }
 
       &__title {
         margin-top: 0;
-        margin-bottom: 5px;
+        margin-bottom: 6px;
+        line-height: 1.1;
         display: inline-block;
       }
 
       &__subtitle, &__date {
+        @include subtitle-text;
         display: block;
+        margin-bottom: 4px;
       }
     }
   }
@@ -111,14 +117,6 @@ export default {
       .post-link {
         display: block;
         text-decoration: none;
-
-        &__img {
-          width: 33%;
-        }
-
-        &__text {
-          width: 67%;
-        }
       }
     }
   }

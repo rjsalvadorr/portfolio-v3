@@ -9,6 +9,7 @@
           <slot>
             <!-- if <Layout> has children, they go here -->
           </slot>
+          <h1 class="content-title">{{ $page.title }}</h1>
           <Content>
           </Content>
           <PostList :enabled="isCategoryPage($page)" :posts="filterPostsByCategory($site.pages, $page.frontmatter.category)"></PostList>
