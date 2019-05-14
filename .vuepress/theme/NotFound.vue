@@ -56,7 +56,7 @@ export default {
   /////  SCOPED NON-GLOBAL STYLES
   @import "../styles/vars.scss";
 
-  .theme-container {
+  .theme-container--404 {
     position: fixed;
     top: 0;
     right: 0;
@@ -72,7 +72,7 @@ export default {
       flex-grow: 1;
     }
 
-    &--404 .content-wrapper {
+    .content-wrapper {
       text-align: center;
     }
   }
