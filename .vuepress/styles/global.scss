@@ -25,6 +25,7 @@ code {
 
 img {
   border-radius: $border-radius;
+  box-shadow: $box-shadow;
   max-width: 100%;
 }
 
@@ -47,15 +48,19 @@ img {
 
 /* Larger than phablet */
 @media (min-width: 550px) {
-  padding-bottom: $space-unit * 2;
+  .content-wrapper {
+    padding-bottom: $space-unit * 2;
+  }
 }
 
 /* Larger than tablet */
 @media (min-width: 750px) {
-  padding-top: $space-unit;
-  padding-right: 0;
-  padding-bottom: $space-unit * 3;
-  padding-left: 0;
+  .content-wrapper {
+    padding-top: $space-unit * 2;
+    padding-right: 0;
+    padding-bottom: $space-unit * 2;
+    padding-left: 0;
+  }
 }
 
 @import "./text.scss";

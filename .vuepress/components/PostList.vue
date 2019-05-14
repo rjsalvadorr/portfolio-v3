@@ -88,16 +88,20 @@ export default {
         display: inline-block;
         width: 75%;
         padding-left: $space-unit * 0.66;
+        margin-bottom: 0;
+        line-height: 1.1;
       }
 
       &__title {
         margin-top: 0;
-        margin-bottom: 5px;
+        margin-bottom: 6px;
         display: inline-block;
       }
 
       &__subtitle, &__date {
+        @include subtitle-text;
         display: block;
+        margin-bottom: 4px;
       }
     }
   }

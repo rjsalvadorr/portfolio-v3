@@ -47,13 +47,9 @@ export default {
 <style scoped lang="scss">
   @import "../styles/vars.scss";
 
-
   $title-height: 40px;
-  $desc-height: 12px;
   $title-margin: 8px;
-
   $title-height-mobile: 30px;
-  $desc-height-mobile: 10px;
 
   $burger-width: 40px;
   $burger-height: 40px;
@@ -112,8 +108,8 @@ export default {
       margin-top: 0;
       letter-spacing: 0.1rem;
       margin-bottom: $title-margin;
-      font-size: $title-height-mobile;
-      line-height: $title-height-mobile;
+      font-size: $title-height;
+      line-height: $title-height;
       color: $header-color;
 
       &:hover {
@@ -122,12 +118,10 @@ export default {
     }
 
     .page-desc {
+      @include subtitle-text;
       display: block;
       font-weight: 300;
       letter-spacing: 0.12rem;
-      text-transform: uppercase;
-      font-size: $desc-height-mobile;
-      line-height: $desc-height-mobile;
     }
 
     .header-wrapper {
@@ -146,11 +140,6 @@ export default {
       .page-title {
         font-size: $title-height;
         line-height: $title-height;
-      }
-
-      .page-desc {
-        font-size: $desc-height;
-        line-height: $desc-height;
       }
 
       .mobile-burger-icon {

@@ -17,9 +17,14 @@ $link-active: lighten($link-normal, 10%);
 $z-index-header: 1000;
 $z-index-overlay: 10000;
 
-$box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+$box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 $box-shadow-up: 0 -3px 8px rgba(0, 0, 0, 0.5);
 $box-shadow-down: 0 3px 8px rgba(0, 0, 0, 0.5);
+
+$body-font-size: 16px;
+$body-font-size-mobile: 14px;
+
+$font-small: $body-font-size * 0.8;
 
 ////////////////////////////////////////////////////////////////////////////////
 ///// SECTION-SPECIFIC DEFINITIONS
@@ -34,7 +39,17 @@ $expected-header-height: 100px;
 
 $footer-bg-color: $palette-primary;
 $footer-color: #eee;
-$expected-footer-height: 62px;
+$expected-footer-height: 52px;
 
 $debug-bg-color: rgba(0, 0, 0, 0.8);
 $debug-color: #eee;
+
+////////////////////////////////////////////////////////////////////////////////
+///// MIXINS
+
+@mixin subtitle-text {
+  text-transform: uppercase;
+  font-size: $font-small;
+  line-height: $font-small;
+  letter-spacing: 0.08rem;
+}

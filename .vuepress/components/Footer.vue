@@ -1,6 +1,6 @@
 <template>
   <div class="page-footer">
-    © {{ getCurrentYear }} Randolph Jerome Salvador
+    <span class="copyright">© {{ getCurrentYear }} Randolph Jerome Salvador</span>
   </div>
 </template>
 
@@ -25,5 +25,10 @@ export default {
     color: $footer-color;
     padding: ($space-unit * 0.75) $space-unit;
     box-shadow: $box-shadow-up;
+
+    .copyright {
+      @include subtitle-text;
+      letter-spacing: 0.09rem;
+    }
   }
 </style>
