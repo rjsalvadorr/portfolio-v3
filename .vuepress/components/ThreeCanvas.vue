@@ -5,23 +5,27 @@
 
 <script>
 import * as THREE from 'three';
+import sample from "lodash/sample";
+import chroma from 'chroma-js';
+import utils from '../utils/three-utils';
 
 export default {
   name: 'ThreeCanvas',
   mounted() {
     ///////////////////////////////////////////////////////////////////////////////
     //   CONSTANTS
-    ///////////////////////////////////////////////////////////////////////////////
 
-    const SHOW_AXIS_LINES = false;
-    const SHOW_CAMERA_TARGET = true;
-    const CAMERA_TARGET = new THREE.Vector3(-30, 10, 0);
-    const STAR_RADIUS = 30;
-    const UPDATES_PER_SECOND = 24;
+    const LIGHT_POS = new THREE.Vector3(1, 5, 1);
+    const UPDATES_PER_SECOND = 20;
+
+    const GRID_WIDTH = 5;
+    const GRID_LENGTH = 5;
+    const GRID_UNIT_LENGTH = 10;
+    const GRID_UNIT_HEIGHT = 8;
+    const GRID_GUTTER_SIZE = 1.5;
 
     ///////////////////////////////////////////////////////////////////////////////
     //   THREE.JS ESSENTIALS
-    ///////////////////////////////////////////////////////////////////////////////
 
     let scene = new THREE.Scene ();
     let camera = new THREE.PerspectiveCamera (
@@ -30,8 +34,6 @@ export default {
       1,
       1000
     );
-    camera.position.set (STAR_RADIUS * 1.5, STAR_RADIUS * -0.5, STAR_RADIUS * 1.5);
-    camera.lookAt (CAMERA_TARGET);
 
     let renderer = new THREE.WebGLRenderer ({antialias: true});
     renderer.setSize (this.$el.clientWidth, this.$el.clientHeight);
@@ -39,47 +41,76 @@ export default {
     canvasWrapper.appendChild (renderer.domElement);
 
     let light = new THREE.DirectionalLight ('white', 0.8);
-    light.position.set (2, 3, 0);
+    light.position.set (LIGHT_POS.x, LIGHT_POS.y, LIGHT_POS.z);
     scene.add (light);
 
     ///////////////////////////////////////////////////////////////////////////////
     //   MAIN OBJECTS
-    ///////////////////////////////////////////////////////////////////////////////
 
-    // Creating stars
-    const globeGeometry = new THREE.IcosahedronGeometry (STAR_RADIUS, 1);
+    // Creating boxes
+    const boxes = [];
+    const gridBoxGroup = new THREE.Group ();
+    let gridBoxGeometry;
+    let gridBoxMaterial;
 
-    const starGroup = new THREE.Group ();
-    const starGeometry = new THREE.SphereGeometry (0.9);
-    const starMaterial = new THREE.LineBasicMaterial ({
-      color: 0xdd0000,
-      lights: false,
-    });
-    let newStar;
-    let starCoords;
-    for (let starPos of globeGeometry.vertices) {
-      newStar = new THREE.Mesh (starGeometry, starMaterial);
+    const lightest = '1919e0';
+    const darkest = chroma(lightest).darken(3);
+    const colorScale = chroma.scale([darkest, lightest]);
+    renderer.setClearColor(colorScale(0).num(), 1);
 
-      newStar.position.setX (starPos.x);
-      newStar.position.setY (starPos.y);
-      newStar.position.setZ (starPos.z);
+    const gridUnitWithGutter = GRID_UNIT_LENGTH + GRID_GUTTER_SIZE;
+    let sceneLength = gridUnitWithGutter * GRID_LENGTH;
+    let sceneWidth = gridUnitWithGutter * GRID_WIDTH;
+    let newHeight;
+    let newBox;
 
-      starGroup.add (newStar);
+    for (let i = 0; i < GRID_LENGTH; i++) {
+      boxes[i] = [];
+
+      for (let j = 0; j < GRID_WIDTH; j++) {
+        newHeight = utils.getRandomInt(2, GRID_UNIT_HEIGHT);
+        gridBoxGeometry = new THREE.BoxBufferGeometry (
+          GRID_UNIT_LENGTH,
+          newHeight,
+          GRID_UNIT_LENGTH,
+        );
+        gridBoxMaterial = new THREE.MeshLambertMaterial ({
+          color: colorScale(sample([0.2, 0.4, 0.6, 0.8, 1.0])).hex(),
+          flatShading: true,
+        });
+
+        newBox = new THREE.Mesh (gridBoxGeometry, gridBoxMaterial);
+        newBox.position.setX(i * gridUnitWithGutter);
+        newBox.position.setY(newHeight / 2);
+        newBox.position.setZ(j * gridUnitWithGutter);
+        boxes[i].push(newBox);
+        gridBoxGroup.add(newBox);
+      }
     }
-    scene.add (starGroup);
+    scene.add (gridBoxGroup);
+    const newCameraTarget = new THREE.Vector3(
+      sceneLength / 2,
+      0,
+      sceneWidth / 2
+    );
 
     ///////////////////////////////////////////////////////////////////////////////
     //   MAIN RENDER/UPDATE LOOPS
-    ///////////////////////////////////////////////////////////////////////////////
 
     // Update loop
-    let startTime = Date.now () / 1000;
+    const cameraHeight = 18;
+    const rotationPeriod = 32;
+    const rotationRadius = 23;
     window.setInterval (function () {
       const currentTime = Date.now () / 1000;
-
-      // Rotate star globe
-      starGroup.rotateY (Math.PI / 180);
-      starGroup.rotateZ (Math.PI / 360);
+      const circCoords = utils.circleFunction(currentTime, rotationPeriod, rotationRadius);
+      const cameraPos = new THREE.Vector3(
+        circCoords.x + (sceneLength / 2),
+        cameraHeight,
+        circCoords.y + (sceneWidth / 2),
+      );
+      camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
+      camera.lookAt(newCameraTarget);
     }, 1000 / UPDATES_PER_SECOND);
 
     // Render loop
@@ -92,16 +123,16 @@ export default {
 
     ///////////////////////////////////////////////////////////////////////////////
     //   HANDLING WINDOW RESIZES
-    ///////////////////////////////////////////////////////////////////////////////
 
-    function resizeRenderer() {
-      camera.aspect = this.$el.clientWidth / this.$el.clientHeight;
-      renderer.setSize(this.$el.clientWidth, this.$el.clientHeight);
+    const canvasElement = this.$el;
+    function resizeRenderer(evt) {
+      camera.aspect = canvasElement.clientWidth / canvasElement.clientHeight;
+      renderer.setSize(canvasElement.clientWidth, canvasElement.clientHeight);
       camera.updateProjectionMatrix();
     };
 
     const resizeHandler = evt => {
-      resizeRenderer();
+      resizeRenderer(evt);
     };
 
     const delay = 100;  // Your delay here

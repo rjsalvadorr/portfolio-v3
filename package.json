@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/rjsalvadorr/portfolio-v3#readme",
   "dependencies": {
+    "chroma-js": "^2.0.3",
     "lodash": "^4.17.11",
     "luxon": "^1.13.0",
     "node-sass": "^4.12.0",

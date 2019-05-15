@@ -110,3 +110,26 @@ target_url: https://example.org
 
 Bacon ipsum dolor amet in est pork belly ex excepteur.
 ```
+
+#### classes
+
+A list of classes that are applied alongside the `.content-wrapper` element. For the given example:
+
+```
+---
+title: Writing words is neat
+date: 2019-03-24 13:35:57
+type: post
+category: deep-thoughts
+classes:
+  - high-level
+  - woke
+---
+
+# Words words words
+
+Bacon ipsum dolor amet in est pork belly ex excepteur.
+``` 
+
+We'll end up with an element like:  
+`<div class="content-wrapper content-wrapper--high-level content-wrapper--woke">`
