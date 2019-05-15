@@ -33,11 +33,13 @@ div, span, p, a, li, ol, ul, {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'Special Elite', sans-serif;
+  letter-spacing: 0.175rem;
   font-weight: 700;
   margin: $heading-margin-top 0 $heading-margin-bottom 0;
   margin-block-start: $heading-margin-top;
   margin-block-end: $heading-margin-bottom;
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.1);
 }
 
 h1 {
