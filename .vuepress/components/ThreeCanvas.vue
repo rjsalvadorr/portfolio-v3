@@ -15,17 +15,14 @@ export default {
     ///////////////////////////////////////////////////////////////////////////////
     //   CONSTANTS
 
-    const LIGHT_POS = new THREE.Vector3(2, 3, 1.25);
-    const CAMERA_POS = new THREE.Vector3(34, 20, 34);
-    const UPDATES_PER_SECOND = 24;
+    const LIGHT_POS = new THREE.Vector3(1, 5, 1);
+    const UPDATES_PER_SECOND = 20;
 
     const GRID_WIDTH = 5;
     const GRID_LENGTH = 5;
-    const GRID_UNIT_LENGTH = 8;
-    const GRID_GUTTER_SIZE = 0.5;
-    // assigned to vars for closures below
-    const WINDOW_WIDTH = this.$el.clientWidth;
-    const WINDOW_HEIGHT = this.$el.clientHeight;
+    const GRID_UNIT_LENGTH = 10;
+    const GRID_UNIT_HEIGHT = 8;
+    const GRID_GUTTER_SIZE = 1.5;
 
     ///////////////////////////////////////////////////////////////////////////////
     //   THREE.JS ESSENTIALS
@@ -37,7 +34,6 @@ export default {
       1,
       1000
     );
-    camera.position.set (CAMERA_POS.x, CAMERA_POS.y, CAMERA_POS.z);
 
     let renderer = new THREE.WebGLRenderer ({antialias: true});
     renderer.setSize (this.$el.clientWidth, this.$el.clientHeight);
@@ -56,22 +52,23 @@ export default {
     const gridBoxGroup = new THREE.Group ();
     let gridBoxGeometry;
     let gridBoxMaterial;
-    const lightest = 'dd0000';
-    const darkest = chroma(lightest).darken(4);
+
+    const lightest = '1919e0';
+    const darkest = chroma(lightest).darken(3);
     const colorScale = chroma.scale([darkest, lightest]);
+    renderer.setClearColor(colorScale(0).num(), 1);
+
     const gridUnitWithGutter = GRID_UNIT_LENGTH + GRID_GUTTER_SIZE;
     let sceneLength = gridUnitWithGutter * GRID_LENGTH;
     let sceneWidth = gridUnitWithGutter * GRID_WIDTH;
     let newHeight;
     let newBox;
 
-    console.log(colorScale(0).hex(), colorScale(0.5), colorScale(1))
-    
     for (let i = 0; i < GRID_LENGTH; i++) {
       boxes[i] = [];
 
       for (let j = 0; j < GRID_WIDTH; j++) {
-        newHeight = utils.getRandomInt(4, GRID_UNIT_LENGTH);
+        newHeight = utils.getRandomInt(2, GRID_UNIT_HEIGHT);
         gridBoxGeometry = new THREE.BoxBufferGeometry (
           GRID_UNIT_LENGTH,
           newHeight,
@@ -81,6 +78,7 @@ export default {
           color: colorScale(sample([0.2, 0.4, 0.6, 0.8, 1.0])).hex(),
           flatShading: true,
         });
+
         newBox = new THREE.Mesh (gridBoxGeometry, gridBoxMaterial);
         newBox.position.setX(i * gridUnitWithGutter);
         newBox.position.setY(newHeight / 2);
@@ -90,25 +88,30 @@ export default {
       }
     }
     scene.add (gridBoxGroup);
-    console.log(sceneLength, sceneWidth);
     const newCameraTarget = new THREE.Vector3(
       sceneLength / 2,
       0,
       sceneWidth / 2
     );
-    camera.lookAt(newCameraTarget);
 
     ///////////////////////////////////////////////////////////////////////////////
     //   MAIN RENDER/UPDATE LOOPS
 
     // Update loop
-    // window.setInterval (function () {
-    //   const currentTime = Date.now () / 1000;
-
-    //   Rotate star globe
-    //   starGroup.rotateY (Math.PI / 180);
-    //   starGroup.rotateZ (Math.PI / 360);
-    // }, 1000 / UPDATES_PER_SECOND);
+    const cameraHeight = 15;
+    const rotationPeriod = 30;
+    const rotationRadius = 26;
+    window.setInterval (function () {
+      const currentTime = Date.now () / 1000;
+      const circCoords = utils.circleFunction(currentTime, rotationPeriod, rotationRadius);
+      const cameraPos = new THREE.Vector3(
+        circCoords.x + (sceneLength / 2),
+        cameraHeight,
+        circCoords.y + (sceneWidth / 2),
+      );
+      camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
+      camera.lookAt(newCameraTarget);
+    }, 1000 / UPDATES_PER_SECOND);
 
     // Render loop
     let render = function () {
