@@ -7,7 +7,9 @@
 import * as THREE from 'three';
 import sample from "lodash/sample";
 import chroma from 'chroma-js';
+
 import utils from '../utils/three-utils';
+import GridQueue from '../utils/grid-queue';
 
 export default {
   name: 'ThreeCanvas',
@@ -56,7 +58,14 @@ export default {
     const lightest = '1919e0';
     const darkest = chroma(lightest).darken(3);
     const colorScale = chroma.scale([darkest, lightest]);
-    renderer.setClearColor(colorScale(0).num(), 1);
+    renderer.setClearColor(chroma(lightest).darken(4).num(), 1);
+    
+    const colorSteps = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
+    const availableColours = [];
+    for(let step of colorSteps) {
+      availableColours.push(colorScale(step).hex());
+    }
+    const colorGridQueue = new GridQueue(GRID_LENGTH, GRID_WIDTH, availableColours);
 
     const gridUnitWithGutter = GRID_UNIT_LENGTH + GRID_GUTTER_SIZE;
     let sceneLength = gridUnitWithGutter * GRID_LENGTH;
@@ -75,7 +84,7 @@ export default {
           GRID_UNIT_LENGTH,
         );
         gridBoxMaterial = new THREE.MeshLambertMaterial ({
-          color: colorScale(sample([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])).hex(),
+          color: sample(availableColours),
           flatShading: true,
         });
 
@@ -112,6 +121,16 @@ export default {
       camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
       camera.lookAt(newCameraTarget);
     }, 1000 / UPDATES_PER_SECOND);
+
+    // Colour update loop
+    window.setInterval (function () {
+      colorGridQueue.update();
+      for (let i = 0; i < GRID_LENGTH; i++) {
+        for (let j = 0; j < GRID_WIDTH; j++) {
+          boxes[i][j].material.color.set(colorGridQueue.toArray()[i][j]);
+        }
+      }
+    }, 1000 * 2);
 
     // Render loop
     let render = function () {
