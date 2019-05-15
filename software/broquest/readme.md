@@ -5,7 +5,7 @@ date: 2017-01-08 17:07:17
 type: post
 category: software
 options:
-  - hide-date
+  - hideDate
 ---
 
 Two brothers tried to make a Zelda-esque platformer. And they caught a glimpse of development hell. <!-- more -->

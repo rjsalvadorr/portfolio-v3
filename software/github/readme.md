@@ -6,5 +6,5 @@ type: link
 category: software
 target_url: https://github.com/rjsalvadorr
 options:
-  - hide-date
+  - hideDate
 ---

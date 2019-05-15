@@ -6,7 +6,10 @@
           <h2 class="post-link__title">{{ post.frontmatter.title }}</h2>
         </a>
         <span class="post-link__subtitle" v-if="post.frontmatter.subtitle">{{ post.frontmatter.subtitle }}</span>
-        <span class="post-link__date">{{ getFormattedDate(post.frontmatter.date) }}</span>
+        <span
+          v-if="showDate(post)"
+          class="post-link__date"
+        >{{ getFormattedDate(post.frontmatter.date) }}</span>
         <a class="actual-plink" :href="getLinkHref(post)" :target="getLinkTarget(post)">
           <img class="post-link__img" :src="getThumbnailLink(post)" />
         </a>
@@ -56,6 +59,12 @@ export default {
       const folderPath = postData.path.split('/').filter(token => token && token !== '');
       const folderName = folderPath[folderPath.length - 1];
       return `/images/thumbs/${folderName}.jpg`
+    },
+    showDate(postData) {
+      if(postData.frontmatter.options && postData.frontmatter.options.includes('hideDate')) {
+        return false;
+      }
+      return true;
     }
   }
 }

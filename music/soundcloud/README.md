@@ -6,5 +6,5 @@ category: music
 subtitle: Compositions and recordings
 target_url: https://soundcloud.com/rj-salvador
 options:
-  - hide-date
+  - hideDate
 ---

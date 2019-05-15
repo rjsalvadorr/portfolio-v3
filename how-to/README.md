@@ -140,5 +140,5 @@ A list of options that trigger changes to site/post rendering. Available options
 
 ```
 options:
-  - hide-date   # hides date on post list
+  - hideDate   # hides date on post list
 ```
