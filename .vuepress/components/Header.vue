@@ -48,7 +48,6 @@ export default {
   @import "../styles/vars.scss";
 
   $title-height: 40px;
-  $title-margin: 8px;
   $title-height-mobile: 30px;
 
   $burger-width: 40px;
@@ -107,7 +106,8 @@ export default {
     .page-title {
       margin-top: 0;
       letter-spacing: 0.1rem;
-      margin-bottom: $title-margin;
+      display: inline-block;
+      margin-bottom: 0;
       font-size: $title-height;
       line-height: $title-height;
       color: $header-color;
@@ -138,6 +138,7 @@ export default {
   @media (min-width: 750px) {
     .header-top {
       .page-title {
+        @include display-text;
         font-size: $title-height;
         line-height: $title-height;
       }

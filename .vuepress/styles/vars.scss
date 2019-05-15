@@ -17,9 +17,11 @@ $link-active: lighten($link-normal, 10%);
 $z-index-header: 1000;
 $z-index-overlay: 10000;
 
-$box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
-$box-shadow-up: 0 -3px 8px rgba(0, 0, 0, 0.5);
-$box-shadow-down: 0 3px 8px rgba(0, 0, 0, 0.5);
+$box-shadow-color: rgba(0, 0, 0, 0.5);
+$box-shadow: 2px 2px 6px $box-shadow-color;
+$box-shadow-centre: 0 0 6px $box-shadow-color;
+$box-shadow-up: 0 -3px 8px $box-shadow-color;
+$box-shadow-down: 0 3px 8px $box-shadow-color;
 
 $body-font-size: 16px;
 $body-font-size-mobile: 14px;
@@ -35,7 +37,7 @@ $body-color: $palette-dark;
 $header-bg-color: $palette-primary;
 $header-color: #eee;
 $header-color-hover: darken($header-color, 20%);
-$expected-header-height: 100px;
+$expected-header-height: 92px;
 
 $footer-bg-color: $palette-primary;
 $footer-color: #eee;
@@ -52,4 +54,10 @@ $debug-color: #eee;
   font-size: $font-small;
   line-height: $font-small;
   letter-spacing: 0.08rem;
+}
+
+@mixin display-text {
+  font-family: 'Special Elite', sans-serif;
+  text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.6);
+  letter-spacing: 0.325rem;
 }
