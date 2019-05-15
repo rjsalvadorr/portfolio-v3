@@ -50,6 +50,19 @@ img {
     margin-top: 0;
   }
 
+  &--home {
+    text-align: center;
+    color: #eee;
+
+    .content-title {
+      margin-top: 25vh;
+    }
+
+    .content-subtitle {
+      @include subtitle-text;
+    }
+  }
+
   &--post {
     img {
       margin: ($space-unit * 1.5) auto;

@@ -1,6 +1,6 @@
 module.exports = {
   title: 'RJ Salvador',
-  description: 'page description...',
+  description: 'Portfolio & other goodies',
   themeConfig: {
     nav: [
       { text: 'Software', link: '/software/' },
