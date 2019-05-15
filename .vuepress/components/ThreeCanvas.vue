@@ -98,9 +98,9 @@ export default {
     //   MAIN RENDER/UPDATE LOOPS
 
     // Update loop
-    const cameraHeight = 15;
-    const rotationPeriod = 30;
-    const rotationRadius = 26;
+    const cameraHeight = 18;
+    const rotationPeriod = 32;
+    const rotationRadius = 23;
     window.setInterval (function () {
       const currentTime = Date.now () / 1000;
       const circCoords = utils.circleFunction(currentTime, rotationPeriod, rotationRadius);
@@ -126,7 +126,6 @@ export default {
 
     const canvasElement = this.$el;
     function resizeRenderer(evt) {
-      console.log(evt, canvasElement);
       camera.aspect = canvasElement.clientWidth / canvasElement.clientHeight;
       renderer.setSize(canvasElement.clientWidth, canvasElement.clientHeight);
       camera.updateProjectionMatrix();
