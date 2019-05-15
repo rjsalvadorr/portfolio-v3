@@ -85,8 +85,11 @@ img {
     padding-bottom: $space-unit * 2;
     
     &--post {
+      .content-title {
+        margin-bottom: $space-unit * 1.75;
+      }
+
       img {
-        max-width: 90%;
         margin: ($space-unit * 2) auto;
       }
     }

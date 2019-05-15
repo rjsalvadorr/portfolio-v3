@@ -32,6 +32,10 @@ div, span, p, a, li, ol, ul, {
   font-size: 1rem;
 }
 
+ol, ul {
+  padding-left: $space-unit;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Special Elite', sans-serif;
   letter-spacing: 0.175rem;
