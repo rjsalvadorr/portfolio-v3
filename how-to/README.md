@@ -133,3 +133,12 @@ Bacon ipsum dolor amet in est pork belly ex excepteur.
 
 We'll end up with an element like:  
 `<div class="content-wrapper content-wrapper--high-level content-wrapper--woke">`
+
+#### options
+
+A list of options that trigger changes to site/post rendering. Available options:
+
+```
+options:
+  - hide-date   # hides date on post list
+```
