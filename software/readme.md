@@ -6,7 +6,6 @@ type: category
 category: software
 ---
 
-My name's RJ and I'm a web developer based in Toronto, Canada.
-I have about five years of pro dev experience, mainly focused on front-end and visual design.
+I'm a web developer based in Toronto, Canada. I have about five years of pro dev experience, mainly focused on front-end and visual design.
 
 When I'm away from the desk, I can be found playing music, painting, or climbing rocks.

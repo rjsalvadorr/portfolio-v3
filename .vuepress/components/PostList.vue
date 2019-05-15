@@ -112,7 +112,7 @@ export default {
   @media (min-width: 750px) {
     .post-links {
       .post-link-wrapper {
-        flex: 0 0 calc(50% - 25px);
+        flex: 0 0 calc(50% - 50px);
       }
       .post-link {
         display: block;

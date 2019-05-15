@@ -40,11 +40,13 @@ export default {
   methods: {
     getContentClasses(pageData) {
       let classes = 'content-wrapper';
-      if(pageData.frontmatter.type === "post") {
-        classes += ' content-wrapper--post';
+      if(pageData.frontmatter.type) {
+        classes += ` content-wrapper--${pageData.frontmatter.type}`;
       }
-      else if(pageData.frontmatter.type === "category") {
-        classes += ' content-wrapper--category';
+      if(pageData.frontmatter.classes) {
+        for(let nextClass of pageData.frontmatter.classes) {
+          classes += ` content-wrapper--${nextClass}`;
+        }
       }
       return classes;
     },
