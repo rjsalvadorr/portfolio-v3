@@ -53,7 +53,7 @@ export default {
     let gridBoxGeometry;
     let gridBoxMaterial;
 
-    const lightest = '1919e0';
+    const lightest = '496868';
     const darkest = chroma(lightest).darken(3);
     const colorScale = chroma.scale([darkest, lightest]);
     renderer.setClearColor(colorScale(0).num(), 1);
