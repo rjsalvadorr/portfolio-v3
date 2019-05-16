@@ -30,6 +30,19 @@ img {
   max-width: 100%;
 }
 
+.theme-container {
+  &--home {
+    .header-top .page-title,
+    .header-top .page-desc {
+      display: none;
+    }
+
+    .content-wrapper {
+      min-height: calc(100vh - #{$expected-header-height} - #{$expected-footer-height - 10});
+    }
+  }
+}
+
 .content-wrapper {
   padding-top: $space-unit;
   padding-right: $space-unit;

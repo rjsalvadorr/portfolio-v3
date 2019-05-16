@@ -1,5 +1,5 @@
 <template>
-  <div class="theme-container" @keyup.esc="toggleDebugPanel()">
+  <div :class="getThemeContainerClasses($page)" @keyup.esc="toggleDebugPanel()">
     <div class="theme-header">
       <Header :title="$site.title" :desc="$site.description"></Header>
     </div>
@@ -47,6 +47,13 @@ export default {
         for(let nextClass of pageData.frontmatter.classes) {
           classes += ` content-wrapper--${nextClass}`;
         }
+      }
+      return classes;
+    },
+    getThemeContainerClasses(pageData) {
+      let classes = 'theme-container';
+      if(pageData.frontmatter.type) {
+        classes += ` theme-container--${pageData.frontmatter.type}`;
       }
       return classes;
     },
