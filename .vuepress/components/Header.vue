@@ -68,27 +68,24 @@ export default {
   $burger-height-mobile: 30px;
 
   .page-header {
-    background-color: $header-bg-color;
-    background-image: url("/textures/shley-tree-1.png");
 
     color: $header-color;
-    padding: $space-unit;
     position: relative;
     z-index: $z-index-header;
     box-shadow: $box-shadow-down;
+    height: $header-height-mob;
 
-    &--mobile-expanded {
+    &--mobile-expanded .header-top {
       height: $header-height-mob-exp;
     }
 
     .header--mobile {
       display: block;
       position: absolute;
-      z-index: $z-index-header - 2;
+      z-index: $z-index-header - 1;
       left: 0;
       right: 0;
-      bottom: 0px;
-      padding-top: 91px;
+      bottom: -40px;
       padding-bottom: $space-unit * 0.75;
       box-shadow: $box-shadow-down;
     }
@@ -113,9 +110,15 @@ export default {
   }
 
   .header-top {
-    position: relative;
-    z-index: $z-index-header - 1;
+    z-index: $z-index-header - 2;
     display: flex;
+
+    padding: $space-unit;
+    background-color: $header-bg-color;
+    background-image: url("/textures/shley-tree-1.png");
+    position: absolute;
+    left: 0;
+    right: 0;
 
     .page-title {
       margin-top: 0;
