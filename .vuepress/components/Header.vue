@@ -1,5 +1,5 @@
 <template>
-  <div class="page-header">
+  <div :class="getHeaderClass()">
     <div class="header-top">
       <div class="header-wrapper">
         <a href="/"><h1 class="page-title">{{ title }}</h1></a>
@@ -22,16 +22,28 @@ import BurgerIcon from "./BurgerIcon.vue";
 
 export default {
   name: 'Header',
+  data: function () {
+    return {
+      mobileMenuOpen: false,
+    }
+  },
   props: {
     title: String,
     desc: String,
-    mobileMenuOpen: false,
+    onHomePage: Boolean,
   },
   components: {
     NavMenu,
     BurgerIcon,
   },
   methods: {
+    getHeaderClass() {
+      let headerClass = 'page-header';
+      if(this.mobileMenuOpen) {
+        headerClass += ' page-header--mobile-expanded'
+      }
+      return headerClass;
+    },
     toggleMobileMenu() {
       this.mobileMenuOpen = !this.mobileMenuOpen;
       console.log(this.mobileMenuOpen);
@@ -65,15 +77,17 @@ export default {
     z-index: $z-index-header;
     box-shadow: $box-shadow-down;
 
+    &--mobile-expanded {
+      height: $header-height-mob-exp;
+    }
+
     .header--mobile {
       display: block;
-      background-color: $header-bg-color;
-      background-image: url("/textures/shley-tree-1.png");
       position: absolute;
       z-index: $z-index-header - 2;
       left: 0;
       right: 0;
-      bottom: -40px;
+      bottom: 0px;
       padding-top: 91px;
       padding-bottom: $space-unit * 0.75;
       box-shadow: $box-shadow-down;
