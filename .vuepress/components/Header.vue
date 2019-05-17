@@ -88,6 +88,10 @@ export default {
       height: $header-height-mob-exp;
     }
 
+    &--home {
+      height: $header-height-mob-home;
+    }
+
     .header-top {
       z-index: $z-index-header - 2;
       display: flex;
@@ -98,6 +102,12 @@ export default {
       position: absolute;
       left: 0;
       right: 0;
+
+      &--home {
+        .nav-wrapper.nav-wrapper--mobile {
+          margin-top: 0;
+        }
+      }
 
       .page-title {
         margin-top: 0;
