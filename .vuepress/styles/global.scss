@@ -51,6 +51,7 @@ img {
   max-width: 960px;
   min-height: calc(100vh - #{$header-height} - #{$expected-footer-height});
   margin: 0 auto;
+  overflow: hidden;
 
   .language-text code {
     display: block;
@@ -157,6 +158,7 @@ img {
   .content-wrapper {
     padding-top: $space-unit * 3.5;
     padding-bottom: $space-unit * 3.5;
+    overflow: auto;
 
     &--post {
       padding-top: $space-unit * 1.5;

@@ -128,11 +128,14 @@ export default {
       .post-link {
         display: block;
         text-decoration: none;
-
-        &__title {
-          letter-spacing: 0.175rem;
-        }
       }
+    }
+  }
+
+  /* Larger than phablet */
+  @media (min-width: 600px) {
+    .post-link &__title {
+      letter-spacing: 0.175rem;
     }
   }
 
@@ -141,6 +144,7 @@ export default {
     .post-links {
       .post-link-wrapper {
         flex: 0 0 calc(50% - 20px);
+        width: auto;
       }
     }
   }
