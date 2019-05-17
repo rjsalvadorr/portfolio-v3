@@ -117,15 +117,24 @@ export default {
     }
   }
 
+  /* Larger than phablet */
+  @media (min-width: 550px) {
+    .post-links {
+      .post-link-wrapper {
+        flex: 0 0 calc(50% - 15px);
+      }
+      .post-link {
+        display: block;
+        text-decoration: none;
+      }
+    }
+  }
+
   /* Larger than tablet */
   @media (min-width: 750px) {
     .post-links {
       .post-link-wrapper {
         flex: 0 0 calc(50% - 50px);
-      }
-      .post-link {
-        display: block;
-        text-decoration: none;
       }
     }
   }
