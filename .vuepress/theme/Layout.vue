@@ -1,18 +1,18 @@
 <template>
-  <div :class="getThemeContainerClasses($page)" @keyup.esc="toggleDebugPanel()">
+  <div :class="getThemeContainerClasses()" @keyup.esc="toggleDebugPanel()">
     <div class="theme-header">
-      <Header :title="$site.title" :desc="$site.description"></Header>
+      <Header :title="$site.title" :desc="$site.description" :onHomePage="isHomePage()"></Header>
     </div>
     <div class="theme-content">
       <div class="content-wrapper-wrapper">
-        <div :class="getContentClasses($page)">
+        <div :class="getContentClasses()">
           <slot>
             <!-- if <Layout> has children, they go here -->
           </slot>
           <h1 class="content-title">{{ $page.title }}</h1>
           <Content>
           </Content>
-          <PostList :enabled="isCategoryPage($page)" :posts="filterPostsByCategory($site.pages, $page.frontmatter.category)"></PostList>
+          <PostList :enabled="isCategoryPage()" :posts="filterPostsByCategory($site.pages, $page.frontmatter.category)"></PostList>
         </div>
         <Footer></Footer>
       </div>
@@ -38,30 +38,33 @@ export default {
     };
   },
   methods: {
-    getContentClasses(pageData) {
+    getContentClasses() {
       let classes = 'content-wrapper';
-      if(pageData.frontmatter.type) {
-        classes += ` content-wrapper--${pageData.frontmatter.type}`;
+      if(this.$page.frontmatter.type) {
+        classes += ` content-wrapper--${this.$page.frontmatter.type}`;
       }
-      if(pageData.frontmatter.classes) {
-        for(let nextClass of pageData.frontmatter.classes) {
+      if(this.$page.frontmatter.classes) {
+        for(let nextClass of this.$page.frontmatter.classes) {
           classes += ` content-wrapper--${nextClass}`;
         }
       }
       return classes;
     },
-    getThemeContainerClasses(pageData) {
+    getThemeContainerClasses() {
       let classes = 'theme-container';
-      if(pageData.frontmatter.type) {
-        classes += ` theme-container--${pageData.frontmatter.type}`;
+      if(this.$page.frontmatter.type) {
+        classes += ` theme-container--${this.$page.frontmatter.type}`;
       }
       return classes;
+    },
+    isHomePage() {
+      return this.$page.frontmatter.type === 'home';
     },
     toggleDebugPanel() {
       this.debugPanelEnabled = !this.debugPanelEnabled;
     },
-    isCategoryPage(pageData) {
-      return pageData.frontmatter.type === 'category';
+    isCategoryPage() {
+      return this.$page.frontmatter.type === 'category';
     },
     filterPostsByCategory(allPages, category) {
       // Filtering by category
