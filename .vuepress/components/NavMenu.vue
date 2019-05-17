@@ -40,12 +40,12 @@ export default {
     &-link {
       text-transform: uppercase;
       letter-spacing: 0.1rem;
-      color: $header-color;
+      color: $header-link-color;
       font-weight: 700;
 
       &:hover,
       &:active {
-        color: $header-color-hover;
+        color: $header-link-color-hover;
       }
     }
 

@@ -6,11 +6,11 @@ type: post
 category: software
 ---
 
-Around early 2018, I started compiling guitar chord diagrams as I studied different chord patterns and inversions. That turned into a huge Visio document, which was a pain in the ass to update. I figured that putting it on the web would be a much cooler idea.
+Around early 2018, I compiled guitar chord diagrams as I studied various chord patterns and inversions. That turned into a huge Visio document, which was irritating to update. I figured that putting it on the web would be a much better idea.
 
 <!-- more -->
 
-This was also a neat opportunity to learn some tech stuff, so I decided to jump on the Vue bandwagon for this one. That turned out to be a great decision. I found that the [Vue CLI tools](https://cli.vuejs.org/guide/creating-a-project.html) didn't get in my way at all, and the Vue documentation made for an gentle learning curve for a React dev.
+This was also a neat opportunity to learn some tech stuff, so I decided to jump on the Vue bandwagon for this one. I found that the [Vue CLI tools](https://cli.vuejs.org/guide/creating-a-project.html) didn't get in my way at all, and the Vue documentation made for an gentle learning curve for a React dev.
 
 ## Process
 

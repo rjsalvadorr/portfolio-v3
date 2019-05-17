@@ -30,6 +30,18 @@ img {
   max-width: 100%;
 }
 
+blockquote, blockquote * {
+  font-family: serif !important;
+  font-style: italic;
+}
+
+blockquote {
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 0;
+  padding: 5px 20px;
+  border-radius: $border-radius;
+}
+
 .theme-container {
   &--home {
     .header-top .page-title,
@@ -76,6 +88,7 @@ img {
       font-size: 3.25rem;
       line-height: 3.25rem;
       margin-top: 25vh;
+      color: $header-link-color;
     }
 
     .content-subtitle {
