@@ -4,7 +4,7 @@
       <div class="header-top">
         <div class="header-wrapper">
           <a href="/"><h1 class="page-title">{{ title }}</h1></a>
-          <span class="page-desc">{{ desc }}</span>
+          <span class="page-desc">{{ desc}}</span>
         </div>
         <NavMenu class="nav-wrapper nav-wrapper--desktop" :navigationLinks="$site.themeConfig.nav"></NavMenu>
         <div class="btn-mobile-burger" v-on:click="toggleMobileMenu">

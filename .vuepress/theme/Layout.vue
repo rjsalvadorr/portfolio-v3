@@ -1,7 +1,7 @@
 <template>
   <div :class="getThemeContainerClasses()" @keyup.esc="toggleDebugPanel()">
     <div class="theme-header">
-      <Header :title="$site.title" :desc="$site.description" :onHomePage="isHomePage()"></Header>
+      <Header :title="$site.title" :desc="getDescription()" :onHomePage="isHomePage()"></Header>
     </div>
     <div class="theme-content">
       <div class="content-wrapper-wrapper">
@@ -29,6 +29,7 @@
 
 <script>
 import { DateTime } from "luxon";
+import sample from "lodash/sample";
 import filter from "lodash/filter";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
@@ -65,6 +66,9 @@ export default {
     },
     isHomePage() {
       return this.$page.frontmatter.type === 'home';
+    },
+    getDescription() {
+      return sample(this.$site.description)
     },
     toggleDebugPanel() {
       this.debugPanelEnabled = !this.debugPanelEnabled;

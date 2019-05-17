@@ -1,6 +1,11 @@
 module.exports = {
   title: 'RJ Salvador',
-  description: 'Portfolio & other goodies',
+  description: [
+    'Portfolio & other goods',
+    'Kludging JS since 2012',
+    'Wrestling CSS since 2012',
+    'Fixing HTML since 2012',
+  ],
   themeConfig: {
     nav: [
       { text: 'Software', link: '/software/' },
