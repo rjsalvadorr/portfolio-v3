@@ -11,4 +11,6 @@ classes:
 
 <ThreeCanvas></ThreeCanvas>
 
-<p class="content-subtitle">Software dev &nbsp;| &nbsp;Music maker&nbsp;| &nbsp;Visual tinkerer</p>
+<p class="content-subtitle content-subtitle--desktop">Software dev &nbsp;| &nbsp;Music maker&nbsp;| &nbsp;Visual tinkerer</p>
+
+<p class="content-subtitle content-subtitle--mobile">Software dev &nbsp;| &nbsp;Music maker<br>Visual tinkerer</p>

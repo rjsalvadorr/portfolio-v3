@@ -70,18 +70,23 @@ img {
 
     .content-title {
       @include display-text;
-      font-size: 6rem;
-      line-height: 6rem;
-      margin-top: 25vh;
       margin-bottom: 0;
       text-transform: uppercase;
+      font-size: 3.25rem;
+      line-height: 3.25rem;
+      margin-top: 25vh;
     }
 
     .content-subtitle {
       @include subtitle-text;
       margin-top: 0;
       font-size: 0.9rem;
-      line-height: 0.9rem;
+      line-height: 1.5rem;
+      
+      &--desktop {
+        line-height: 0.9rem;
+        display: none;
+      }
     }
   }
 
@@ -112,9 +117,33 @@ img {
   }
 }
 
+/* Larger than mobile */
+@media (min-width: 400px) {
+  .content-wrapper {
+    &--home .content-title {
+      font-size: 4.5rem;
+      line-height: 4.5rem;
+    }
+  }
+}
+
 /* Larger than phablet */
 @media (min-width: 550px) {
   .content-wrapper {
+    &--home {
+      .content-title {
+        font-size: 6rem;
+        line-height: 6rem;
+      }
+
+      .content-subtitle--desktop {
+        display: block;
+      }
+      .content-subtitle--mobile {
+        display: none;
+      }
+    }
+
     &--post {
       img {
         margin: ($space-unit * 2) auto;
@@ -154,6 +183,11 @@ img {
   .content-wrapper {
     padding-right: 0;
     padding-left: 0;
+
+    &--home .content-title {
+      font-size: 8rem;
+      line-height: 8rem;
+    }
 
     &--post {
       padding-top: $space-unit * 3;
