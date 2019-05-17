@@ -1,15 +1,15 @@
 <template>
   <div class="page-footer">
     <span class="contact contact-email">
-      <img class="contact-icon" src="/icons/mail.svg" />
+      <img class="contact-icon" src="/images/icons/mail.svg" />
       randolph.salvador@gmail.com
     </span>
     <span class="contact contact-linkedin">
-      <img class="contact-icon" src="/icons/linkedin.svg" />
+      <img class="contact-icon" src="/images/icons/linkedin.svg" />
       linkedin.com/in/randolphsalvador
     </span>
     <span class="contact contact-github">
-      <img class="contact-icon" src="/icons/github.svg" />
+      <img class="contact-icon" src="/images/icons/github.svg" />
       github.com/rjsalvadorr
     </span>
     <span class="copyright">© {{ getCurrentYear }} Randolph Jerome Salvador</span>
@@ -32,7 +32,7 @@ export default {
 
   .page-footer {
     background-color: $footer-bg-color;
-    background-image: url("/textures/shley-tree-1.png");
+    background-image: url("/images/textures/shley-tree-1.png");
 
     color: $footer-color;
     padding: ($space-unit * 0.75) $space-unit;

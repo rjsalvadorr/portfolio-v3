@@ -98,7 +98,7 @@ export default {
 
       padding: $space-unit;
       background-color: $header-bg-color;
-      background-image: url("/textures/shley-tree-1.png");
+      background-image: url("/images/textures/shley-tree-1.png");
       position: absolute;
       left: 0;
       right: 0;
