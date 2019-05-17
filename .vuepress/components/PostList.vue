@@ -82,6 +82,7 @@ export default {
       margin-top: $space-unit;
       margin-bottom: $space-unit;
       flex: 0 0 100%;
+      width: 100%;
     }
 
     .post-link {
@@ -107,6 +108,7 @@ export default {
         margin-bottom: 6px;
         line-height: 1.1;
         display: inline-block;
+        letter-spacing: 0.08rem;
       }
 
       &__subtitle, &__date {
@@ -126,6 +128,10 @@ export default {
       .post-link {
         display: block;
         text-decoration: none;
+
+        &__title {
+          letter-spacing: 0.175rem;
+        }
       }
     }
   }
