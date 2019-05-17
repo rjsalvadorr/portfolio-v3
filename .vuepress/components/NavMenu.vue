@@ -55,7 +55,7 @@ export default {
   }
 
   /* Larger than phablet */
-  @media (min-width: 550px) {
+  @media (min-width: 600px) {
     .page-nav-wrapper {
       padding: 0 $space-unit;
     }
