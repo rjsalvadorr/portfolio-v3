@@ -114,8 +114,8 @@ export default {
         letter-spacing: 0.1rem;
         display: inline-block;
         margin-bottom: 0;
-        font-size: $title-height;
-        line-height: $title-height;
+        font-size: $title-height-mobile;
+        line-height: $title-height-mobile;
         color: $header-color;
 
         &:hover {
@@ -175,8 +175,8 @@ export default {
     .header-top {
       .page-title {
         @include display-text;
-        font-size: $title-height;
-        line-height: $title-height;
+        font-size: $title-height !important;
+        line-height: $title-height !important;
       }
 
       .mobile-burger-icon {

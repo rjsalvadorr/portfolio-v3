@@ -32,7 +32,7 @@ export default {
     justify-content: flex-end;
 
     &-wrapper {
-      padding: 0 $space-unit;
+      padding: 0 ($space-unit / 2.5);
       flex: 0 0 auto;
       text-align: right;
     }
@@ -51,6 +51,13 @@ export default {
 
     &.nav-wrapper--mobile {
       justify-content: space-around
+    }
+  }
+
+  /* Larger than phablet */
+  @media (min-width: 550px) {
+    .page-nav-wrapper {
+      padding: 0 $space-unit;
     }
   }
 </style>
