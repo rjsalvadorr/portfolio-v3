@@ -37,7 +37,10 @@ $body-color: $palette-dark;
 $header-bg-color: $palette-primary;
 $header-color: #eee;
 $header-color-hover: darken($header-color, 20%);
-$expected-header-height: 92px;
+$header-height: 92px;
+$header-height-mob: 92px;
+$header-height-mob-home: 62px;
+$header-height-mob-exp: $header-height-mob + 42px;
 
 $footer-bg-color: $palette-primary;
 $footer-color: #eee;
