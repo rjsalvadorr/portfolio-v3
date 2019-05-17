@@ -116,10 +116,10 @@ export default {
         margin-bottom: 0;
         font-size: $title-height-mobile;
         line-height: $title-height-mobile;
-        color: $header-color;
+        color: $header-link-color;
 
         &:hover {
-          color: $header-color-hover;
+          color: $header-link-color-hover;
         }
       }
 
@@ -136,7 +136,7 @@ export default {
 
       .nav-wrapper {
         flex: 2 1 50%;
-        margin-top: $space-unit;
+        margin-top: $space-unit - 5px;
       }
     }
 
