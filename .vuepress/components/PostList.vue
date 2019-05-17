@@ -117,15 +117,33 @@ export default {
     }
   }
 
-  /* Larger than tablet */
-  @media (min-width: 750px) {
+  /* Larger than phablet */
+  @media (min-width: 550px) {
     .post-links {
       .post-link-wrapper {
-        flex: 0 0 calc(50% - 50px);
+        flex: 0 0 calc(50% - 15px);
       }
       .post-link {
         display: block;
         text-decoration: none;
+      }
+    }
+  }
+
+  /* Larger than desktop */
+  @media (min-width: 1000px) {
+    .post-links {
+      .post-link-wrapper {
+        flex: 0 0 calc(50% - 20px);
+      }
+    }
+  }
+
+  /* Larger than Desktop HD */
+  @media (min-width: 1200px) {
+    .post-links {
+      .post-link-wrapper {
+        flex: 0 0 calc(50% - 50px);
       }
     }
   }

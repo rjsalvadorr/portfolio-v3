@@ -10,7 +10,13 @@
             <!-- if <Layout> has children, they go here -->
           </slot>
           <h1 class="content-title">{{ $page.title }}</h1>
-          <Content>
+          <span
+            class="content-date"
+            v-if="isPost() && getPostDate()"
+          >
+            {{ getPostDate() }}
+          </span>
+          <Content :class="`content--${$page.frontmatter.type}`">
           </Content>
           <PostList :enabled="isCategoryPage()" :posts="filterPostsByCategory($site.pages, $page.frontmatter.category)"></PostList>
         </div>
@@ -65,6 +71,16 @@ export default {
     },
     isCategoryPage() {
       return this.$page.frontmatter.type === 'category';
+    },
+    isPost() {
+      return this.$page.frontmatter.type === 'post';
+    },
+    getPostDate() {
+      if(this.$page.frontmatter.date) {
+        const dt = DateTime.fromISO(this.$page.frontmatter.date).toUTC();
+        return dt.toLocaleString(DateTime.DATE_MED);
+      }
+      return '';
     },
     filterPostsByCategory(allPages, category) {
       // Filtering by category
