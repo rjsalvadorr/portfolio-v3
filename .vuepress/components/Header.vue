@@ -89,7 +89,7 @@ export default {
     }
 
     &--home {
-      height: $header-height-mob-home;
+      height: $header-height-phone-home;
     }
 
     .header-top {

@@ -105,6 +105,14 @@ blockquote {
     text-align: center;
     color: #eee;
 
+    .home-content-wrapper {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      left: 0;
+      transform: translateY(-100%);
+    }
+
     .content-title {
       @include display-text;
       margin-bottom: 0;
@@ -185,6 +193,15 @@ blockquote {
       img {
         margin: ($space-unit * 2) auto;
       }
+    }
+  }
+}
+
+@media (min-width: 600px) and (orientation: landscape) {
+  .content-wrapper {
+    &--home .content-title {
+      font-size: 4.5rem;
+      line-height: 4.5rem;
     }
   }
 }
