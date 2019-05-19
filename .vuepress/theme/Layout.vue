@@ -34,7 +34,6 @@ import filter from "lodash/filter";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import PostList from "../components/PostList.vue";
-import ThreeCanvas from "../components/ThreeCanvas.vue";
 import DebugPanel from "../components/DebugPanel.vue";
 
 export default {
@@ -115,7 +114,6 @@ export default {
     Header,
     Footer,
     PostList,
-    ThreeCanvas,
     DebugPanel
   }
 }

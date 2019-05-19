@@ -46,6 +46,7 @@ blockquote {
 .theme-container {
   &--home {
     height: 100vh;
+    background-color: #000 !important;
 
     .header-top .page-title,
     .header-top .page-desc {
@@ -61,14 +62,14 @@ blockquote {
 
         .page-footer {
           position: relative;
-          z-index: 1;
+          z-index: 50;
         }
       }
 
       .content-title,
       .content-subtitle {
         position: relative;
-        z-index: 1;
+        z-index: 50;
       }
     }
   }

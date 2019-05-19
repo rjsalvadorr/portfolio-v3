@@ -7,10 +7,10 @@
 import * as THREE from 'three';
 import sample from "lodash/sample";
 import chroma from 'chroma-js';
-import utils from '../utils/three-utils';
+import utils from '../../utils/three-utils';
 
 export default {
-  name: 'ThreeCanvas',
+  name: 'ThreeCity',
   mounted() {
     ///////////////////////////////////////////////////////////////////////////////
     //   CONSTANTS
@@ -156,7 +156,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../styles/vars.scss";
+  @import "../../styles/vars.scss";
 
   .canvas-wrapper {
     position: absolute;

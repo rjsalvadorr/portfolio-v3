@@ -4,27 +4,25 @@
     </div>
     <div class="visuals-wrapper">
       <div v-if="currentVisual === 1" class="visual visual-1">
-        <ThreeCanvas></ThreeCanvas>
+        <ThreeCity></ThreeCity>
       </div>
       <div v-if="currentVisual === 2" class="visual visual-2">
-        <h2>VISUAL 2 COMIN AT YA</h2>
-      </div>
-      <div v-if="currentVisual === 3" class="visual visual-3">
-        <h2>THIRD VISUAL WHOA</h2>
+        <GreyWaterfall lightestCol="222231" darkestCol="0c0c12"></GreyWaterfall>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ThreeCanvas from "./ThreeCanvas.vue";
+import ThreeCity from "./visualizations/ThreeCity.vue";
+import GreyWaterfall from "./visualizations/GreyWaterfall.vue";
 
 export default {
   name: 'Visualizations',
   data: function () {
     return {
-      currentVisual: 3,
-      maxVisuals: 3,
+      currentVisual: 1,
+      maxVisuals: 2,
       visualDuration: 10,
       overlayEnabled: true,
     }
@@ -38,13 +36,17 @@ export default {
       this.overlayEnabled = false;
     }
 
-    const next = () => {
-      this.goToNextVisual();
+    const setFades = () => {
       fadeIn();
-      window.setTimeout(fadeOut, (this.visualDuration - 0.5) * 1000);
+      window.setTimeout(fadeOut, (this.visualDuration - 0.6) * 1000);
     }
 
-    next();
+    const next = () => {
+      this.goToNextVisual();
+      setFades();
+    }
+
+    setFades();
     window.setInterval (next, 1000 * this.visualDuration);
   },
   methods: {
@@ -58,6 +60,10 @@ export default {
         this.currentVisual = this.currentVisual + 1;
       }
     }
+  },
+  components: {
+    ThreeCity,
+    GreyWaterfall,
   }
 }
 </script>
@@ -71,6 +77,7 @@ export default {
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: 10
   }
 
   .visuals-overlay {
@@ -79,10 +86,10 @@ export default {
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 1;
+    z-index: 40;
     background-color: #000000;
-    opacity: 0.1;
-    transition: opacity 0.5s linear;
+    opacity: 0.25;
+    transition: opacity 0.6s linear;
   }
 
   .visuals-overlay--opaque {
