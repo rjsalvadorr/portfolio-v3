@@ -14,6 +14,7 @@
 import sample from "lodash/sample";
 import chroma from 'chroma-js';
 import GridQueue from '../../utils/grid-queue';
+import utils from '../../utils/three-utils';
 
 export default {
   name: 'GreyWaterfall',
@@ -47,7 +48,14 @@ export default {
         for(let j = 1; j <= data.length; j++) {
           const selector = `row-${k}-col-${j}`
           const element = document.getElementsByClassName(selector)[0];
-          element.style.backgroundColor = gridQueue.toArray()[k - 1][j - 1];
+          const newCol = chroma(gridQueue.toArray()[k - 1][j - 1]);
+          const hueAdj = utils.periodicFunction(
+            new Date().getTime() / 1000,
+            7,
+            newCol.get('hsl.h') - 80,
+            newCol.get('hsl.h') + 80,
+          );
+          element.style.backgroundColor = newCol.set('hsl.h', hueAdj);
         }
       }
     }
