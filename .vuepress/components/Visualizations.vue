@@ -25,6 +25,7 @@ export default {
       maxVisuals: 2,
       visualDuration: 10,
       overlayEnabled: true,
+      intervalId: null,
     }
   },
   mounted() {
@@ -47,7 +48,7 @@ export default {
     }
 
     setFades();
-    window.setInterval (next, 1000 * this.visualDuration);
+    this.intervalId = window.setInterval (next, 1000 * this.visualDuration);
   },
   methods: {
     getFadeClass() {
@@ -64,6 +65,9 @@ export default {
   components: {
     ThreeCity,
     GreyWaterfall,
+  },
+  beforeDestroy() {
+    window.clearInterval(this.intervalId);
   }
 }
 </script>
