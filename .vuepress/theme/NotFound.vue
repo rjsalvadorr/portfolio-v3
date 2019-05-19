@@ -57,17 +57,13 @@ export default {
   @import "../styles/vars.scss";
 
   .theme-container--404 {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
     background-color: $body-bg-color;
     color: $body-color;
     display: flex;
     flex-direction: column;
 
     .theme-content {
+      width: 100%;
       overflow: auto;
       flex-grow: 1;
     }

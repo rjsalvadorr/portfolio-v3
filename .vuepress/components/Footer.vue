@@ -39,7 +39,6 @@ export default {
     box-shadow: $box-shadow-up;
 
     .contact {
-      // @include subtitle-text;
       letter-spacing: 0.05rem;
       font-size: $body-font-size * 0.8;
       line-height: $body-font-size * 1.2;

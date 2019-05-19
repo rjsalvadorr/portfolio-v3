@@ -99,9 +99,6 @@ export default {
       padding: $space-unit;
       background-color: $header-bg-color;
       background-image: url("/images/textures/shley-tree-1.png");
-      position: absolute;
-      left: 0;
-      right: 0;
 
       &--home {
         .nav-wrapper.nav-wrapper--mobile {
@@ -186,6 +183,8 @@ export default {
     }
 
     .page-header {
+      height: auto;
+
       .header--mobile {
         display: none;
       }

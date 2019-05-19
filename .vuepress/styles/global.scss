@@ -21,6 +21,7 @@ code {
 
 .content-wrapper-wrapper {
   background-image: url("/images/textures/asfalt-dark.png");
+  position: relative;
 }
 
 img {
@@ -44,6 +45,8 @@ blockquote {
 
 .theme-container {
   &--home {
+    height: 100vh;
+
     .header-top .page-title,
     .header-top .page-desc {
       display: none;
@@ -51,6 +54,22 @@ blockquote {
 
     .content-wrapper {
       min-height: calc(100vh - #{$header-height-mob-home} - #{$expected-footer-height});
+      
+      &-wrapper {
+        overflow: hidden;
+        background: none;
+
+        .page-footer {
+          position: relative;
+          z-index: 1;
+        }
+      }
+
+      .content-title,
+      .content-subtitle {
+        position: relative;
+        z-index: 1;
+      }
     }
   }
 }
@@ -75,6 +94,11 @@ blockquote {
     letter-spacing: 0.5rem;
     text-align: center;
     margin-top: 0;
+
+    &-wrapper {
+      position: relative;
+      z-index: 10;
+    }
   }
 
   &--home {
@@ -87,7 +111,6 @@ blockquote {
       text-transform: uppercase;
       font-size: 3.25rem;
       line-height: 3.25rem;
-      margin-top: 25vh;
       color: $header-link-color;
     }
 
