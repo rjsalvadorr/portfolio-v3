@@ -63,4 +63,4 @@ typings/
 # doesn't belong in the repo
 
 temp-img
-.dist
+dist
