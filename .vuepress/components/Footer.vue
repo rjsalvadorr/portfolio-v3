@@ -6,11 +6,15 @@
     </span>
     <span class="contact contact-linkedin">
       <img class="contact-icon" src="/images/icons/linkedin.svg" />
-      linkedin.com/in/randolphsalvador
+      <a href="https://www.linkedin.com/in/randolphsalvador/" target="_blank">
+        linkedin.com/in/randolphsalvador
+      </a>
     </span>
     <span class="contact contact-github">
       <img class="contact-icon" src="/images/icons/github.svg" />
-      github.com/rjsalvadorr
+      <a href="https://github.com/rjsalvadorr" target="_blank">
+        github.com/rjsalvadorr
+      </a>
     </span>
     <span class="copyright">© {{ getCurrentYear }} Randolph Jerome Salvador</span>
   </div>
@@ -43,6 +47,16 @@ export default {
       font-size: $body-font-size * 0.8;
       line-height: $body-font-size * 1.2;
       display: block;
+
+      a {
+        font-size: inherit;
+        line-height: inherit;
+        color: inherit;
+
+        &:hover {
+          color: darken($footer-color, 30%);
+        }
+      }
 
       &-icon {
         display: inline-block;

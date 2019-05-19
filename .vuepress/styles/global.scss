@@ -46,6 +46,7 @@ blockquote {
 .theme-container {
   &--home {
     height: 100vh;
+    background-color: #000 !important;
 
     .header-top .page-title,
     .header-top .page-desc {
@@ -61,14 +62,14 @@ blockquote {
 
         .page-footer {
           position: relative;
-          z-index: 1;
+          z-index: 50;
         }
       }
 
       .content-title,
       .content-subtitle {
         position: relative;
-        z-index: 1;
+        z-index: 50;
       }
     }
   }
@@ -111,6 +112,7 @@ blockquote {
       right: 0;
       left: 0;
       transform: translateY(-100%);
+      z-index: 2000;
     }
 
     .content-title {
@@ -127,6 +129,7 @@ blockquote {
       margin-top: 0;
       font-size: 0.9rem;
       line-height: 1.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
       
       &--desktop {
         line-height: 0.9rem;

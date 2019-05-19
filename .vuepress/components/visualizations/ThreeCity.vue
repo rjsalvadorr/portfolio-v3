@@ -7,10 +7,15 @@
 import * as THREE from 'three';
 import sample from "lodash/sample";
 import chroma from 'chroma-js';
-import utils from '../utils/three-utils';
+import utils from '../../utils/three-utils';
 
 export default {
-  name: 'ThreeCanvas',
+  name: 'ThreeCity',
+  data: function () {
+    return {
+      intervalId: null,
+    }
+  },
   mounted() {
     ///////////////////////////////////////////////////////////////////////////////
     //   CONSTANTS
@@ -101,7 +106,7 @@ export default {
     const cameraHeight = 18;
     const rotationPeriod = 32;
     const rotationRadius = 23;
-    window.setInterval (function () {
+    this.intervalId = window.setInterval (function () {
       const currentTime = Date.now () / 1000;
       const circCoords = utils.circleFunction(currentTime, rotationPeriod, rotationRadius);
       const cameraPos = new THREE.Vector3(
@@ -152,11 +157,14 @@ export default {
       });
     })();
   },
+  beforeDestroy() {
+    window.clearInterval(this.intervalId);
+  }
 }
 </script>
 
 <style scoped lang="scss">
-  @import "../styles/vars.scss";
+  @import "../../styles/vars.scss";
 
   .canvas-wrapper {
     position: absolute;

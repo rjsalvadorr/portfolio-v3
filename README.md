@@ -9,7 +9,7 @@ classes:
   - landing
 ---
 
-<ThreeCanvas></ThreeCanvas>
+<Visualizations></Visualizations>
 
 <div class="home-content-wrapper">
   <h1 class="content-title">RJ Salvador</h1>
