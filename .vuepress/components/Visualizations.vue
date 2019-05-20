@@ -4,10 +4,13 @@
     </div>
     <div class="visuals-wrapper">
       <div v-if="currentVisual === 1" class="visual visual-1">
-        <ThreeCity></ThreeCity>
+        <SpiralSite></SpiralSite>
       </div>
       <div v-if="currentVisual === 2" class="visual visual-2">
         <GreyWaterfall lightestCol="191925" darkestCol="08080c"></GreyWaterfall>
+      </div>
+      <div v-if="currentVisual === 3" class="visual visual-3">
+        <SpiralSite></SpiralSite>
       </div>
     </div>
   </div>
@@ -16,13 +19,14 @@
 <script>
 import ThreeCity from "./visualizations/ThreeCity.vue";
 import GreyWaterfall from "./visualizations/GreyWaterfall.vue";
+import SpiralSite from "./visualizations/SpiralSite.vue";
 
 export default {
   name: 'Visualizations',
   data: function () {
     return {
       currentVisual: 1,
-      maxVisuals: 2,
+      maxVisuals: 3,
       visualDuration: 10,
       overlayEnabled: true,
       intervalId: null,
@@ -65,6 +69,7 @@ export default {
   components: {
     ThreeCity,
     GreyWaterfall,
+    SpiralSite,
   },
   beforeDestroy() {
     window.clearInterval(this.intervalId);
