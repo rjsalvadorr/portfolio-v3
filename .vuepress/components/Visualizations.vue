@@ -4,13 +4,13 @@
     </div>
     <div class="visuals-wrapper">
       <div v-if="currentVisual === 1" class="visual visual-1">
-        <InfiniteScreen></InfiniteScreen>
-      </div>
-      <div v-if="currentVisual === 2" class="visual visual-2">
         <ThreeCity></ThreeCity>
       </div>
-      <div v-if="currentVisual === 3" class="visual visual-3">
+      <div v-if="currentVisual === 2" class="visual visual-2">
         <GreyWaterfall lightestCol="295aa3" darkestCol="0c1b30"></GreyWaterfall>
+      </div>
+      <div v-if="currentVisual === 3" class="visual visual-3">
+        <InfiniteScreen></InfiniteScreen>
       </div>
     </div>
   </div>

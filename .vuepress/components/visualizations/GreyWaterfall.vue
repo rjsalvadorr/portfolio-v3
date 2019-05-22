@@ -51,9 +51,9 @@ export default {
           const newCol = chroma(gridQueue.toArray()[k - 1][j - 1]);
           const hueAdj = utils.periodicFunction(
             new Date().getTime() / 1000,
-            6,
-            newCol.get('hsl.h') - 10,
-            newCol.get('hsl.h') + 10,
+            4,
+            newCol.get('hsl.h') - 15,
+            newCol.get('hsl.h') + 15,
           );
           element.style.backgroundColor = newCol.set('hsl.h', hueAdj);
         }

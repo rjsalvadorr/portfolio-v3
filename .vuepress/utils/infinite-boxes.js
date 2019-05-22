@@ -7,6 +7,7 @@ class Box {
       .toString(36)
       .substring(7)
       .toUpperCase();
+    this.mesh = {};
     this.x = x;
     this.y = y;
     this.length = length;
@@ -21,7 +22,7 @@ class InfiniteBoxes {
     this.gutter = gutter;
     this.movePos = movePositive;
 
-    const min = totalLength / numBoxes * 0.66;
+    const min = totalLength / numBoxes * 0.6;
     const boxLengths = utils.splitRough(totalLength, numBoxes, min);
     let startingX = 0;
     for (let len of boxLengths) {
@@ -35,14 +36,14 @@ class InfiniteBoxes {
     let sortedEdges;
     let maxX;
     let limitReached;
+    let xVal;
     for (let box of this.boxes) {
-      box.x += this.movePos ? 3 : -3;
+      xVal = this.movePos ? 0.6 : -0.6;
+      box.x += xVal;
+
       if (this.movePos) {
-        box.x += 3;
-        limitReached =
-          box.x > this.totalLength + this.gutter * this.boxes.length;
+        limitReached = box.x > this.totalLength + this.gutter * this.boxes.length;
       } else {
-        box.x -= 3;
         limitReached = box.x < 0;
       }
 
@@ -60,6 +61,7 @@ class InfiniteBoxes {
           box.x = maxX + this.gutter;
         }
       }
+      box.mesh.position.set(box.x + (box.length / 2), 0, box.y);
     }
   }
 }
