@@ -8,9 +8,10 @@ import * as THREE from 'three';
 import sample from "lodash/sample";
 import chroma from 'chroma-js';
 import utils from '../../utils/three-utils';
+import InfiniteBoxes from '../../utils/infinite-boxes';
 
 export default {
-  name: 'ThreeCity',
+  name: 'InfiniteScreen',
   data: function () {
     return {
       intervalId: null,
@@ -19,19 +20,17 @@ export default {
   mounted() {
     ///////////////////////////////////////////////////////////////////////////////
     //   CONSTANTS
-
+    const CAM_POS = new THREE.Vector3(45, 25, 67);
+    const CAM_TARGET = new THREE.Vector3(
+      CAM_POS.x + 40,
+      CAM_POS.y - 40,
+      CAM_POS.z - 20,
+    );
     const LIGHT_POS = new THREE.Vector3(1, 5, 1);
     const UPDATES_PER_SECOND = 20;
 
-    const GRID_WIDTH = 5;
-    const GRID_LENGTH = 5;
-    const GRID_UNIT_LENGTH = 10;
-    const GRID_UNIT_HEIGHT = 8;
-    const GRID_GUTTER_SIZE = 1.5;
-
     ///////////////////////////////////////////////////////////////////////////////
     //   THREE.JS ESSENTIALS
-
     let scene = new THREE.Scene ();
     let camera = new THREE.PerspectiveCamera (
       45,
@@ -39,6 +38,8 @@ export default {
       1,
       1000
     );
+    camera.position.set(CAM_POS.x, CAM_POS.y, CAM_POS.z);
+    camera.lookAt(CAM_TARGET);
 
     let renderer = new THREE.WebGLRenderer ({antialias: true});
     renderer.setSize (this.$el.clientWidth, this.$el.clientHeight);
@@ -51,71 +52,56 @@ export default {
 
     ///////////////////////////////////////////////////////////////////////////////
     //   MAIN OBJECTS
+    const lengthOptions =  [160, 165, 170];
+    const infBoxRow = [];
+    const numBoxes = 6;
+    const boxWidth = 100;
+    const boxesGutter = 5;
+    for (let i = 0; i < 2; i++) {
+      infBoxRow.push(
+        new InfiniteBoxes(
+          sample(lengthOptions),
+          numBoxes,
+          boxWidth,
+          i * (boxWidth + boxesGutter),
+          i % 2 === 0,
+          boxesGutter,
+        )
+      );
+    }
 
-    // Creating boxes
-    const boxes = [];
-    const gridBoxGroup = new THREE.Group ();
-    let gridBoxGeometry;
-    let gridBoxMaterial;
-
-    const lightest = '337a99';
-    const darkest = chroma(lightest).darken(3);
-    const colorScale = chroma.scale([darkest, lightest]);
-    renderer.setClearColor(chroma(lightest).darken(4).num(), 1);
-
-    const gridUnitWithGutter = GRID_UNIT_LENGTH + GRID_GUTTER_SIZE;
-    let sceneLength = gridUnitWithGutter * GRID_LENGTH;
-    let sceneWidth = gridUnitWithGutter * GRID_WIDTH;
-    let newHeight;
+    const boxColour = '#922438';
+    const bgLightest = chroma(boxColour).darken(1.5);
+    const bgDarkest = chroma(boxColour).darken(4);
+    const colorScale = chroma.scale([bgDarkest, bgLightest]);
+    const meshes = [];
+    let bGeometry;
+    let bMaterial;
     let newBox;
-
-    for (let i = 0; i < GRID_LENGTH; i++) {
-      boxes[i] = [];
-
-      for (let j = 0; j < GRID_WIDTH; j++) {
-        newHeight = utils.getRandomInt(2, GRID_UNIT_HEIGHT);
-        gridBoxGeometry = new THREE.BoxBufferGeometry (
-          GRID_UNIT_LENGTH,
-          newHeight,
-          GRID_UNIT_LENGTH,
-        );
-        gridBoxMaterial = new THREE.MeshLambertMaterial ({
-          color: colorScale(sample([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])).hex(),
+    for (let boxes of infBoxRow) {
+      for (let box of boxes.boxes) {
+        bGeometry = new THREE.BoxBufferGeometry(box.length, 1.5, box.width);
+        bMaterial = new THREE.MeshLambertMaterial({
+          color: boxColour,
           flatShading: true,
         });
-
-        newBox = new THREE.Mesh (gridBoxGeometry, gridBoxMaterial);
-        newBox.position.setX(i * gridUnitWithGutter);
-        newBox.position.setY(newHeight / 2);
-        newBox.position.setZ(j * gridUnitWithGutter);
-        boxes[i].push(newBox);
-        gridBoxGroup.add(newBox);
+        newBox = new THREE.Mesh( bGeometry, bMaterial );
+        newBox.position.set(box.x + (box.length / 2), 0, box.y);
+        box.mesh = newBox;
+        meshes.push(newBox);
+        scene.add(newBox);
       }
     }
-    scene.add (gridBoxGroup);
-    const newCameraTarget = new THREE.Vector3(
-      sceneLength / 2,
-      0,
-      sceneWidth / 2
-    );
 
     ///////////////////////////////////////////////////////////////////////////////
     //   MAIN RENDER/UPDATE LOOPS
-
-    // Update loop
-    const cameraHeight = 18;
-    const rotationPeriod = 32;
-    const rotationRadius = 23;
     this.intervalId = window.setInterval (function () {
+      for (let boxes of infBoxRow) {
+        boxes.moveBoxes();
+      }
       const currentTime = Date.now () / 1000;
-      const circCoords = utils.circleFunction(currentTime, rotationPeriod, rotationRadius);
-      const cameraPos = new THREE.Vector3(
-        circCoords.x + (sceneLength / 2),
-        cameraHeight,
-        circCoords.y + (sceneWidth / 2),
-      );
-      camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
-      camera.lookAt(newCameraTarget);
+      const bgColour = utils.periodicFunction(currentTime, 3, 0, 1);
+      renderer.setClearColor(colorScale(bgColour).num(), 1);
     }, 1000 / UPDATES_PER_SECOND);
 
     // Render loop
@@ -128,7 +114,6 @@ export default {
 
     ///////////////////////////////////////////////////////////////////////////////
     //   HANDLING WINDOW RESIZES
-
     const canvasElement = this.$el;
     function resizeRenderer(evt) {
       camera.aspect = canvasElement.clientWidth / canvasElement.clientHeight;

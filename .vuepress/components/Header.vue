@@ -56,7 +56,6 @@ export default {
     },
     toggleMobileMenu() {
       this.mobileMenuOpen = !this.mobileMenuOpen;
-      console.log(this.mobileMenuOpen);
     },
     getButtonClass() {
       const iconModifier = this.mobileMenuOpen ? 'open' : 'closed';

@@ -7,13 +7,18 @@
         <ThreeCity></ThreeCity>
       </div>
       <div v-if="currentVisual === 2" class="visual visual-2">
-        <GreyWaterfall lightestCol="191925" darkestCol="08080c"></GreyWaterfall>
+        <GreyWaterfall lightestCol="295aa3" darkestCol="0c1b30"></GreyWaterfall>
+      </div>
+      <div v-if="currentVisual === 3" class="visual visual-3">
+        <InfiniteScreen></InfiniteScreen>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+// import ThreeTemplate from "./visualizations/ThreeTemplate.vue";
+import InfiniteScreen from "./visualizations/InfiniteScreen.vue";
 import ThreeCity from "./visualizations/ThreeCity.vue";
 import GreyWaterfall from "./visualizations/GreyWaterfall.vue";
 
@@ -22,7 +27,7 @@ export default {
   data: function () {
     return {
       currentVisual: 1,
-      maxVisuals: 2,
+      maxVisuals: 3,
       visualDuration: 10,
       overlayEnabled: true,
       intervalId: null,
@@ -63,6 +68,7 @@ export default {
     }
   },
   components: {
+    InfiniteScreen,
     ThreeCity,
     GreyWaterfall,
   },
@@ -92,7 +98,7 @@ export default {
     left: 0;
     z-index: 40;
     background-color: #000000;
-    opacity: 0.25;
+    opacity: 0.15;
     transition: opacity 0.6s linear;
   }
 
