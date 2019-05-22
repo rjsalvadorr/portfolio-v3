@@ -102,6 +102,7 @@ export default {
       const currentTime = Date.now () / 1000;
       const bgColour = utils.periodicFunction(currentTime, 3, 0, 1);
       renderer.setClearColor(colorScale(bgColour).num(), 1);
+      console.log('InfiniteScreen update');
     }, 1000 / UPDATES_PER_SECOND);
 
     // Render loop
@@ -143,6 +144,7 @@ export default {
     })();
   },
   beforeDestroy() {
+    console.log('InfiniteScreen beforeDestroy()');
     window.clearInterval(this.intervalId);
   }
 }

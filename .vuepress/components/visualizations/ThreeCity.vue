@@ -116,6 +116,7 @@ export default {
       );
       camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
       camera.lookAt(newCameraTarget);
+      console.log('ThreeCity update');
     }, 1000 / UPDATES_PER_SECOND);
 
     // Render loop
@@ -158,6 +159,7 @@ export default {
     })();
   },
   beforeDestroy() {
+    console.log('ThreeCity beforeDestroy()');
     window.clearInterval(this.intervalId);
   }
 }
