@@ -4,13 +4,13 @@
     </div>
     <div class="visuals-wrapper">
       <div v-if="currentVisual === 1" class="visual visual-1">
-        <ThreeCity></ThreeCity>
+        <ThreeCity :renderer="renderer"></ThreeCity>
       </div>
       <div v-if="currentVisual === 2" class="visual visual-2">
         <GreyWaterfall lightestCol="295aa3" darkestCol="0c1b30"></GreyWaterfall>
       </div>
       <div v-if="currentVisual === 3" class="visual visual-3">
-        <InfiniteScreen></InfiniteScreen>
+        <InfiniteScreen :renderer="renderer"></InfiniteScreen>
       </div>
     </div>
   </div>
@@ -18,6 +18,7 @@
 
 <script>
 // import ThreeTemplate from "./visualizations/ThreeTemplate.vue";
+import { WebGLRenderer } from 'three';
 import InfiniteScreen from "./visualizations/InfiniteScreen.vue";
 import ThreeCity from "./visualizations/ThreeCity.vue";
 import GreyWaterfall from "./visualizations/GreyWaterfall.vue";
@@ -31,6 +32,7 @@ export default {
       visualDuration: 10,
       overlayEnabled: true,
       intervalId: null,
+      renderer: new WebGLRenderer ({antialias: true}),
     }
   },
   mounted() {

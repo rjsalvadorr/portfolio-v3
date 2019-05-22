@@ -11,6 +11,9 @@ import utils from '../../utils/three-utils';
 
 export default {
   name: 'ThreeCity',
+  props: {
+    renderer: Object,
+  },
   data: function () {
     return {
       intervalId: null,
@@ -19,7 +22,6 @@ export default {
   mounted() {
     ///////////////////////////////////////////////////////////////////////////////
     //   CONSTANTS
-
     const LIGHT_POS = new THREE.Vector3(1, 5, 1);
     const UPDATES_PER_SECOND = 20;
 
@@ -28,10 +30,10 @@ export default {
     const GRID_UNIT_LENGTH = 10;
     const GRID_UNIT_HEIGHT = 8;
     const GRID_GUTTER_SIZE = 1.5;
+    const RENDERER = this.renderer;
 
     ///////////////////////////////////////////////////////////////////////////////
     //   THREE.JS ESSENTIALS
-
     let scene = new THREE.Scene ();
     let camera = new THREE.PerspectiveCamera (
       45,
@@ -40,10 +42,9 @@ export default {
       1000
     );
 
-    let renderer = new THREE.WebGLRenderer ({antialias: true});
-    renderer.setSize (this.$el.clientWidth, this.$el.clientHeight);
+    RENDERER.setSize (this.$el.clientWidth, this.$el.clientHeight);
     const canvasWrapper = this.$el;
-    canvasWrapper.appendChild (renderer.domElement);
+    canvasWrapper.appendChild (RENDERER.domElement);
 
     let light = new THREE.DirectionalLight ('white', 0.8);
     light.position.set (LIGHT_POS.x, LIGHT_POS.y, LIGHT_POS.z);
@@ -61,7 +62,7 @@ export default {
     const lightest = '337a99';
     const darkest = chroma(lightest).darken(3);
     const colorScale = chroma.scale([darkest, lightest]);
-    renderer.setClearColor(chroma(lightest).darken(4).num(), 1);
+    RENDERER.setClearColor(chroma(lightest).darken(4).num(), 1);
 
     const gridUnitWithGutter = GRID_UNIT_LENGTH + GRID_GUTTER_SIZE;
     let sceneLength = gridUnitWithGutter * GRID_LENGTH;
@@ -73,7 +74,7 @@ export default {
       boxes[i] = [];
 
       for (let j = 0; j < GRID_WIDTH; j++) {
-        newHeight = utils.getRandomInt(2, GRID_UNIT_HEIGHT);
+        newHeight = sample(utils.splitRough(25, 5, 2.5));
         gridBoxGeometry = new THREE.BoxBufferGeometry (
           GRID_UNIT_LENGTH,
           newHeight,
@@ -116,24 +117,22 @@ export default {
       );
       camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
       camera.lookAt(newCameraTarget);
-      console.log('ThreeCity update');
     }, 1000 / UPDATES_PER_SECOND);
 
     // Render loop
     let render = function () {
       requestAnimationFrame (render);
-      renderer.render (scene, camera);
+      RENDERER.render (scene, camera);
     };
 
     render ();
 
     ///////////////////////////////////////////////////////////////////////////////
     //   HANDLING WINDOW RESIZES
-
     const canvasElement = this.$el;
     function resizeRenderer(evt) {
       camera.aspect = canvasElement.clientWidth / canvasElement.clientHeight;
-      renderer.setSize(canvasElement.clientWidth, canvasElement.clientHeight);
+      RENDERER.setSize(canvasElement.clientWidth, canvasElement.clientHeight);
       camera.updateProjectionMatrix();
     };
 
@@ -159,7 +158,6 @@ export default {
     })();
   },
   beforeDestroy() {
-    console.log('ThreeCity beforeDestroy()');
     window.clearInterval(this.intervalId);
   }
 }
