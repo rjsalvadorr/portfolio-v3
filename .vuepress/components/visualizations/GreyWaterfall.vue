@@ -38,7 +38,7 @@ export default {
         zIndex: sample([30, 31, 32]),
       };
     });
-    const updatesPerSecond = 9;
+    const updatesPerSecond = 8;
 
     const gridQueue = new GridQueue(this.gridWidth, this.gridLength, modValues);
     const data = {
