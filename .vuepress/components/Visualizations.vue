@@ -98,7 +98,7 @@ export default {
     left: 0;
     z-index: 40;
     background-color: #000000;
-    opacity: 0.25;
+    opacity: 0.15;
     transition: opacity 0.6s linear;
   }
 

@@ -71,7 +71,7 @@ export default {
     }
 
     const boxColour = '#922438';
-    const bgLightest = chroma(boxColour).darken(2);
+    const bgLightest = chroma(boxColour).darken(1.5);
     const bgDarkest = chroma(boxColour).darken(4);
     const colorScale = chroma.scale([bgDarkest, bgLightest]);
     const meshes = [];
@@ -157,6 +157,5 @@ export default {
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 10000;
   }
 </style>
