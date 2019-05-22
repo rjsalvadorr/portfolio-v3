@@ -10,7 +10,7 @@
         <ThreeCity></ThreeCity>
       </div>
       <div v-if="currentVisual === 3" class="visual visual-3">
-        <GreyWaterfall lightestCol="191925" darkestCol="08080c"></GreyWaterfall>
+        <GreyWaterfall lightestCol="295aa3" darkestCol="0c1b30"></GreyWaterfall>
       </div>
     </div>
   </div>

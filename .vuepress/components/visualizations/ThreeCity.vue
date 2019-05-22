@@ -58,10 +58,10 @@ export default {
     let gridBoxGeometry;
     let gridBoxMaterial;
 
-    const lightest = '496868';
+    const lightest = '337a99';
     const darkest = chroma(lightest).darken(3);
     const colorScale = chroma.scale([darkest, lightest]);
-    renderer.setClearColor(colorScale(0).num(), 1);
+    renderer.setClearColor(chroma(lightest).darken(4).num(), 1);
 
     const gridUnitWithGutter = GRID_UNIT_LENGTH + GRID_GUTTER_SIZE;
     let sceneLength = gridUnitWithGutter * GRID_LENGTH;

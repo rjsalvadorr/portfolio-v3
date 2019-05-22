@@ -24,14 +24,14 @@ export default {
   },
   data: function () {
     return {
-      gridLength: 10,
-      gridWidth: 10,
+      gridLength: 13,
+      gridWidth: 13,
       intervalId: null,
     }
   },
   mounted() {
     const colorScale = chroma.scale([this.darkestCol, this.lightestCol]);
-    const scaleVals = [0.0, 0.2, 0.5, 0.8, 1.0];
+    const scaleVals = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
     const modValues = scaleVals.map(x => {
       return colorScale(x).hex();
     });
@@ -51,9 +51,9 @@ export default {
           const newCol = chroma(gridQueue.toArray()[k - 1][j - 1]);
           const hueAdj = utils.periodicFunction(
             new Date().getTime() / 1000,
-            7,
-            newCol.get('hsl.h') - 80,
-            newCol.get('hsl.h') + 80,
+            6,
+            newCol.get('hsl.h') - 10,
+            newCol.get('hsl.h') + 10,
           );
           element.style.backgroundColor = newCol.set('hsl.h', hueAdj);
         }
@@ -75,6 +75,8 @@ export default {
 <style scoped lang="scss">
   @import "../../styles/vars.scss";
   $table-gutter: 10px;
+  $waterfall-unit-w: 100vw / 13;
+  $waterfall-unit-h: 100vh / 13;
 
   .grey-waterfall {
     position: absolute;
@@ -90,8 +92,8 @@ export default {
   }
 
   .grey-waterfall-table td {
-    height: 10vw;
-    width: 10vw;
+    height: $waterfall-unit-w;
+    width: $waterfall-unit-w;
     background-color: #222;
   }
 
@@ -100,8 +102,8 @@ export default {
       width: 100vh;
 
       td {
-        height: 10vh;
-        width: 10vh;
+        height: $waterfall-unit-h;
+        width: $waterfall-unit-h;
       }
     }
   }
@@ -111,8 +113,8 @@ export default {
       width: 100vw;
 
       td {
-        height: 10vw;
-        width: 10vw;
+        height: $waterfall-unit-w;
+        width: $waterfall-unit-w;
       }
     }
   }
