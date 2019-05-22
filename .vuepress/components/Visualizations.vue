@@ -32,8 +32,11 @@ export default {
       visualDuration: 10,
       overlayEnabled: true,
       intervalId: null,
-      renderer: new WebGLRenderer ({antialias: true}),
+      renderer: null,
     }
+  },
+  beforeMount() {
+    this.renderer = new WebGLRenderer ({antialias: true});
   },
   mounted() {
     const fadeOut = () => {
