@@ -74,7 +74,7 @@ export default {
       boxes[i] = [];
 
       for (let j = 0; j < GRID_WIDTH; j++) {
-        newHeight = sample(utils.splitRough(25, 5, 2.5));
+        newHeight = sample(utils.splitRough(33, 5, 3));
         gridBoxGeometry = new THREE.BoxBufferGeometry (
           GRID_UNIT_LENGTH,
           newHeight,
