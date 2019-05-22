@@ -7,6 +7,4 @@ category: art
 ---
 
 I focused on visual art in my teen years, only to abandon it after high school.
-I've rediscovered the joy of painting in 2019, and now I'm playing with acrylic on canvas.
-
-The dream is still alive.
+I've rediscovered the joy of painting in 2019, and now I'm playing with acrylic on canvas again.

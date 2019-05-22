@@ -7,6 +7,4 @@ category: music
 ---
 
 My main musical weapons are the classical guitar and bass guitar.
-Over time, I've also dabbled with instruments like the violin, piano, and cello.
-
-After listening to flamenco music for years, I'm now learning flamenco guitar.
+After dabbling with violin, piano, and cello, I've stuck with flamenco guitar (clips coming soon...)
