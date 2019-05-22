@@ -4,7 +4,7 @@
     </div>
     <div class="visuals-wrapper">
       <div v-if="currentVisual === 1" class="visual visual-1">
-        <ThreeTemplate></ThreeTemplate>
+        <InfiniteScreen></InfiniteScreen>
       </div>
       <div v-if="currentVisual === 2" class="visual visual-2">
         <ThreeCity></ThreeCity>
@@ -17,7 +17,8 @@
 </template>
 
 <script>
-import ThreeTemplate from "./visualizations/ThreeTemplate.vue";
+// import ThreeTemplate from "./visualizations/ThreeTemplate.vue";
+import InfiniteScreen from "./visualizations/InfiniteScreen.vue";
 import ThreeCity from "./visualizations/ThreeCity.vue";
 import GreyWaterfall from "./visualizations/GreyWaterfall.vue";
 
@@ -67,7 +68,7 @@ export default {
     }
   },
   components: {
-    ThreeTemplate,
+    InfiniteScreen,
     ThreeCity,
     GreyWaterfall,
   },
