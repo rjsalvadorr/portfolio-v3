@@ -12,6 +12,9 @@ import InfiniteBoxes from '../../utils/infinite-boxes';
 
 export default {
   name: 'InfiniteScreen',
+  props: {
+    renderer: Object,
+  },
   data: function () {
     return {
       intervalId: null,
@@ -28,6 +31,7 @@ export default {
     );
     const LIGHT_POS = new THREE.Vector3(1, 5, 1);
     const UPDATES_PER_SECOND = 20;
+    const RENDERER = this.renderer;
 
     ///////////////////////////////////////////////////////////////////////////////
     //   THREE.JS ESSENTIALS
@@ -41,10 +45,9 @@ export default {
     camera.position.set(CAM_POS.x, CAM_POS.y, CAM_POS.z);
     camera.lookAt(CAM_TARGET);
 
-    let renderer = new THREE.WebGLRenderer ({antialias: true});
-    renderer.setSize (this.$el.clientWidth, this.$el.clientHeight);
+    RENDERER.setSize (this.$el.clientWidth, this.$el.clientHeight);
     const canvasWrapper = this.$el;
-    canvasWrapper.appendChild (renderer.domElement);
+    canvasWrapper.appendChild (RENDERER.domElement);
 
     let light = new THREE.DirectionalLight ('white', 0.8);
     light.position.set (LIGHT_POS.x, LIGHT_POS.y, LIGHT_POS.z);
@@ -71,7 +74,7 @@ export default {
     }
 
     const boxColour = '#922438';
-    const bgLightest = chroma(boxColour).darken(1.5);
+    const bgLightest = chroma(boxColour).darken(1.33);
     const bgDarkest = chroma(boxColour).darken(4);
     const colorScale = chroma.scale([bgDarkest, bgLightest]);
     const meshes = [];
@@ -101,13 +104,13 @@ export default {
       }
       const currentTime = Date.now () / 1000;
       const bgColour = utils.periodicFunction(currentTime, 3, 0, 1);
-      renderer.setClearColor(colorScale(bgColour).num(), 1);
+      RENDERER.setClearColor(colorScale(bgColour).num(), 1);
     }, 1000 / UPDATES_PER_SECOND);
 
     // Render loop
     let render = function () {
       requestAnimationFrame (render);
-      renderer.render (scene, camera);
+      RENDERER.render (scene, camera);
     };
 
     render ();
@@ -115,9 +118,10 @@ export default {
     ///////////////////////////////////////////////////////////////////////////////
     //   HANDLING WINDOW RESIZES
     const canvasElement = this.$el;
+    const rendererrr = RENDERER;
     function resizeRenderer(evt) {
       camera.aspect = canvasElement.clientWidth / canvasElement.clientHeight;
-      renderer.setSize(canvasElement.clientWidth, canvasElement.clientHeight);
+      RENDERER.setSize(canvasElement.clientWidth, canvasElement.clientHeight);
       camera.updateProjectionMatrix();
     };
 

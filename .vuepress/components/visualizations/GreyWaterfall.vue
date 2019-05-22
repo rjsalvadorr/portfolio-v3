@@ -33,7 +33,10 @@ export default {
     const colorScale = chroma.scale([this.darkestCol, this.lightestCol]);
     const scaleVals = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
     const modValues = scaleVals.map(x => {
-      return colorScale(x).hex();
+      return {
+        color: colorScale(x).hex(),
+        zIndex: sample([30, 31, 32]),
+      };
     });
     const updatesPerSecond = 9;
 
@@ -46,9 +49,10 @@ export default {
     const updateGrid = () => {
       for(let k = 1; k <= data.width; k++) {
         for(let j = 1; j <= data.length; j++) {
+          const currentUnit = gridQueue.toArray()[k - 1][j - 1];
           const selector = `row-${k}-col-${j}`
           const element = document.getElementsByClassName(selector)[0];
-          const newCol = chroma(gridQueue.toArray()[k - 1][j - 1]);
+          const newCol = chroma(currentUnit.color);
           const hueAdj = utils.periodicFunction(
             new Date().getTime() / 1000,
             4,
@@ -56,6 +60,7 @@ export default {
             newCol.get('hsl.h') + 15,
           );
           element.style.backgroundColor = newCol.set('hsl.h', hueAdj);
+          element.style.zIndex = currentUnit.zIndex;
         }
       }
     }
@@ -95,6 +100,9 @@ export default {
     height: $waterfall-unit-w;
     width: $waterfall-unit-w;
     background-color: #222;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    position: relative;
   }
 
   @media (orientation: portrait) {

@@ -24,6 +24,7 @@ export default {
     const CAM_TARGET = new THREE.Vector3(0, 20, 0);
     const LIGHT_POS = new THREE.Vector3(1, 5, 1);
     const UPDATES_PER_SECOND = 20;
+    const RENDERER = this.renderer;
 
     ///////////////////////////////////////////////////////////////////////////////
     //   THREE.JS ESSENTIALS
