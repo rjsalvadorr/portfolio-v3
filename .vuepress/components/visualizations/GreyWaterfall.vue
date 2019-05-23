@@ -1,7 +1,7 @@
 <template>
   <div class="grey-waterfall">
     <table class="grey-waterfall-table">
-      <tr v-for="row in gridLength" :class="`waterfall-row row-${row}`">
+      <tr v-for="row in getRowNumbers" :class="`waterfall-row row-${row}`">
         <td v-for="column in gridWidth" :class="`waterfall-col row-${row}-col-${column}`">
           <div class="inner"></div>
         </td>
@@ -21,13 +21,24 @@ export default {
   props: {
     lightestCol: String,
     darkestCol: String,
+    reversed: Boolean,
   },
   data: function () {
     return {
       gridLength: 13,
       gridWidth: 13,
+      updatesPerSecond: 8,
       intervalId: null,
     }
+  },
+  computed: {
+    getRowNumbers: function() {
+      if(this.reversed) {
+        return Array(this.gridLength).fill().map((_,i) => i + 1);
+      } else {
+        return Array(this.gridLength).fill().map((_,i) => this.gridLength - i);
+      }
+    },
   },
   mounted() {
     const colorScale = chroma.scale([this.darkestCol, this.lightestCol]);
@@ -35,10 +46,9 @@ export default {
     const modValues = scaleVals.map(x => {
       return {
         color: colorScale(x).hex(),
-        zIndex: sample([30, 31, 32]),
+        zIndex: sample([30, 31, 32, 33, 34]),
       };
     });
-    const updatesPerSecond = 8;
 
     const gridQueue = new GridQueue(this.gridWidth, this.gridLength, modValues);
     const data = {
@@ -69,7 +79,7 @@ export default {
     this.intervalId = window.setInterval(() => {
       gridQueue.update();
       updateGrid();
-    }, 1000 / updatesPerSecond);
+    }, 1000 / this.updatesPerSecond);
   },
   beforeDestroy() {
     window.clearInterval(this.intervalId);
