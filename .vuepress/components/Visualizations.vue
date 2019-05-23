@@ -7,10 +7,10 @@
         <ThreeCity :renderer="renderer"></ThreeCity>
       </div>
       <div v-if="currentVisual === 2" class="visual visual-2">
-        <GreyWaterfall lightestCol="295aa3" darkestCol="0c1b30"></GreyWaterfall>
+        <InfiniteScreen :renderer="renderer"></InfiniteScreen>
       </div>
       <div v-if="currentVisual === 3" class="visual visual-3">
-        <InfiniteScreen :renderer="renderer"></InfiniteScreen>
+        <GreyWaterfall lightestCol="295aa3" darkestCol="0c1b30"></GreyWaterfall>
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@ export default {
     return {
       currentVisual: 1,
       maxVisuals: 3,
-      visualDuration: 10,
+      visualDuration: 8,
       overlayEnabled: true,
       intervalId: null,
       renderer: null,
