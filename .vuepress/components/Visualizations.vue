@@ -10,7 +10,7 @@
         <InfiniteScreen :renderer="renderer"></InfiniteScreen>
       </div>
       <div v-if="currentVisual === 3" class="visual visual-3">
-        <GreyWaterfall lightestCol="295aa3" darkestCol="0c1b30"></GreyWaterfall>
+        <GridWaterfall lightestCol="295aa3" darkestCol="0c1b30"></GridWaterfall>
       </div>
     </div>
   </div>
@@ -21,7 +21,7 @@
 import { WebGLRenderer } from 'three';
 import InfiniteScreen from "./visualizations/InfiniteScreen.vue";
 import ThreeCity from "./visualizations/ThreeCity.vue";
-import GreyWaterfall from "./visualizations/GreyWaterfall.vue";
+import GridWaterfall from "./visualizations/GridWaterfall.vue";
 
 export default {
   name: 'Visualizations',
@@ -75,7 +75,7 @@ export default {
   components: {
     InfiniteScreen,
     ThreeCity,
-    GreyWaterfall,
+    GridWaterfall,
   },
   beforeDestroy() {
     window.clearInterval(this.intervalId);

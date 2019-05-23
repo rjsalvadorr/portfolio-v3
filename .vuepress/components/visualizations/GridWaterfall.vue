@@ -1,6 +1,6 @@
 <template>
-  <div class="grey-waterfall">
-    <table class="grey-waterfall-table">
+  <div class="grid-waterfall">
+    <table class="grid-waterfall-table">
       <tr v-for="row in getRowNumbers" :class="`waterfall-row row-${row}`">
         <td v-for="column in gridWidth" :class="`waterfall-col row-${row}-col-${column}`">
           <div class="inner"></div>
@@ -17,7 +17,7 @@ import GridQueue from '../../utils/grid-queue';
 import utils from '../../utils/three-utils';
 
 export default {
-  name: 'GreyWaterfall',
+  name: 'GridWaterfall',
   props: {
     lightestCol: String,
     darkestCol: String,
@@ -93,7 +93,7 @@ export default {
   $waterfall-unit-w: 100vw / 13;
   $waterfall-unit-h: 100vh / 13;
 
-  .grey-waterfall {
+  .grid-waterfall {
     position: absolute;
     top: 0;
     right: 0;
@@ -102,11 +102,11 @@ export default {
     background-color: #222;
   }
 
-  .grey-waterfall-table {
+  .grid-waterfall-table {
     border-collapse: collapse;
   }
 
-  .grey-waterfall-table td {
+  .grid-waterfall-table td {
     height: $waterfall-unit-w;
     width: $waterfall-unit-w;
     background-color: #222;
@@ -116,7 +116,7 @@ export default {
   }
 
   @media (orientation: portrait) {
-    .grey-waterfall-table {
+    .grid-waterfall-table {
       width: 100vh;
 
       td {
@@ -127,7 +127,7 @@ export default {
   }
 
   @media (orientation: landscape) {
-    .grey-waterfall-table {
+    .grid-waterfall-table {
       width: 100vw;
 
       td {
