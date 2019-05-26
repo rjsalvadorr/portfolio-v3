@@ -69,12 +69,14 @@ export default {
     let sceneWidth = gridUnitWithGutter * GRID_WIDTH;
     let newHeight;
     let newBox;
+    let boxHeights;
 
     for (let i = 0; i < GRID_LENGTH; i++) {
       boxes[i] = [];
+      boxHeights = utils.splitRough(GRID_WIDTH * 6, GRID_WIDTH, 3.5);
 
       for (let j = 0; j < GRID_WIDTH; j++) {
-        newHeight = sample(utils.splitRough(33, 5, 3));
+        newHeight = boxHeights[j];
         gridBoxGeometry = new THREE.BoxBufferGeometry (
           GRID_UNIT_LENGTH,
           newHeight,
