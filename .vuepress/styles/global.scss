@@ -54,7 +54,7 @@ blockquote {
     }
 
     .content-wrapper {
-      min-height: calc(100vh - #{$header-height-mob-home} - #{$expected-footer-height});
+      min-height: calc(100vh - #{$header-height-mob-home});
       
       &-wrapper {
         overflow: hidden;
@@ -111,7 +111,7 @@ blockquote {
       top: 50%;
       right: 0;
       left: 0;
-      transform: translateY(-100%);
+      transform: translateY(-50%);
       z-index: 2000;
     }
 
@@ -255,3 +255,4 @@ blockquote {
 }
 
 @import "./text.scss";
+@import "./contact.scss";

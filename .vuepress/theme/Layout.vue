@@ -20,7 +20,7 @@
           </Content>
           <PostList :enabled="isCategoryPage()" :posts="filterPostsByCategory($site.pages, $page.frontmatter.category)"></PostList>
         </div>
-        <Footer></Footer>
+        <Footer v-if="!isHomePage()"></Footer>
       </div>
     </div>
     <DebugPanel :enabled="debugPanelEnabled" :siteData="$site" :pageData="$page" ></DebugPanel>

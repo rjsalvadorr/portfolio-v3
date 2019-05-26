@@ -11,7 +11,7 @@ $palette-dark: #222222;
 $palette-light1: #5d5d5d;
 $palette-light2: #cccccc;
 
-$link-normal: lighten($palette-primary, 5%);
+$link-normal: lighten($palette-primary, 10%);
 $link-active: lighten($link-normal, 10%);
 
 $z-index-header: 1000;
