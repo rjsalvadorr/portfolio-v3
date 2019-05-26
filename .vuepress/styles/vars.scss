@@ -11,7 +11,7 @@ $palette-dark: #222222;
 $palette-light1: #5d5d5d;
 $palette-light2: #cccccc;
 
-$link-normal: lighten($palette-primary, 5%);
+$link-normal: lighten($palette-primary, 10%);
 $link-active: lighten($link-normal, 10%);
 
 $z-index-header: 1000;
@@ -24,7 +24,7 @@ $box-shadow-up: 0 -3px 8px $box-shadow-color;
 $box-shadow-down: 0 3px 8px $box-shadow-color;
 
 $body-font-size: 16px;
-$body-font-size-mobile: 14px;
+$body-font-size-mobile: 15px;
 
 $font-small: $body-font-size * 0.8;
 
@@ -41,7 +41,7 @@ $header-height: 92px;
 $header-height-mob: 82px;
 $header-height-mob-home: 62px;
 $header-height-phone-home: 59px;
-$header-height-mob-exp: $header-height-mob + 42px;
+$header-height-mob-exp: $header-height-mob + 130px;
 $header-link-color: #ffe39f;
 $header-link-color-hover: darken($header-link-color, 10%);
 

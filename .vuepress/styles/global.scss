@@ -54,7 +54,7 @@ blockquote {
     }
 
     .content-wrapper {
-      min-height: calc(100vh - #{$header-height-mob-home} - #{$expected-footer-height});
+      min-height: calc(100vh - #{$header-height-mob-home});
       
       &-wrapper {
         overflow: hidden;
@@ -81,7 +81,7 @@ blockquote {
   padding-bottom: $space-unit * 1.5;
   padding-left: $space-unit;
   max-width: 960px;
-  min-height: calc(100vh - #{$header-height} - #{$expected-footer-height});
+  min-height: calc(100vh - #{$header-height-mob} - #{$expected-footer-height});
   margin: 0 auto;
   overflow: hidden;
 
@@ -111,7 +111,7 @@ blockquote {
       top: 50%;
       right: 0;
       left: 0;
-      transform: translateY(-100%);
+      transform: translateY(-50%);
       z-index: 2000;
     }
 
@@ -214,6 +214,7 @@ blockquote {
   .content-wrapper {
     padding-top: $space-unit * 3.5;
     padding-bottom: $space-unit * 3.5;
+    min-height: calc(100vh - #{$header-height} - #{$expected-footer-height});
     overflow: auto;
 
     &--post {
@@ -255,3 +256,4 @@ blockquote {
 }
 
 @import "./text.scss";
+@import "./contact.scss";

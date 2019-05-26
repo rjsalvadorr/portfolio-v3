@@ -59,11 +59,7 @@ export default {
       }
 
       &-icon {
-        display: inline-block;
-        height: $body-font-size * 0.95;
-        width: $body-font-size * 0.95;
         margin-right: $body-font-size / 4;
-        vertical-align: middle;
       }
     }
 

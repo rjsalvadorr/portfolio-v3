@@ -29,7 +29,7 @@ export default {
     return {
       currentVisual: 1,
       maxVisuals: 3,
-      visualDuration: 8,
+      visualDuration: 7,
       overlayEnabled: true,
       intervalId: null,
       renderer: null,

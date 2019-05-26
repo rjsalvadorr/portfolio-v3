@@ -17,13 +17,14 @@
     </div>
     <div v-else>
       <div class="header-top header-top--home">
-        <NavMenu class="nav-wrapper nav-wrapper--mobile" :navigationLinks="$site.themeConfig.nav"></NavMenu>
+        <NavMenu class="nav-wrapper nav-wrapper--home" :navigationLinks="$site.themeConfig.nav.slice(0, -1)"></NavMenu>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import throttle from "lodash/throttle";
 import NavMenu from "./NavMenu.vue";
 import BurgerIcon from "./BurgerIcon.vue";
 
@@ -32,6 +33,7 @@ export default {
   data: function () {
     return {
       mobileMenuOpen: false,
+      throttledResize: function() {},
     }
   },
   props: {
@@ -60,7 +62,23 @@ export default {
     getButtonClass() {
       const iconModifier = this.mobileMenuOpen ? 'open' : 'closed';
       return `mobile-burger-icon mobile-burger-icon--${iconModifier}`;
+    },
+    onResize(event) {
+      const viewportWidth = event.target.innerWidth
+      console.log('window has been resized', viewportWidth);
+      if(viewportWidth >= 750) {
+        this.mobileMenuOpen = false;
+      }
     }
+  },
+  mounted() {
+    // Register an event listener when the Vue component is ready
+    this.throttledResize = throttle(this.onResize, 150, { leading: true });
+    window.addEventListener('resize', this.throttledResize);
+  },
+  beforeDestroy() {
+    // Unregister the event listener before destroying this Vue instance
+    window.removeEventListener('resize', this.throttledResize);
   }
 }
 </script>
@@ -75,6 +93,8 @@ export default {
   $burger-height: 40px;
   $burger-width-mobile: 30px;
   $burger-height-mobile: 30px;
+
+  $nav-mobile-offset: -130px;
 
   .page-header {
     color: $header-color;
@@ -100,7 +120,12 @@ export default {
       background-image: url("/images/textures/shley-tree-1.png");
 
       &--home {
-        .nav-wrapper.nav-wrapper--mobile {
+        padding-left: 0;
+        padding-right: 0;
+
+        .nav-wrapper.nav-wrapper--home {
+          padding-left: 0;
+          padding-right: 0;
           margin-top: 0;
         }
       }
@@ -142,7 +167,7 @@ export default {
       z-index: $z-index-header - 1;
       left: 0;
       right: 0;
-      bottom: -40px;
+      bottom: $nav-mobile-offset;
       padding-bottom: $space-unit * 0.75;
       box-shadow: $box-shadow-down;
     }
@@ -162,6 +187,18 @@ export default {
         fill: darken($header-color, 5%);
         opacity: 0.5;
         filter: none;
+      }
+    }
+  }
+
+  /* Larger than tablet */
+  @media (min-width: 600px) {
+    .page-header {
+      &--mobile-expanded .header-top {
+        height: $header-height-mob-exp + 10px;
+      }
+      .header--mobile {
+        bottom: $nav-mobile-offset - 10px;
       }
     }
   }
