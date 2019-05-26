@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import throttle from "lodash/throttle";
 import NavMenu from "./NavMenu.vue";
 import BurgerIcon from "./BurgerIcon.vue";
 
@@ -32,6 +33,7 @@ export default {
   data: function () {
     return {
       mobileMenuOpen: false,
+      throttledResize: function() {},
     }
   },
   props: {
@@ -60,7 +62,23 @@ export default {
     getButtonClass() {
       const iconModifier = this.mobileMenuOpen ? 'open' : 'closed';
       return `mobile-burger-icon mobile-burger-icon--${iconModifier}`;
+    },
+    onResize(event) {
+      const viewportWidth = event.target.innerWidth
+      console.log('window has been resized', viewportWidth);
+      if(viewportWidth >= 750) {
+        this.mobileMenuOpen = false;
+      }
     }
+  },
+  mounted() {
+    // Register an event listener when the Vue component is ready
+    this.throttledResize = throttle(this.onResize, 150, { leading: true });
+    window.addEventListener('resize', this.throttledResize);
+  },
+  beforeDestroy() {
+    // Unregister the event listener before destroying this Vue instance
+    window.removeEventListener('resize', this.throttledResize);
   }
 }
 </script>

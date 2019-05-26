@@ -77,6 +77,11 @@ export default {
     .page-nav-wrapper {
       justify-content: space-around;
       padding: 0 $space-unit * 0.75;
+    }
+  }
+  
+  @media (min-width: 750px) {
+    .page-nav-wrapper {
       margin-top: 0;
     }
   }
