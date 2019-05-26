@@ -81,7 +81,7 @@ blockquote {
   padding-bottom: $space-unit * 1.5;
   padding-left: $space-unit;
   max-width: 960px;
-  min-height: calc(100vh - #{$header-height} - #{$expected-footer-height});
+  min-height: calc(100vh - #{$header-height-mob} - #{$expected-footer-height});
   margin: 0 auto;
   overflow: hidden;
 
@@ -214,6 +214,7 @@ blockquote {
   .content-wrapper {
     padding-top: $space-unit * 3.5;
     padding-bottom: $space-unit * 3.5;
+    min-height: calc(100vh - #{$header-height} - #{$expected-footer-height});
     overflow: auto;
 
     &--post {

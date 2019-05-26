@@ -17,7 +17,7 @@
     </div>
     <div v-else>
       <div class="header-top header-top--home">
-        <NavMenu class="nav-wrapper nav-wrapper--mobile" :navigationLinks="$site.themeConfig.nav"></NavMenu>
+        <NavMenu class="nav-wrapper nav-wrapper--home" :navigationLinks="$site.themeConfig.nav.slice(0, -1)"></NavMenu>
       </div>
     </div>
   </div>
@@ -76,6 +76,8 @@ export default {
   $burger-width-mobile: 30px;
   $burger-height-mobile: 30px;
 
+  $nav-mobile-offset: -130px;
+
   .page-header {
     color: $header-color;
     position: relative;
@@ -100,7 +102,12 @@ export default {
       background-image: url("/images/textures/shley-tree-1.png");
 
       &--home {
-        .nav-wrapper.nav-wrapper--mobile {
+        padding-left: 0;
+        padding-right: 0;
+
+        .nav-wrapper.nav-wrapper--home {
+          padding-left: 0;
+          padding-right: 0;
           margin-top: 0;
         }
       }
@@ -142,7 +149,7 @@ export default {
       z-index: $z-index-header - 1;
       left: 0;
       right: 0;
-      bottom: -40px;
+      bottom: $nav-mobile-offset;
       padding-bottom: $space-unit * 0.75;
       box-shadow: $box-shadow-down;
     }
@@ -162,6 +169,18 @@ export default {
         fill: darken($header-color, 5%);
         opacity: 0.5;
         filter: none;
+      }
+    }
+  }
+
+  /* Larger than tablet */
+  @media (min-width: 600px) {
+    .page-header {
+      &--mobile-expanded .header-top {
+        height: $header-height-mob-exp + 10px;
+      }
+      .header--mobile {
+        bottom: $nav-mobile-offset - 10px;
       }
     }
   }

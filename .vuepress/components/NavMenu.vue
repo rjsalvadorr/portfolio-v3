@@ -1,6 +1,6 @@
 <template>
   <nav class="page-nav">
-    <div class="page-nav-wrapper" v-for="navLink in navigationLinks">
+    <div :class="`page-nav-wrapper page-nav-wrapper--${idx}`" v-for="(navLink, idx) in navigationLinks">
       <a class="page-nav-link"
       :href="navLink.link"
       :target="getLinkTarget(navLink)"
@@ -30,11 +30,17 @@ export default {
   .page-nav {
     display: flex;
     justify-content: flex-end;
+    padding: 0 $space-unit / 1.75;
 
     &-wrapper {
+      margin-top: 10px;
       padding: 0 ($space-unit / 2.5);
       flex: 0 0 auto;
       text-align: right;
+
+      &--0 {
+        margin-top: 0;
+      }
     }
 
     &-link {
@@ -49,15 +55,29 @@ export default {
       }
     }
 
+    &.nav-wrapper--home {
+      justify-content: space-around;
+      
+      .page-nav-wrapper {
+        margin-top: 0;
+      }
+    }
+
     &.nav-wrapper--mobile {
-      justify-content: space-around
+      display: block;
+
+      .page-nav-wrapper {
+        text-align: left;
+      }
     }
   }
 
   /* Larger than phablet */
   @media (min-width: 600px) {
     .page-nav-wrapper {
-      padding: 0 $space-unit;
+      justify-content: space-around;
+      padding: 0 $space-unit * 0.75;
+      margin-top: 0;
     }
   }
 </style>
