@@ -1,12 +1,12 @@
 ---
-title: Sharingan Paintings (progress)
+title: Sharingan Paintings (process)
 subtitle:
 date: 2019-03-24 13:34:57
 type: post
 category: art
 ---
 
-Progress shots for the Sharingan project  <!-- more --> ([see here](../sharingan/)).
+Process shots for the Sharingan project  <!-- more --> ([see here](../sharingan/)).
 
 ## Materials/media
 
