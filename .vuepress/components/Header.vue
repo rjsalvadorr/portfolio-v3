@@ -64,8 +64,7 @@ export default {
       return `mobile-burger-icon mobile-burger-icon--${iconModifier}`;
     },
     onResize(event) {
-      const viewportWidth = event.target.innerWidth
-      console.log('window has been resized', viewportWidth);
+      const viewportWidth = event.target.innerWidth;
       if(viewportWidth >= 750) {
         this.mobileMenuOpen = false;
       }
