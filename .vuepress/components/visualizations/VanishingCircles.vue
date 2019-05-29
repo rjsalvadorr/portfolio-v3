@@ -23,7 +23,7 @@ export default {
     ///////////////////////////////////////////////////////////////////////////////
     //   CONSTANTS
 
-    const RING_MAX_RADIUS = 170;
+    const RING_MAX_RADIUS = 160;
     const CAM_POS = new THREE.Vector3(0, 0, -15);
     const CAM_TARGET = new THREE.Vector3(0, 0, 500);
     const LIGHT_POS = new THREE.Vector3(CAM_TARGET.x, CAM_TARGET.y, -50);
@@ -73,7 +73,7 @@ export default {
       ballGroups.push(new THREE.Group ());
       ballGroupRotations.push(150 + (i * 90));
 
-      ringRadius = RING_MAX_RADIUS - (15 * i);
+      ringRadius = RING_MAX_RADIUS - (10 * i);
       ringDepth = 200 + (225 * i);
       inputMin = inputMax / BALLS_PER_RING * 0.7;
       circleInputs = utils.splitRough(inputMax, BALLS_PER_RING, inputMin, false);
@@ -96,7 +96,7 @@ export default {
       for(let i = 0; i < BALLS_PER_RING; i++) {
         ballGroups[i].rotateZ(Math.PI / ballGroupRotations[i]);
       }
-      const cameraOffset = utils.periodicFunction(currentTime, 10, 0, 125);
+      const cameraOffset = utils.periodicFunction(currentTime, 10, 0, 175);
       console.log(cameraOffset);
       camera.position.set(CAM_POS.x, CAM_POS.y, CAM_POS.z + cameraOffset);
     }, 1000 / UPDATES_PER_SECOND);
