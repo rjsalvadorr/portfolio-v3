@@ -4,24 +4,24 @@
     </div>
     <div class="visuals-wrapper">
       <div v-if="currentVisual === 1" class="visual visual-1">
-        <ThreeCity :renderer="renderer"></ThreeCity>
+        <VanishingCircles :renderer="renderer"></VanishingCircles>
       </div>
       <div v-if="currentVisual === 2" class="visual visual-2">
-        <InfiniteScreen :renderer="renderer"></InfiniteScreen>
+        <GridWaterfall lightestCol="295aa3" darkestCol="0c1b30"></GridWaterfall>
       </div>
       <div v-if="currentVisual === 3" class="visual visual-3">
-        <GridWaterfall lightestCol="295aa3" darkestCol="0c1b30"></GridWaterfall>
+        <VanishingCircles :renderer="renderer"></VanishingCircles>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import ThreeTemplate from "./visualizations/ThreeTemplate.vue";
 import { WebGLRenderer } from 'three';
 import InfiniteScreen from "./visualizations/InfiniteScreen.vue";
 import ThreeCity from "./visualizations/ThreeCity.vue";
 import GridWaterfall from "./visualizations/GridWaterfall.vue";
+import VanishingCircles from "./visualizations/VanishingCircles.vue";
 
 export default {
   name: 'Visualizations',
@@ -76,6 +76,7 @@ export default {
     InfiniteScreen,
     ThreeCity,
     GridWaterfall,
+    VanishingCircles,
   },
   beforeDestroy() {
     window.clearInterval(this.intervalId);
