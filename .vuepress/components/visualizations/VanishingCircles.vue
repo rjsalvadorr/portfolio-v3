@@ -71,7 +71,7 @@ export default {
     const ballGroupRotations = [];
     for(let i = 0; i < NUM_RINGS; i++) {
       ballGroups.push(new THREE.Group ());
-      ballGroupRotations.push(150 + (i * 50));
+      ballGroupRotations.push(150 + (i * 90));
 
       ringRadius = RING_MAX_RADIUS - (15 * i);
       ringDepth = 200 + (225 * i);
@@ -96,6 +96,9 @@ export default {
       for(let i = 0; i < BALLS_PER_RING; i++) {
         ballGroups[i].rotateZ(Math.PI / ballGroupRotations[i]);
       }
+      const cameraOffset = utils.periodicFunction(currentTime, 10, 0, 125);
+      console.log(cameraOffset);
+      camera.position.set(CAM_POS.x, CAM_POS.y, CAM_POS.z + cameraOffset);
     }, 1000 / UPDATES_PER_SECOND);
 
     // Render loop
