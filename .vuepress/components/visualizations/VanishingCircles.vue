@@ -23,14 +23,16 @@ export default {
     ///////////////////////////////////////////////////////////////////////////////
     //   CONSTANTS
 
-    const BALL_BOX = new THREE.Vector3(200, 200, 400);
-    const CAM_POS = new THREE.Vector3(BALL_BOX.x / 2, BALL_BOX.y / 2, 0);
-    const CAM_TARGET = new THREE.Vector3(BALL_BOX.x / 2, BALL_BOX.y / 2, BALL_BOX.z);
+    const RING_MAX_RADIUS = 170;
+    const CAM_POS = new THREE.Vector3(0, 0, -15);
+    const CAM_TARGET = new THREE.Vector3(0, 0, 500);
     const LIGHT_POS = new THREE.Vector3(CAM_TARGET.x, CAM_TARGET.y, -50);
     const UPDATES_PER_SECOND = 20;
     const RENDERER = this.renderer;
 
     const NUM_BALLS = 27;
+    const NUM_RINGS = 5;
+    const BALLS_PER_RING = 5;
 
     ///////////////////////////////////////////////////////////////////////////////
     //   THREE.JS ESSENTIALS
@@ -40,7 +42,7 @@ export default {
 
     let scene = new THREE.Scene ();
     const aspectRatio = this.$el.clientWidth / this.$el.clientHeight
-    let camera = new THREE.PerspectiveCamera (45, aspectRatio , 1, 1000);
+    let camera = new THREE.PerspectiveCamera (45, aspectRatio , 1, 1500);
     camera.position.set(CAM_POS.x, CAM_POS.y, CAM_POS.z);
     camera.lookAt(CAM_TARGET);
 
@@ -51,7 +53,7 @@ export default {
     ///////////////////////////////////////////////////////////////////////////////
     //   MAIN OBJECTS
 
-    const ballRadius = 10;
+    const ballRadius = 45;
     const ballGeo = new THREE.SphereBufferGeometry(ballRadius);
     const ballMat = new THREE.MeshLambertMaterial({
       color: 0x880000,
@@ -59,19 +61,42 @@ export default {
     });
 
     let newBall;
-    const coords = utils.randomizeEvenly(NUM_BALLS, BALL_BOX);
-    for(let i = 0; i < NUM_BALLS; i++) {
-      newBall = new THREE.Mesh(ballGeo, ballMat);
-      newBall.position.set(coords[i].x, coords[i].y, coords[i].z);
-      scene.add(newBall);
+    let ringRadius;
+    let ringDepth;
+    let circleInputs;
+    let inputMin;
+    let circleCoord;
+    const inputMax = 100;
+    const ballGroups = [];
+    const ballGroupRotations = [];
+    for(let i = 0; i < NUM_RINGS; i++) {
+      ballGroups.push(new THREE.Group ());
+      ballGroupRotations.push(150 + (i * 50));
+
+      ringRadius = RING_MAX_RADIUS - (15 * i);
+      ringDepth = 200 + (225 * i);
+      inputMin = inputMax / BALLS_PER_RING * 0.7;
+      circleInputs = utils.splitRough(inputMax, BALLS_PER_RING, inputMin, false);
+
+      for(let cInput of circleInputs) {
+        circleCoord = utils.circleFunction(cInput, inputMax, ringRadius);
+        newBall = new THREE.Mesh(ballGeo, ballMat);
+        newBall.position.set(circleCoord.x, circleCoord.y, ringDepth);
+        ballGroups[i].add(newBall);
+      }
+
+      scene.add(ballGroups[i]);
     }
 
     ///////////////////////////////////////////////////////////////////////////////
     //   MAIN RENDER/UPDATE LOOPS
 
-    // this.intervalId = window.setInterval (function () {
-    //   const currentTime = Date.now () / 1000;
-    // }, 1000 / UPDATES_PER_SECOND);
+    this.intervalId = window.setInterval (function () {
+      const currentTime = Date.now () / 1000;
+      for(let i = 0; i < BALLS_PER_RING; i++) {
+        ballGroups[i].rotateZ(Math.PI / ballGroupRotations[i]);
+      }
+    }, 1000 / UPDATES_PER_SECOND);
 
     // Render loop
     let render = function () {
