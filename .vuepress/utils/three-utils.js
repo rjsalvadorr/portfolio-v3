@@ -1,3 +1,6 @@
+import sample from 'lodash/sample';
+import shuffle from 'lodash/shuffle';
+
 ///////////////////////////////////////////////////////////////////////////////
 //   UTILS
 ///////////////////////////////////////////////////////////////////////////////
@@ -54,7 +57,7 @@ const splitRough = (valToSplit, numSplit, min, discreteVals = true) => {
     }
     roughArr.push(arrVal);
   }
-  return discreteVals ? roughArr : _.shuffle(roughArr);
+  return discreteVals ? roughArr : shuffle(roughArr);
 };
 
 /**
@@ -142,6 +145,43 @@ const getRandomVector = () => {
   return newVector.normalize();
 }
 
+
+/**
+* Returns a list of evenly-distributed random coords
+* in a given space (as a box defined by x, y, z args)
+*/
+const randomizeEvenly = (numPoints, box) => {
+  // get the cube root of numPoints. The box is divided
+  // into even sections using this number.
+  const cubedPoints = Math.cbrt(numPoints);
+  if(!Number.isInteger(cubedPoints)) {
+    throw "randomizeEvenly() requires a cubic integer (like 8, 27, 64)";
+  }
+  
+  const coords = [];
+  let yCoords;
+  let zCoords;
+  let xCoords;
+  
+  for(let i = 0; i < cubedPoints; i++) {
+    xCoords = splitRough(box.x, cubedPoints, (box.x / cubedPoints * 0.45), false);
+    yCoords = splitRough(box.y, cubedPoints, (box.y / cubedPoints * 0.45), false);
+    for(let yCoord of yCoords) {
+      zCoords = splitRough(box.z, cubedPoints, (box.z / cubedPoints * 0.45), false);
+      for(let zCoord of zCoords) {
+        coords.push({
+          x: sample(xCoords),
+          y: yCoord,
+          z: zCoord,
+        });
+      }
+    }
+  }
+
+  console.log(coords);
+  return coords;
+} 
+
 const threeUtils = {
   splitNumber: splitNumber,
   splitRough: splitRough,
@@ -151,6 +191,7 @@ const threeUtils = {
   getRandomSphereCoordinate: getRandomSphereCoordinate,
   getRandomCylinderCoordinate: getRandomCylinderCoordinate,
   getRandomVector: getRandomVector,
+  randomizeEvenly: randomizeEvenly,
 }
 
 export default threeUtils;

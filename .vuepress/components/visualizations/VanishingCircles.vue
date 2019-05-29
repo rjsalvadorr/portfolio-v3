@@ -23,14 +23,14 @@ export default {
     ///////////////////////////////////////////////////////////////////////////////
     //   CONSTANTS
 
-    const BALL_BOX = new THREE.Vector3(100, 100, 300);
-    const CAM_POS = new THREE.Vector3(BALL_BOX.x / 2, BALL_BOX.y / 2, -10);
-    const CAM_TARGET = new THREE.Vector3(BALL_BOX.x / 2, BALL_BOX.y / 2, 300);
+    const BALL_BOX = new THREE.Vector3(200, 200, 400);
+    const CAM_POS = new THREE.Vector3(BALL_BOX.x / 2, BALL_BOX.y / 2, 0);
+    const CAM_TARGET = new THREE.Vector3(BALL_BOX.x / 2, BALL_BOX.y / 2, BALL_BOX.z);
     const LIGHT_POS = new THREE.Vector3(CAM_TARGET.x, CAM_TARGET.y, -50);
     const UPDATES_PER_SECOND = 20;
     const RENDERER = this.renderer;
 
-    const NUM_BALLS = 25;
+    const NUM_BALLS = 27;
 
     ///////////////////////////////////////////////////////////////////////////////
     //   THREE.JS ESSENTIALS
@@ -51,7 +51,7 @@ export default {
     ///////////////////////////////////////////////////////////////////////////////
     //   MAIN OBJECTS
 
-    const ballRadius = 8;
+    const ballRadius = 10;
     const ballGeo = new THREE.SphereBufferGeometry(ballRadius);
     const ballMat = new THREE.MeshLambertMaterial({
       color: 0x880000,
@@ -59,15 +59,10 @@ export default {
     });
 
     let newBall;
-    let newCoords;
+    const coords = utils.randomizeEvenly(NUM_BALLS, BALL_BOX);
     for(let i = 0; i < NUM_BALLS; i++) {
       newBall = new THREE.Mesh(ballGeo, ballMat);
-      newCoords = {
-        x: utils.getRandomInt(0, BALL_BOX.x),
-        y: utils.getRandomInt(0, BALL_BOX.y),
-        z: utils.getRandomInt(0, BALL_BOX.z),
-      }
-      newBall.position.set(newCoords.x, newCoords.y, newCoords.z);
+      newBall.position.set(coords[i].x, coords[i].y, coords[i].z);
       scene.add(newBall);
     }
 
