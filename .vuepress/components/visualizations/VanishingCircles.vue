@@ -8,6 +8,7 @@ import * as THREE from 'three';
 import sample from "lodash/sample";
 import chroma from 'chroma-js';
 import utils from '../../utils/three-utils';
+import RjMesh from '../../utils/rj-mesh';
 
 export default {
   name: 'VanishingCircles',
@@ -58,6 +59,7 @@ export default {
     const ballMat = new THREE.MeshLambertMaterial({
       color: 0x880000,
       flatShading: true,
+      transparent: true,
     });
 
     let newBall;
@@ -67,22 +69,26 @@ export default {
     let inputMin;
     let circleCoord;
     const inputMax = 100;
+
+    const balls = [];
     const ballGroups = [];
     const ballGroupRotations = [];
     for(let i = 0; i < NUM_RINGS; i++) {
       ballGroups.push(new THREE.Group ());
-      ballGroupRotations.push(150 + (i * 90));
+      ballGroupRotations.push(140 + (i * 100));
 
-      ringRadius = RING_MAX_RADIUS - (10 * i);
-      ringDepth = 200 + (225 * i);
+      ringRadius = RING_MAX_RADIUS - (7 * i);
+      ringDepth = 200 + (210 * i);
       inputMin = inputMax / BALLS_PER_RING * 0.7;
       circleInputs = utils.splitRough(inputMax, BALLS_PER_RING, inputMin, false);
 
       for(let cInput of circleInputs) {
         circleCoord = utils.circleFunction(cInput, inputMax, ringRadius);
-        newBall = new THREE.Mesh(ballGeo, ballMat);
-        newBall.position.set(circleCoord.x, circleCoord.y, ringDepth);
-        ballGroups[i].add(newBall);
+        newBall = new RjMesh(new THREE.Mesh(ballGeo, ballMat));
+        newBall.mesh.position.set(circleCoord.x, circleCoord.y, ringDepth);
+        ballGroups[i].add(newBall.mesh);
+        balls.push(newBall);
+        newBall.setFadeOutInDelay(1000, 3000);
       }
 
       scene.add(ballGroups[i]);
@@ -97,7 +103,7 @@ export default {
         ballGroups[i].rotateZ(Math.PI / ballGroupRotations[i]);
       }
       const cameraOffset = utils.periodicFunction(currentTime, 10, 0, 175);
-      console.log(cameraOffset);
+      // console.log(cameraOffset);
       camera.position.set(CAM_POS.x, CAM_POS.y, CAM_POS.z + cameraOffset);
     }, 1000 / UPDATES_PER_SECOND);
 
