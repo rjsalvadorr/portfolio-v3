@@ -27,7 +27,7 @@ export default {
     const RING_MAX_RADIUS = 160;
     const CAM_POS = new THREE.Vector3(0, 0, -15);
     const CAM_TARGET = new THREE.Vector3(0, 0, 500);
-    const LIGHT_POS = new THREE.Vector3(CAM_TARGET.x, CAM_TARGET.y, -50);
+    const LIGHT_POS = new THREE.Vector3(CAM_POS.x, CAM_POS.y, -50);
     const UPDATES_PER_SECOND = 20;
     const RENDERER = this.renderer;
 
@@ -56,11 +56,7 @@ export default {
 
     const ballRadius = 45;
     const ballGeo = new THREE.SphereBufferGeometry(ballRadius);
-    const ballMat = new THREE.MeshLambertMaterial({
-      color: 0x880000,
-      flatShading: true,
-      transparent: true,
-    });
+    let ballMat;
 
     let newBall;
     let ringRadius;
@@ -84,11 +80,21 @@ export default {
 
       for(let cInput of circleInputs) {
         circleCoord = utils.circleFunction(cInput, inputMax, ringRadius);
+        ballMat = new THREE.MeshLambertMaterial({
+          color: 0x880000,
+          flatShading: true,
+          transparent: true,
+        });
         newBall = new RjMesh(new THREE.Mesh(ballGeo, ballMat));
         newBall.mesh.position.set(circleCoord.x, circleCoord.y, ringDepth);
         ballGroups[i].add(newBall.mesh);
         balls.push(newBall);
-        newBall.setFadeOutInDelay(1000, 3000);
+
+        const distance = newBall.mesh.position.distanceTo(new THREE.Vector3(200, 200, -100));
+        const delay1 = Math.pow(distance, 1.075);
+        const delay2 = delay1 + 3000;
+        newBall.setFadeOutInDelay(delay1, delay1 + 550);
+        newBall.setFadeOutInDelay(delay2, delay2 + 550);
       }
 
       scene.add(ballGroups[i]);
@@ -103,7 +109,6 @@ export default {
         ballGroups[i].rotateZ(Math.PI / ballGroupRotations[i]);
       }
       const cameraOffset = utils.periodicFunction(currentTime, 10, 0, 175);
-      // console.log(cameraOffset);
       camera.position.set(CAM_POS.x, CAM_POS.y, CAM_POS.z + cameraOffset);
     }, 1000 / UPDATES_PER_SECOND);
 

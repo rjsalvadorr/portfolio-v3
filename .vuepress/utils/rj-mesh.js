@@ -12,13 +12,13 @@ class RjMesh {
   }
   
   fadeOut(nextFunc) {
-    console.log('fadeOut()');
     const that = this;
     const fadeIntervalId = window.setInterval(() => {
-      that.opacity -= 0.1;
+      that.opacity -= 0.15;
       that.mesh.material.opacity = this.opacity;
       if(that.opacity <= 0) {
         that.opacity = 0;
+        that.mesh.material.opacity = this.opacity;
         window.clearInterval(fadeIntervalId);
         if(nextFunc) {
           nextFunc();
@@ -28,13 +28,13 @@ class RjMesh {
   }
 
   fadeIn(nextFunc) {
-    console.log('fadeIn()');
     const that = this;
     const fadeIntervalId = window.setInterval(() => {
-      that.opacity += 0.1;
+      that.opacity += 0.15;
       that.mesh.material.opacity = this.opacity;
       if(that.opacity >= 1) {
         that.opacity = 1;
+        that.mesh.material.opacity = this.opacity;
         window.clearInterval(fadeIntervalId);
         if(nextFunc) {
           nextFunc();
