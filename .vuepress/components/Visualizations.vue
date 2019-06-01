@@ -4,13 +4,16 @@
     </div>
     <div class="visuals-wrapper">
       <div v-if="currentVisual === 1" class="visual visual-1">
-        <VanishingCircles :renderer="renderer"></VanishingCircles>
+        <ThreeCity :renderer="renderer"></ThreeCity>
       </div>
       <div v-if="currentVisual === 2" class="visual visual-2">
-        <GridWaterfall lightestCol="295aa3" darkestCol="0c1b30"></GridWaterfall>
+        <VanishingCircles :renderer="renderer"></VanishingCircles>
       </div>
       <div v-if="currentVisual === 3" class="visual visual-3">
-        <VanishingCircles :renderer="renderer"></VanishingCircles>
+        <InfiniteScreen :renderer="renderer"></InfiniteScreen>
+      </div>
+      <div v-if="currentVisual === 4" class="visual visual-2">
+        <GridWaterfall lightestCol="295aa3" darkestCol="0c1b30"></GridWaterfall>
       </div>
     </div>
   </div>
@@ -28,7 +31,7 @@ export default {
   data: function () {
     return {
       currentVisual: 1,
-      maxVisuals: 3,
+      maxVisuals: 4,
       visualDuration: 7,
       overlayEnabled: true,
       intervalId: null,
@@ -104,7 +107,7 @@ export default {
     left: 0;
     z-index: 40;
     background-color: #000000;
-    opacity: 0.15;
+    opacity: 0.2;
     transition: opacity 0.6s linear;
   }
 

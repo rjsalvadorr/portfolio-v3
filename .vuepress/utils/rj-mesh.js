@@ -1,4 +1,5 @@
 import utils from './three-utils';
+import chroma from 'chroma-js';
 
 class RjMesh {
   constructor(mesh) {
@@ -10,18 +11,29 @@ class RjMesh {
     this.y = 0;
     this.mesh = mesh;
     this.opacity = 1;
-    this.glowIntensity = 1;
+    this.glowIntensity = 0;
+    this.glowColor = '#ffffff';
     this.updatesPerSecond = 18;
+    const meshCol = this.mesh.material.color.getHexString();
+    this.glowScale = chroma.scale([meshCol, this.glowColor]);
+  }
+
+  setGlowColor(glowCol) {
+    this.glowColor = glowCol;
+    const meshCol = this.mesh.material.color.getHexString();
+    this.glowScale = chroma.scale([meshCol, this.glowColor]);
   }
 
   applyEffect(effectType, input) {
     switch (effectType) {
       case 'opacity':
-        this[effectType] = input;
+        this.opacity = input;
         this.mesh.material.opacity = this.opacity;
         break;
-      case 'glowIntensity':
-        this[effectType] = input;
+      case 'glow':
+        this.glowIntensity = input;
+        const newCol = this.glowScale(this.glowIntensity).num();
+        this.mesh.material.color.setHex(newCol);
         break;
       default:
         console.warn('entered invalid effectType');

@@ -39,6 +39,7 @@ export default {
     //   THREE.JS ESSENTIALS
 
     RENDERER.setSize (this.$el.clientWidth, this.$el.clientHeight);
+    RENDERER.setClearColor( 0xb23500, 1);
     this.$el.appendChild (RENDERER.domElement);
 
     let scene = new THREE.Scene ();
@@ -47,15 +48,16 @@ export default {
     camera.position.set(CAM_POS.x, CAM_POS.y, CAM_POS.z);
     camera.lookAt(CAM_TARGET);
 
-    let light = new THREE.DirectionalLight ('white', 1.0);
+    let light = new THREE.DirectionalLight ('white', 0.6);
     light.position.set (LIGHT_POS.x, LIGHT_POS.y, LIGHT_POS.z);
     scene.add (light);
+
 
     ///////////////////////////////////////////////////////////////////////////////
     //   MAIN OBJECTS
 
     const ballRadius = 45;
-    const ballGeo = new THREE.SphereBufferGeometry(ballRadius);
+    const ballGeo = new THREE.SphereBufferGeometry(ballRadius, 16);
     let ballMat;
 
     let newBall;
@@ -81,11 +83,12 @@ export default {
       for(let cInput of circleInputs) {
         circleCoord = utils.circleFunction(cInput, inputMax, ringRadius);
         ballMat = new THREE.MeshLambertMaterial({
-          color: 0x880000,
+          color: 0x019799,
           flatShading: true,
           transparent: true,
         });
         newBall = new RjMesh(new THREE.Mesh(ballGeo, ballMat));
+        newBall.setGlowColor('#97baba');
         newBall.mesh.position.set(circleCoord.x, circleCoord.y, ringDepth);
         ballGroups[i].add(newBall.mesh);
         balls.push(newBall);
@@ -93,8 +96,10 @@ export default {
         const distance = newBall.mesh.position.distanceTo(new THREE.Vector3(200, 200, -100));
         const delay1 = Math.pow(distance, 1.075);
         const delay2 = delay1 + 3000;
-        newBall.setEaseInOutDelay('opacity', delay1, true);
-        newBall.setEaseInOutDelay('opacity', delay2, true);
+        // newBall.setEaseInOutDelay('opacity', delay1, true);
+        // newBall.setEaseInOutDelay('opacity', delay2, true);
+        newBall.setEaseInOutDelay('glow', delay1);
+        newBall.setEaseInOutDelay('glow', delay2);
       }
 
       scene.add(ballGroups[i]);
