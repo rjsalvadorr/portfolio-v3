@@ -197,11 +197,29 @@ const ease = (input, period, flip = false) => {
   }
   return cosResult * -0.5 + 0.5;
 };
+
+const easeCircular = (input, period, flip = false) => {
+  if(input <= 0 || input >= period) {
+    return flip ? 1 : 0;
+  }
+  let cosResult = Math.cos(input * Math.PI / (period / 2));
+  if(flip) {
+    cosResult = -cosResult;
+  }
+  return cosResult * -0.5 + 0.5;
+};
+
 const easeIn = (input, period) => {
   return ease(input, period);
 };
 const easeOut = (input, period) => {
   return ease(input, period, true);
+};
+const easeInOut = (input, period) => {
+  return easeCircular(input, period, false);
+};
+const easeOutIn = (input, period) => {
+  return easeCircular(input, period, true);
 };
 
 const threeUtils = {
@@ -216,6 +234,8 @@ const threeUtils = {
   randomizeEvenly: randomizeEvenly,
   easeIn: easeIn,
   easeOut: easeOut,
+  easeInOut: easeInOut,
+  easeOutIn: easeOutIn,
 }
 
 export default threeUtils;

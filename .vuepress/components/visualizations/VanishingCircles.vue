@@ -93,8 +93,8 @@ export default {
         const distance = newBall.mesh.position.distanceTo(new THREE.Vector3(200, 200, -100));
         const delay1 = Math.pow(distance, 1.075);
         const delay2 = delay1 + 3000;
-        newBall.setFadeOutInDelay(delay1, delay1 + 550);
-        newBall.setFadeOutInDelay(delay2, delay2 + 550);
+        newBall.setFadeOutInDelay(delay1, delay1 + 550, true);
+        newBall.setFadeOutInDelay(delay2, delay2 + 550, true);
       }
 
       scene.add(ballGroups[i]);
