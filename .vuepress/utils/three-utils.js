@@ -20,7 +20,7 @@ const splitNumber = (value, numSplits, discreteVals = true) => {
     points.push(randyVal * value);
   }
 
-  points.sort(function(a, b) {
+  points.sort(function (a, b) {
     return a - b;
   });
   if (discreteVals) {
@@ -154,21 +154,21 @@ const randomizeEvenly = (numPoints, box) => {
   // get the cube root of numPoints. The box is divided
   // into even sections using this number.
   const cubedPoints = Math.cbrt(numPoints);
-  if(!Number.isInteger(cubedPoints)) {
+  if (!Number.isInteger(cubedPoints)) {
     throw "randomizeEvenly() requires a cubic integer (like 8, 27, 64)";
   }
-  
+
   const coords = [];
   let yCoords;
   let zCoords;
   let xCoords;
-  
-  for(let i = 0; i < cubedPoints; i++) {
+
+  for (let i = 0; i < cubedPoints; i++) {
     xCoords = splitRough(box.x, cubedPoints, (box.x / cubedPoints * 0.45), false);
     yCoords = splitRough(box.y, cubedPoints, (box.y / cubedPoints * 0.45), false);
-    for(let yCoord of yCoords) {
+    for (let yCoord of yCoords) {
       zCoords = splitRough(box.z, cubedPoints, (box.z / cubedPoints * 0.45), false);
-      for(let zCoord of zCoords) {
+      for (let zCoord of zCoords) {
         coords.push({
           x: sample(xCoords),
           y: yCoord,
@@ -178,9 +178,31 @@ const randomizeEvenly = (numPoints, box) => {
     }
   }
 
-  console.log(coords);
   return coords;
-} 
+}
+
+// Core implementation of ease-in/ease-out
+// Returns a value between 0 and 1
+// Starts at 1 if flip == true
+const ease = (input, period, flip = false) => {
+  if (input <= 0) {
+    return flip ? 1 : 0;
+  }
+  if (input >= period) {
+    return flip ? 0 : 1;
+  }
+  let cosResult = Math.cos(input * Math.PI / period);
+  if (flip) {
+    cosResult = -cosResult;
+  }
+  return cosResult * -0.5 + 0.5;
+};
+const easeIn = (input, period) => {
+  return ease(input, period);
+};
+const easeOut = (input, period) => {
+  return ease(input, period, true);
+};
 
 const threeUtils = {
   splitNumber: splitNumber,
@@ -192,6 +214,8 @@ const threeUtils = {
   getRandomCylinderCoordinate: getRandomCylinderCoordinate,
   getRandomVector: getRandomVector,
   randomizeEvenly: randomizeEvenly,
+  easeIn: easeIn,
+  easeOut: easeOut,
 }
 
 export default threeUtils;

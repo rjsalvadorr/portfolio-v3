@@ -1,3 +1,5 @@
+import utils from './three-utils';
+
 class RjMesh {
   constructor(mesh) {
     this.id = Math.random()
@@ -10,59 +12,48 @@ class RjMesh {
     this.opacity = 1;
     this.updatesPerSecond = 18;
   }
-  
-  fadeOut(nextFunc) {
+
+  fade(duration, fadeOut = false) {
     const that = this;
+    const startTime = Date.now();
     const fadeIntervalId = window.setInterval(() => {
-      that.opacity -= 0.15;
+      const currentTime = Date.now() - startTime;
+      if(fadeOut) {
+        that.opacity = utils.easeOut(currentTime, duration);
+      } else {
+        that.opacity = utils.easeIn(currentTime, duration);
+      }
       that.mesh.material.opacity = this.opacity;
-      if(that.opacity <= 0) {
-        that.opacity = 0;
-        that.mesh.material.opacity = this.opacity;
+      const finished = fadeOut ? that.opacity <= 0 : that.opacity >= 1;
+      if (finished) {
         window.clearInterval(fadeIntervalId);
-        if(nextFunc) {
-          nextFunc();
-        }
       }
     }, 1000 / this.updatesPerSecond);
   }
 
-  fadeIn(nextFunc) {
-    const that = this;
-    const fadeIntervalId = window.setInterval(() => {
-      that.opacity += 0.15;
-      that.mesh.material.opacity = this.opacity;
-      if(that.opacity >= 1) {
-        that.opacity = 1;
-        that.mesh.material.opacity = this.opacity;
-        window.clearInterval(fadeIntervalId);
-        if(nextFunc) {
-          nextFunc();
-        }
-      }
-    }, 1000 / this.updatesPerSecond);
+  fadeOut(duration) {
+    this.fade(duration, true);
+  }
+
+  fadeIn(duration) {
+    this.fade(duration);
   }
 
   setFadeInDelay(milliseconds) {
     window.setTimeout(() => {
-      this.fadeIn();
+      this.fadeIn(500);
     }, milliseconds);
   }
 
   setFadeOutDelay(milliseconds) {
     window.setTimeout(() => {
-      this.fadeOut();
+      this.fadeOut(500);
     }, milliseconds);
   }
 
   setFadeOutInDelay(msOut, msIn) {
-    window.setTimeout(() => {
-      this.fadeOut();
-    }, msOut);
-
-    window.setTimeout(() => {
-      this.fadeIn();
-    }, msIn);
+    this.setFadeOutDelay(msOut);
+    this.setFadeInDelay(msIn);
   }
 }
 
