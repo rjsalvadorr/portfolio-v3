@@ -14,42 +14,57 @@ class RjMesh {
     this.updatesPerSecond = 18;
   }
 
-  ease(duration, easeOut = false) {
+  applyEffect(effectType, input) {
+    switch (effectType) {
+      case 'opacity':
+        this[effectType] = input;
+        this.mesh.material.opacity = this.opacity;
+        break;
+      case 'glowIntensity':
+        this[effectType] = input;
+        break;
+      default:
+        console.warn('entered invalid effectType');
+    }
+  }
+
+  ease(effectType, duration, easeOut = false) {
     const that = this;
     const startTime = Date.now();
     const easeIntervalId = window.setInterval(() => {
       const currentTime = Date.now() - startTime;
+      let effectInput;
       if(easeOut) {
-        that.opacity = utils.easeOut(currentTime, duration);
+        effectInput = utils.easeOut(currentTime, duration);
       } else {
-        that.opacity = utils.easeIn(currentTime, duration);
+        effectInput = utils.easeIn(currentTime, duration);
       }
-      that.mesh.material.opacity = this.opacity;
-      const finished = easeOut ? that.opacity <= 0 : that.opacity >= 1;
+      this.applyEffect(effectType, effectInput);
+      const finished = easeOut ? effectInput <= 0 : effectInput >= 1;
       if (finished) {
         window.clearInterval(easeIntervalId);
       }
     }, 1000 / this.updatesPerSecond);
   }
 
-  easeInOut(duration, flip = false) {
+  easeInOut(effectType, duration, flip = false) {
     const that = this;
     const startTime = Date.now();
     let calcTimer = 3; // hack for figuring out "finished" state easily
     const easeIntervalId = window.setInterval(() => {
       const currentTime = Date.now() - startTime;
+      let effectInput;
       if(flip) {
-        that.opacity = utils.easeOutIn(currentTime, duration);
+        effectInput = utils.easeOutIn(currentTime, duration);
       } else {
-        that.opacity = utils.easeInOut(currentTime, duration);
+        effectInput = utils.easeInOut(currentTime, duration);
       }
-      that.mesh.material.opacity = this.opacity;
+      this.applyEffect(effectType, effectInput);
       let finished = false;
       if(calcTimer == 0) {
-        finished = flip ? that.opacity >= 1 : that.opacity <= 0;
+        finished = flip ? effectInput >= 1 : effectInput <= 0;
       }
       if (finished) {
-        console.log(that.opacity);
         window.clearInterval(easeIntervalId);
       }
       if(calcTimer > 0) {
@@ -58,29 +73,29 @@ class RjMesh {
     }, 1000 / this.updatesPerSecond);
   }
 
-  easeOut(duration) {
-    this.ease(duration, true);
+  easeOut(effectType, duration) {
+    this.ease(effectType, duration, true);
   }
 
-  easeIn(duration) {
-    this.ease(duration);
+  easeIn(effectType, duration) {
+    this.ease(effectType, duration);
   }
 
-  setEaseInDelay(milliseconds) {
+  setEaseInDelay(effectType, milliseconds) {
     window.setTimeout(() => {
-      this.easeIn(500);
+      this.easeIn(effectType, 500);
     }, milliseconds);
   }
 
-  setEaseOutDelay(milliseconds) {
+  setEaseOutDelay(effectType, milliseconds) {
     window.setTimeout(() => {
-      this.easeOut(500);
+      this.easeOut(effectType, 500);
     }, milliseconds);
   }
 
-  setEaseInOutDelay(milliseconds, flip) {
+  setEaseInOutDelay(effectType, milliseconds, flip) {
     window.setTimeout(() => {
-      this.easeInOut(500, flip);
+      this.easeInOut(effectType, 500, flip);
     }, milliseconds);
   }
 }
