@@ -14,29 +14,29 @@ class RjMesh {
     this.updatesPerSecond = 18;
   }
 
-  fade(duration, fadeOut = false) {
+  ease(duration, easeOut = false) {
     const that = this;
     const startTime = Date.now();
-    const fadeIntervalId = window.setInterval(() => {
+    const easeIntervalId = window.setInterval(() => {
       const currentTime = Date.now() - startTime;
-      if(fadeOut) {
+      if(easeOut) {
         that.opacity = utils.easeOut(currentTime, duration);
       } else {
         that.opacity = utils.easeIn(currentTime, duration);
       }
       that.mesh.material.opacity = this.opacity;
-      const finished = fadeOut ? that.opacity <= 0 : that.opacity >= 1;
+      const finished = easeOut ? that.opacity <= 0 : that.opacity >= 1;
       if (finished) {
-        window.clearInterval(fadeIntervalId);
+        window.clearInterval(easeIntervalId);
       }
     }, 1000 / this.updatesPerSecond);
   }
 
-  fadeInOut(duration, flip = false) {
+  easeInOut(duration, flip = false) {
     const that = this;
     const startTime = Date.now();
     let calcTimer = 3; // hack for figuring out "finished" state easily
-    const fadeIntervalId = window.setInterval(() => {
+    const easeIntervalId = window.setInterval(() => {
       const currentTime = Date.now() - startTime;
       if(flip) {
         that.opacity = utils.easeOutIn(currentTime, duration);
@@ -50,7 +50,7 @@ class RjMesh {
       }
       if (finished) {
         console.log(that.opacity);
-        window.clearInterval(fadeIntervalId);
+        window.clearInterval(easeIntervalId);
       }
       if(calcTimer > 0) {
         calcTimer--;
@@ -58,29 +58,29 @@ class RjMesh {
     }, 1000 / this.updatesPerSecond);
   }
 
-  fadeOut(duration) {
-    this.fade(duration, true);
+  easeOut(duration) {
+    this.ease(duration, true);
   }
 
-  fadeIn(duration) {
-    this.fade(duration);
+  easeIn(duration) {
+    this.ease(duration);
   }
 
-  setFadeInDelay(milliseconds) {
+  setEaseInDelay(milliseconds) {
     window.setTimeout(() => {
-      this.fadeIn(500);
+      this.easeIn(500);
     }, milliseconds);
   }
 
-  setFadeOutDelay(milliseconds) {
+  setEaseOutDelay(milliseconds) {
     window.setTimeout(() => {
-      this.fadeOut(500);
+      this.easeOut(500);
     }, milliseconds);
   }
 
-  setFadeOutInDelay(milliseconds, flip) {
+  setEaseInOutDelay(milliseconds, flip) {
     window.setTimeout(() => {
-      this.fadeInOut(500, flip);
+      this.easeInOut(500, flip);
     }, milliseconds);
   }
 }
