@@ -22,7 +22,7 @@ class InfiniteBoxes {
     this.gutter = gutter;
     this.movePos = movePositive;
 
-    const min = totalLength / numBoxes * 0.6;
+    const min = totalLength / numBoxes * 0.7;
     const boxLengths = utils.splitRough(totalLength, numBoxes, min);
     let startingX = 0;
     for (let len of boxLengths) {

@@ -7,9 +7,12 @@
         <ThreeCity :renderer="renderer"></ThreeCity>
       </div>
       <div v-if="currentVisual === 2" class="visual visual-2">
-        <InfiniteScreen :renderer="renderer"></InfiniteScreen>
+        <VanishingCircles :renderer="renderer"></VanishingCircles>
       </div>
       <div v-if="currentVisual === 3" class="visual visual-3">
+        <InfiniteScreen :renderer="renderer"></InfiniteScreen>
+      </div>
+      <div v-if="currentVisual === 4" class="visual visual-2">
         <GridWaterfall lightestCol="295aa3" darkestCol="0c1b30"></GridWaterfall>
       </div>
     </div>
@@ -17,18 +20,18 @@
 </template>
 
 <script>
-// import ThreeTemplate from "./visualizations/ThreeTemplate.vue";
 import { WebGLRenderer } from 'three';
 import InfiniteScreen from "./visualizations/InfiniteScreen.vue";
 import ThreeCity from "./visualizations/ThreeCity.vue";
 import GridWaterfall from "./visualizations/GridWaterfall.vue";
+import VanishingCircles from "./visualizations/VanishingCircles.vue";
 
 export default {
   name: 'Visualizations',
   data: function () {
     return {
       currentVisual: 1,
-      maxVisuals: 3,
+      maxVisuals: 4,
       visualDuration: 7,
       overlayEnabled: true,
       intervalId: null,
@@ -76,6 +79,7 @@ export default {
     InfiniteScreen,
     ThreeCity,
     GridWaterfall,
+    VanishingCircles,
   },
   beforeDestroy() {
     window.clearInterval(this.intervalId);
@@ -103,7 +107,7 @@ export default {
     left: 0;
     z-index: 40;
     background-color: #000000;
-    opacity: 0.15;
+    opacity: 0.2;
     transition: opacity 0.6s linear;
   }
 

@@ -11,6 +11,9 @@ import utils from '../../utils/three-utils';
 
 export default {
   name: 'ThreeTemplate',
+  props: {
+    renderer: Object,
+  },
   data: function () {
     return {
       intervalId: null,
@@ -39,10 +42,9 @@ export default {
     camera.position.set(CAM_POS.x, CAM_POS.y, CAM_POS.z);
     camera.lookAt(CAM_TARGET);
 
-    let renderer = new THREE.WebGLRenderer ({antialias: true});
-    renderer.setSize (this.$el.clientWidth, this.$el.clientHeight);
+    RENDERER.setSize (this.$el.clientWidth, this.$el.clientHeight);
     const canvasWrapper = this.$el;
-    canvasWrapper.appendChild (renderer.domElement);
+    canvasWrapper.appendChild (RENDERER.domElement);
 
     let light = new THREE.DirectionalLight ('white', 0.8);
     light.position.set (LIGHT_POS.x, LIGHT_POS.y, LIGHT_POS.z);
@@ -72,7 +74,7 @@ export default {
     // Render loop
     let render = function () {
       requestAnimationFrame (render);
-      renderer.render (scene, camera);
+      RENDERER.render (scene, camera);
     };
 
     render ();
@@ -83,7 +85,7 @@ export default {
     const canvasElement = this.$el;
     function resizeRenderer(evt) {
       camera.aspect = canvasElement.clientWidth / canvasElement.clientHeight;
-      renderer.setSize(canvasElement.clientWidth, canvasElement.clientHeight);
+      RENDERER.setSize(canvasElement.clientWidth, canvasElement.clientHeight);
       camera.updateProjectionMatrix();
     };
 
