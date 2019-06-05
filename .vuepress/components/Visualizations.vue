@@ -25,6 +25,7 @@ import InfiniteScreen from "./visualizations/InfiniteScreen.vue";
 import ThreeCity from "./visualizations/ThreeCity.vue";
 import GridWaterfall from "./visualizations/GridWaterfall.vue";
 import VanishingCircles from "./visualizations/VanishingCircles.vue";
+import utils from '../utils/three-utils';
 
 export default {
   name: 'Visualizations',
@@ -42,26 +43,29 @@ export default {
     this.renderer = new WebGLRenderer ({antialias: true});
   },
   mounted() {
-    const fadeOut = () => {
-      this.overlayEnabled = true;
-    }
+    // const fadeOut = () => {
+    //   this.overlayEnabled = true;
+    // }
 
     const fadeIn = () => {
       this.overlayEnabled = false;
     }
 
-    const setFades = () => {
-      fadeIn();
-      window.setTimeout(fadeOut, (this.visualDuration - 0.6) * 1000);
-    }
+    // const setFades = () => {
+    //   fadeIn();
+    //   window.setTimeout(fadeOut, (this.visualDuration - 0.6) * 1000);
+    // }
 
-    const next = () => {
-      this.goToNextVisual();
-      setFades();
-    }
+    // const next = () => {
+    //   this.goToNextVisual();
+    //   setFades();
+    // }
 
-    setFades();
-    this.intervalId = window.setInterval (next, 1000 * this.visualDuration);
+    // setFades();
+    // this.intervalId = window.setInterval (next, 1000 * this.visualDuration);
+    
+    fadeIn();
+    this.setRandomVisual();
   },
   methods: {
     getFadeClass() {
@@ -73,6 +77,9 @@ export default {
       } else {
         this.currentVisual = this.currentVisual + 1;
       }
+    },
+    setRandomVisual() {
+      this.currentVisual = utils.getRandomInt(1, this.maxVisuals);
     }
   },
   components: {
