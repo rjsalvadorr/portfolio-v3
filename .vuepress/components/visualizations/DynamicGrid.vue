@@ -36,19 +36,14 @@ export default {
     }
   },
   mounted() {
-    const grid = new DynamicGrid(
-      this.$el.clientWidth,
-      this.$el.clientHeight,
-      this.unitSize,
-    );
+    const initFunc = this.initializeGrid;
+    initFunc();
 
-    this.grid = grid;
-
-///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
     //   HANDLING WINDOW RESIZES
-    const canvasElement = this.$el;
+
     function resizeGrid(evt) {
-      console.log('resizing....');
+      initFunc();
     };
 
     const resizeHandler = evt => {
@@ -80,6 +75,14 @@ export default {
     }, 1000 / updateFrequency);
   },
   methods: {
+    initializeGrid: function() {
+      const grid = new DynamicGrid(
+        this.$el.clientWidth,
+        this.$el.clientHeight,
+        this.unitSize,
+      );
+      this.grid = grid;
+    },
     updateGridUnit: function(gUnit) {
       const time = Date.now() / 1000;
       const waveCentre = {x: -1, y: 1};
@@ -128,7 +131,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 30;
-    background-color: #4b0d00;
+    background-color: #3c0a00;
 
     .grid-unit {
       position: absolute;

@@ -95,19 +95,19 @@ class RjMesh {
 
   setEaseInDelay(effectType, milliseconds) {
     window.setTimeout(() => {
-      this.easeIn(effectType, 500);
+      this.easeIn(effectType, 300);
     }, milliseconds);
   }
 
   setEaseOutDelay(effectType, milliseconds) {
     window.setTimeout(() => {
-      this.easeOut(effectType, 500);
+      this.easeOut(effectType, 300);
     }, milliseconds);
   }
 
   setEaseInOutDelay(effectType, milliseconds, flip) {
     window.setTimeout(() => {
-      this.easeInOut(effectType, 500, flip);
+      this.easeInOut(effectType, 300, flip);
     }, milliseconds);
   }
 }

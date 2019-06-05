@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import sample from 'lodash/sample';
 import { WebGLRenderer } from 'three';
 import InfiniteScreen from "./visualizations/InfiniteScreen.vue";
 import ThreeCity from "./visualizations/ThreeCity.vue";
@@ -50,9 +51,6 @@ export default {
 
     fadeIn();
     this.setRandomVisual();
-
-    // Temporary setting, for dev'ing
-    this.currentVisual = 4;
   },
   methods: {
     getFadeClass() {
@@ -66,7 +64,8 @@ export default {
       }
     },
     setRandomVisual() {
-      this.currentVisual = utils.getRandomInt(1, this.maxVisuals);
+      const chances = [1, 1, 1, 2, 2, 3, 4, 4, 4];
+      this.currentVisual = sample(chances);
     }
   },
   components: {
