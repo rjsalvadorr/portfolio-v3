@@ -12,8 +12,8 @@
       <div v-if="currentVisual === 3" class="visual visual-3">
         <InfiniteScreen :renderer="renderer"></InfiniteScreen>
       </div>
-      <div v-if="currentVisual === 4" class="visual visual-2">
-        <GridWaterfall lightestCol="295aa3" darkestCol="0c1b30"></GridWaterfall>
+      <div v-if="currentVisual === 4" class="visual visual-4">
+        <DynamicGrid></DynamicGrid>
       </div>
     </div>
   </div>
@@ -25,6 +25,7 @@ import InfiniteScreen from "./visualizations/InfiniteScreen.vue";
 import ThreeCity from "./visualizations/ThreeCity.vue";
 import GridWaterfall from "./visualizations/GridWaterfall.vue";
 import VanishingCircles from "./visualizations/VanishingCircles.vue";
+import DynamicGrid from "./visualizations/DynamicGrid.vue";
 import utils from '../utils/three-utils';
 
 export default {
@@ -43,29 +44,15 @@ export default {
     this.renderer = new WebGLRenderer ({antialias: true});
   },
   mounted() {
-    // const fadeOut = () => {
-    //   this.overlayEnabled = true;
-    // }
-
     const fadeIn = () => {
       this.overlayEnabled = false;
     }
 
-    // const setFades = () => {
-    //   fadeIn();
-    //   window.setTimeout(fadeOut, (this.visualDuration - 0.6) * 1000);
-    // }
-
-    // const next = () => {
-    //   this.goToNextVisual();
-    //   setFades();
-    // }
-
-    // setFades();
-    // this.intervalId = window.setInterval (next, 1000 * this.visualDuration);
-    
     fadeIn();
     this.setRandomVisual();
+
+    // Temporary setting, for dev'ing
+    this.currentVisual = 4;
   },
   methods: {
     getFadeClass() {
@@ -87,6 +74,7 @@ export default {
     ThreeCity,
     GridWaterfall,
     VanishingCircles,
+    DynamicGrid,
   },
   beforeDestroy() {
     window.clearInterval(this.intervalId);
