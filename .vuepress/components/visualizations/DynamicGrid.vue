@@ -140,7 +140,7 @@ export default {
         width: $display-size;
         height: $display-size;
         border-radius: $display-size / 2;
-        background-color: #e12900;
+        background-color: #ca2400;
         position: relative;
         top: -$display-size / 2;
         left: -$display-size / 2;
