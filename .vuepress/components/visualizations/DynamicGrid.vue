@@ -21,6 +21,7 @@ import sample from "lodash/sample";
 import chroma from 'chroma-js';
 import DynamicGrid from '../../utils/dynamic-grid';
 import utils from '../../utils/three-utils';
+import { radialWave3 } from '../../utils/wave-utils';
 
 export default {
   name: 'DynamicGrid',
@@ -30,24 +31,18 @@ export default {
   data: function () {
     return {
       intervalId: null,
+      unitSize: 64,
       grid: [],
     }
   },
   mounted() {
-    const setRandomIntensity = (gUnit) => {
-      gUnit.intensity1 = Math.random();
-      gUnit.intensity2 = Math.random();
-    }
-
-    const unitSize = 48;
     const grid = new DynamicGrid(
       this.$el.clientWidth,
       this.$el.clientHeight,
-      unitSize,
+      this.unitSize,
     );
 
-    this.grid = grid
-    this.grid.applyFunc(setRandomIntensity);
+    this.grid = grid;
 
 ///////////////////////////////////////////////////////////////////////////////
     //   HANDLING WINDOW RESIZES
@@ -78,14 +73,41 @@ export default {
     })();
   },
   updated() {
-    this.grid.applyFunc(this.updateGridUnit);
+    const updateFrequency = 20;
+    this.intervalId = setInterval(() => {
+      this.grid.applyFunc(this.updateGridUnit);
+      this.grid.applyFunc(this.drawGridUnit);
+    }, 1000 / updateFrequency);
   },
   methods: {
     updateGridUnit: function(gUnit) {
+      const time = Date.now() / 1000;
+      const waveCentre = {x: -1, y: 1};
+      const adjustedCoords = {
+        x: gUnit.x / this.$el.clientWidth,
+        y: gUnit.y / this.$el.clientHeight,
+      }
+      const intensity = radialWave3(
+        waveCentre,
+        {x: adjustedCoords.x, y: adjustedCoords.y},
+        time,
+      );
+      gUnit.intensity1 = intensity;
+      gUnit.intensity2 = intensity;
+    },
+    drawGridUnit: function(gUnit) {
       const element = document.getElementsByClassName(`grid-unit--${gUnit.id}`)[0];
-      element.style.top = `${gUnit.y}px`;
-      element.style.left = `${gUnit.x}px`;
+      element.style.top = `${gUnit.yCenter}px`;
+      element.style.left = `${gUnit.xCenter}px`;
       element.style.opacity = gUnit.intensity1;
+
+      const inner = element.children[0];
+      const diameter = 48 * gUnit.intensity2;
+      inner.style.height = `${diameter}px`;
+      inner.style.width = `${diameter}px`;
+      inner.style.borderRadius = `${diameter / 2}px`;
+      inner.style.top = `-${diameter / 2}px`;
+      inner.style.left = `-${diameter / 2}px`;
     }
   },
   beforeDestroy() {
@@ -96,7 +118,8 @@ export default {
 
 <style scoped lang="scss">
   @import "../../styles/vars.scss";
-  $unit-size: 48px;
+  $unit-size: 64px;
+  $display-size: 48px;
 
   .dynamic-grid-wrapper {
     position: absolute;
@@ -104,12 +127,22 @@ export default {
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: 30;
+    background-color: #4b0d00;
 
     .grid-unit {
       position: absolute;
-      width: $unit-size;
-      height: $unit-size;
-      background-color: #F00;
+
+      .inner {
+        width: $display-size;
+        height: $display-size;
+        border-radius: $display-size / 2;
+        background-color: #e12900;
+        position: relative;
+        top: -$display-size / 2;
+        left: -$display-size / 2;
+        z-index: 31;
+      }
     }
   }
 </style>

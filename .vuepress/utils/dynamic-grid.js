@@ -28,17 +28,17 @@ class DynamicGrid {
     const xPadding = boxWidth % unitSize;
     const yPadding = boxHeight % unitSize;
     
-    const xUnits = (boxWidth - xPadding) / unitSize;
-    const yUnits = (boxHeight - yPadding) / unitSize;
+    this.xUnits = (boxWidth - xPadding) / unitSize;
+    this.yUnits = (boxHeight - yPadding) / unitSize;
     
     let x;
     let y;
     let half;
     let gUnit;
 
-    for(let i = 0; i < xUnits; i++) {
+    for(let i = 0; i < this.xUnits; i++) {
       this.grid.push([]);
-      for(let j = 0; j < yUnits; j++) {
+      for(let j = 0; j < this.yUnits; j++) {
         x = unitSize * i + (xPadding / 2);
         y = unitSize * j + (yPadding / 2);
         half = unitSize / 2;
