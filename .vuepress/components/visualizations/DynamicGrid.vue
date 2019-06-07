@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import * as THREE from 'three';
 import sample from "lodash/sample";
 import chroma from 'chroma-js';
 import DynamicGrid from '../../utils/dynamic-grid';
@@ -32,7 +31,7 @@ export default {
     return {
       intervalId: null,
       unitSize: 64,
-      grid: [],
+      grid: {},
     }
   },
   mounted() {

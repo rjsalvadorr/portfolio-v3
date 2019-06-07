@@ -13,7 +13,7 @@
         <InfiniteScreen :renderer="renderer"></InfiniteScreen>
       </div>
       <div v-if="currentVisual === 4" class="visual visual-4">
-        <DynamicGrid></DynamicGrid>
+        <BrokenGrid></BrokenGrid>
       </div>
     </div>
   </div>
@@ -27,6 +27,7 @@ import ThreeCity from "./visualizations/ThreeCity.vue";
 import GridWaterfall from "./visualizations/GridWaterfall.vue";
 import VanishingCircles from "./visualizations/VanishingCircles.vue";
 import DynamicGrid from "./visualizations/DynamicGrid.vue";
+import BrokenGrid from "./visualizations/BrokenGrid.vue";
 import utils from '../utils/three-utils';
 
 export default {
@@ -51,6 +52,9 @@ export default {
 
     fadeIn();
     this.setRandomVisual();
+    
+    // temp
+    this.currentVisual = 4;
   },
   methods: {
     getFadeClass() {
@@ -74,6 +78,7 @@ export default {
     GridWaterfall,
     VanishingCircles,
     DynamicGrid,
+    BrokenGrid,
   },
   beforeDestroy() {
     window.clearInterval(this.intervalId);
