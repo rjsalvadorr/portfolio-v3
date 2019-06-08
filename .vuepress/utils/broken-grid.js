@@ -29,6 +29,7 @@ class BrokenGrid {
     this.gutter = gutter;
     const startBox = new Box(x, y, width, height);
     this.divideBox(startBox);
+    utils.rjShuffle(this.boxes);
   }
 
   divideBox(box, minArea) {
@@ -84,8 +85,14 @@ class BrokenGrid {
     }
   }
 
-  filterBoxes(func) {
-    return this.boxes.filter(func);
+  filterBoxes(filterFunc, transformFunc) {
+    const filtered = this.boxes.filter(filterFunc, transformFunc);
+    if(transformFunc) {
+      for(let box of filtered) {
+        transformFunc(box);
+      }
+    }
+    return filtered;
   }
 }
 

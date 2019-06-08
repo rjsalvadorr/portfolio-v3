@@ -222,6 +222,18 @@ const easeOutIn = (input, period) => {
   return easeCircular(input, period, true);
 };
 
+/**
+ * Shuffles array in place. ES6 version
+ * @param {Array} a items An array containing the items.
+ */
+const rjShuffle = (a) => {
+  for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 const threeUtils = {
   splitNumber: splitNumber,
   splitRough: splitRough,
@@ -236,6 +248,7 @@ const threeUtils = {
   easeOut: easeOut,
   easeInOut: easeInOut,
   easeOutIn: easeOutIn,
+  rjShuffle: rjShuffle,
 }
 
 export default threeUtils;
