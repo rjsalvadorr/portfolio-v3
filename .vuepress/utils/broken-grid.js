@@ -9,6 +9,7 @@ class Box {
     this.h = h;
     this.intensity1 = 1;
     this.intensity2 = 0;
+    this.intensity3 = 0;
   }
 
   generateId() {

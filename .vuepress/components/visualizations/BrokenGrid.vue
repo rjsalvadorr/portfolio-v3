@@ -13,7 +13,7 @@ import shuffle from "lodash/shuffle";
 import chroma from 'chroma-js';
 import BrokenGrid from '../../utils/broken-grid';
 import utils from '../../utils/three-utils';
-import { getDistFromPoints } from '../../utils/wave-utils';
+import { getDistFromPoints, radialWave3 } from '../../utils/wave-utils';
 
 export default {
   name: 'BrokenGrid',
@@ -61,24 +61,18 @@ export default {
     })();
   },
   updated() {
-    // const updateFrequency = 20;
-    // this.intervalId = setInterval(() => {
-    //   this.grid.applyFunc(this.updateBox);
-    //   this.grid.applyFunc(this.drawBox);
-    // }, 1000 / updateFrequency);
-
     const subsetIdx = Math.ceil(this.circleGrid.length * 0.25);
     const subsetIdx2 = this.circleGrid.length - Math.ceil(this.circleGrid.length * 0.25);
     const subset = this.circleGrid.slice(0, subsetIdx);
     const subset2 = this.circleGrid.slice(subsetIdx2, this.circleGrid.length);
 
     for(let box of subset) {
-      box.intensity1 = box.intensity1 * 0.5;
+      box.intensity1 = box.intensity1 * 0.7;
       box.intensity2 = 1;
     }
 
     for(let box of subset2) {
-      box.intensity1 = box.intensity1 * 0.4;
+      box.intensity1 = box.intensity1 * 0.5;
       box.intensity2 = 2;
     }
 
@@ -86,6 +80,21 @@ export default {
       this.updateBox(box);
       this.drawBox(box);
     }
+
+    const updateFrequency = 20;
+    this.intervalId = setInterval(() => {
+      for(let box of this.circleGrid) {
+        const intensity = radialWave3(
+          {x: 0, y: 0},
+          {x: box.x, y: box.y},
+          Date.now() / 1100,
+        );
+        const avgIntensity = box.intensity1 + intensity / 2;
+        box.intensity3 = avgIntensity;
+        this.updateBox(box);
+        this.drawBox(box);
+      }
+    }, 1000 / updateFrequency);
   },
   computed: {
     circleGrid: function() {
@@ -148,7 +157,7 @@ export default {
         this.mainBox.y,
         this.mainBox.w,
         this.mainBox.h,
-        this.mainBox.w * this.mainBox.h / 300,
+        this.mainBox.w * this.mainBox.h / 250,
         BOX_GUTTER,
       );
 
@@ -164,7 +173,7 @@ export default {
         element.style.top = `${gUnit.y}px`;
         element.style.width = `${gUnit.w}px`;
         element.style.height = `${gUnit.h}px`;
-        element.style.opacity = gUnit.intensity1;
+        element.style.opacity = gUnit.intensity3;
 
         if(gUnit.intensity2 === 1) {
           element.style.backgroundColor = '#2B4162';
@@ -199,7 +208,7 @@ export default {
 
     .box {
       position: absolute;
-      background-color: #900;
+      background-color: #800;
     }
   }
 </style>
