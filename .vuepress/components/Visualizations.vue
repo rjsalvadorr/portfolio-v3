@@ -15,6 +15,9 @@
       <div v-if="currentVisual === 4" class="visual visual-4">
         <DynamicGrid></DynamicGrid>
       </div>
+      <div v-if="currentVisual === 5" class="visual visual-5">
+        <BrokenGrid></BrokenGrid>
+      </div>
     </div>
   </div>
 </template>
@@ -27,6 +30,7 @@ import ThreeCity from "./visualizations/ThreeCity.vue";
 import GridWaterfall from "./visualizations/GridWaterfall.vue";
 import VanishingCircles from "./visualizations/VanishingCircles.vue";
 import DynamicGrid from "./visualizations/DynamicGrid.vue";
+import BrokenGrid from "./visualizations/BrokenGrid.vue";
 import utils from '../utils/three-utils';
 
 export default {
@@ -64,7 +68,7 @@ export default {
       }
     },
     setRandomVisual() {
-      const chances = [1, 1, 1, 2, 2, 3, 4, 4, 4];
+      const chances = [1, 1, 1, 1, 2, 2, 3, 4, 4, 4, 4, 5, 5, 5, 5];
       this.currentVisual = sample(chances);
     }
   },
@@ -74,6 +78,7 @@ export default {
     GridWaterfall,
     VanishingCircles,
     DynamicGrid,
+    BrokenGrid,
   },
   beforeDestroy() {
     window.clearInterval(this.intervalId);
