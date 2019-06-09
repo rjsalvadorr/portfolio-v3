@@ -89,7 +89,7 @@ export default {
           {x: box.x, y: box.y},
           Date.now() / 1100,
         );
-        const avgIntensity = box.intensity1 + intensity / 2;
+        const avgIntensity = (box.intensity1 + (intensity * 0.6)) / 2;
         box.intensity3 = avgIntensity;
         this.updateBox(box);
         this.drawBox(box);

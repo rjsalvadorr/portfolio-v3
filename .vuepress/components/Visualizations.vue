@@ -13,6 +13,9 @@
         <InfiniteScreen :renderer="renderer"></InfiniteScreen>
       </div>
       <div v-if="currentVisual === 4" class="visual visual-4">
+        <DynamicGrid></DynamicGrid>
+      </div>
+      <div v-if="currentVisual === 5" class="visual visual-5">
         <BrokenGrid></BrokenGrid>
       </div>
     </div>
@@ -52,9 +55,6 @@ export default {
 
     fadeIn();
     this.setRandomVisual();
-    
-    // temp
-    this.currentVisual = 4;
   },
   methods: {
     getFadeClass() {
@@ -68,7 +68,7 @@ export default {
       }
     },
     setRandomVisual() {
-      const chances = [1, 1, 1, 2, 2, 3, 4, 4, 4];
+      const chances = [1, 1, 1, 1, 2, 2, 3, 4, 4, 4, 4, 5, 5, 5, 5];
       this.currentVisual = sample(chances);
     }
   },
