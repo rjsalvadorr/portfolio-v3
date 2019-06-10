@@ -14,6 +14,7 @@ import chroma from 'chroma-js';
 import BrokenGrid from '../../utils/broken-grid';
 import utils from '../../utils/three-utils';
 import { getDistFromPoints, radialWave3 } from '../../utils/wave-utils';
+import { sigmoid3 } from '../../utils/math-utils';
 
 export default {
   name: 'BrokenGrid',
@@ -82,14 +83,20 @@ export default {
     }
 
     const updateFrequency = 20;
+    const inputMultiplier = 1 / 125;
+    const centerPoint = {
+      x: 15,
+      y: 30,
+    };
+
     this.intervalId = setInterval(() => {
       for(let box of this.circleGrid) {
         const intensity = radialWave3(
-          {x: 0, y: 0},
-          {x: box.x, y: box.y},
-          Date.now() / 1100,
+          centerPoint,
+          {x: box.x * inputMultiplier, y: box.y * inputMultiplier},
+          Date.now() / 1000,
         );
-        const avgIntensity = (box.intensity1 + (intensity * 0.6)) / 2;
+        const avgIntensity = (box.intensity1 + (intensity * 0.75)) / 2;
         box.intensity3 = avgIntensity;
         this.updateBox(box);
         this.drawBox(box);
