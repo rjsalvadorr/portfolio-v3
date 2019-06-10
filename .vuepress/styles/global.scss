@@ -54,7 +54,8 @@ blockquote {
     }
 
     .content-wrapper {
-      min-height: calc(100vh - #{$header-height-mob-home});
+      // min-height: calc(100vh - #{$header-height-mob-home});
+      min-height: 100vh;
       
       &-wrapper {
         overflow: hidden;
@@ -251,6 +252,16 @@ blockquote {
     &--post {
       padding-top: $space-unit * 3;
       padding-bottom: $space-unit * 3;
+    }
+  }
+}
+
+/* Larger than desktop */
+@media (min-width: 1300px) {
+  .content-wrapper {
+    &--home .content-title {
+      font-size: 9rem;
+      line-height: 9rem;
     }
   }
 }

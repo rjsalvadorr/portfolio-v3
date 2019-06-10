@@ -108,6 +108,10 @@ export default {
 
     &--home {
       height: $header-height-phone-home;
+      position: absolute;
+      left: 0;
+      right: 0;
+      box-shadow: none;
     }
 
     .header-top {
@@ -121,6 +125,11 @@ export default {
       &--home {
         padding-left: 0;
         padding-right: 0;
+
+        // position: absolute;
+        // left: 0;
+        // right: 0;
+        background: none;
 
         .nav-wrapper.nav-wrapper--home {
           padding-left: 0;
