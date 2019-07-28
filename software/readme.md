@@ -7,4 +7,4 @@ category: software
 ---
 
 I'm a web developer based in Toronto, with about five years of pro dev experience.
-So far, my career has been focused on the front-end and cleaning things up for better user experience.
+So far, my career has been focused on the front-end and making sure that pages work according to visual specs.
